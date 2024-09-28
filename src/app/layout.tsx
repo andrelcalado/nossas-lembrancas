@@ -38,11 +38,13 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <StyledComponentsRegistry>
-          {/* <Header /> */}
-          {children}
-          {/* <Footer /> */}
-        </StyledComponentsRegistry>
+        <main>
+          <StyledComponentsRegistry>
+            <Header />
+            {children}
+            <Footer />
+          </StyledComponentsRegistry>
+        </main>
       </body>
     </html>
   );

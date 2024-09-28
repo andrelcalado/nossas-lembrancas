@@ -1,15 +1,13 @@
-// Core
-import Image from "next/image";
-
 // Styles
 import { Title } from "./styles";
+import LoginForm from "@/components/LoginForm";
 
 export default function Home() {
   return (
     <div>
-      <main>
-        <Title>Testando</Title>
-      </main>
+      <Title>Phone Validation - Firebase</Title>
+
+      <LoginForm />
     </div>
   );
 }

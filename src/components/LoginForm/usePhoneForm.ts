@@ -33,23 +33,28 @@ const usePhoneForm = () => {
     }));
   }
 
-  const handleSendCode = (ev) => {
+  const handleSendCode = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     ev.preventDefault();
 
-    signInWithPhoneNumber(firebaseAuth, phoneForm.phone as string, window.recaptchaVerifier)
+    signInWithPhoneNumber(
+      firebaseAuth,
+      phoneForm.phone as string,
+      window.recaptchaVerifier as RecaptchaVerifier
+    )
     .then((confirmationResult) => {
       window.confirmationResult = confirmationResult;
       handleSetPhoneForm('formCode', true)
-    }).catch((error) => {
+    })
+    .catch((error) => {
       console.log('error', error)
     });
   }
 
-  const handleLoginWithCode = (ev) => {
+  const handleLoginWithCode = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     ev.preventDefault()
 
     if (window.confirmationResult) {
-      window.confirmationResult.confirm(phoneForm.code).then((res) => {
+      window.confirmationResult.confirm(phoneForm.code as string).then((res) => {
         console.log('code-validate', res)
       }).catch((err) => {
         console.log('code-invalidate', err)
@@ -57,13 +62,12 @@ const usePhoneForm = () => {
     }
   }
   
-  const handleGoogleLogin = (ev) => {
+  const handleGoogleLogin = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     ev.preventDefault()
     const provider = new GoogleAuthProvider;
 
     signInWithPopup(firebaseAuth, provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential?.accessToken;
       const user = result.user;

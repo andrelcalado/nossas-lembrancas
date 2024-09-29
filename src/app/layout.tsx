@@ -1,11 +1,9 @@
 // Core
-import type * as next from "next";
+import type * as next from "next"
+import localFont from "next/font/local";
 
 // Libraries
 import StyledComponentsRegistry from './registry';
-
-// Typography
-import localFont from "next/font/local";
 
 // Styles
 import "./globals.css";
@@ -14,16 +12,41 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const Aeonik = localFont({
+  src: [
+    {
+      path: "./fonts/Aeonik-Light.woff",
+      style: 'normal',
+      weight: "300",
+    },
+    {
+      path: "./fonts/Aeonik-LightItalic.woff",
+      style: 'italic',
+      weight: "300",
+    },
+    {
+      path: "./fonts/Aeonik-Regular.woff",
+      style: 'normal',
+      weight: "400",
+    },
+    {
+      path: "./fonts/Aeonik-RegularItalic.woff",
+      style: 'italic',
+      weight: "400",
+    },
+    {
+      path: "./fonts/Aeonik-Bold.woff",
+      style: 'normal',
+      weight: "700",
+    },
+    {
+      path: "./fonts/Aeonik-BoldItalic.woff",
+      style: 'italic',
+      weight: "700",
+    },
+  ]
+},
+);
 
 export const metadata: next.Metadata = {
   title: "Nossas Memórias",
@@ -37,7 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={Aeonik.className}>
         <main>
           <StyledComponentsRegistry>
             <Header />

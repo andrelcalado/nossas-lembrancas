@@ -8,3 +8,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.container {
+  max-width: calc(1640px + 80px);
+  padding: 0 40px;
+  margin: 0 auto;
+}

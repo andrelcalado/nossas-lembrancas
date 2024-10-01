@@ -8,24 +8,25 @@ import styled from "styled-components";
 import { theme } from "../../theme/globalStyles";
 
 // Typography
-import { textSmMedium, textXsMedium, textXsRegular } from "../../theme/typography";
+import { textSmMedium } from "../../theme/typography";
 
 // Types
 import { ButtonProps, ElementSizeENUM } from "@/types/layoutTypes";
 
-const getPaddingSize = (size: ElementSizeENUM) => {
+const getPaddingSize = (size?: ElementSizeENUM) => {
   switch (size) {
     case 'xl':
       return '16px 20px';
     case 'lg':
       return '14px 20px';
+    default:
     case 'md':
       return '12px 20px';
     case 'sm':
       return '10px 20px';
     case 'xs':
       return '8px 20px';
-  }    
+  }
 }
 
 export const ButtonComponent = styled(Link)<Pick<ButtonProps, 'size'>>`

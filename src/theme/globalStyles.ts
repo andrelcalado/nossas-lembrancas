@@ -10,6 +10,12 @@ export const theme: Theme = {
     black: "#121212",
     gray: {
       100: '#faf4f7',
+      200: '#e7e1e4',
+      300: '#ccc7ca',
+      400: '#a8a4a6',
+      500: '#8a8788',
+      600: '#646263',
+      700: '#4c4a4b',
     },
     secondary: {
       100: '#DDBAD6',

@@ -4,6 +4,9 @@ import React from 'react'
 // Libraries
 import Image from 'next/image'
 
+// Components
+import Button from '../Button'
+
 // Assets
 import logoLabel from '@/app/assets/icon/logo-label.svg'
 
@@ -22,7 +25,7 @@ const Header = (): JSX.Element => {
 
         <HeaderButtons>
           <li>
-            <button>Nossa lembrança</button>
+            <Button size='xs'>Conectar</Button>
           </li>
         </HeaderButtons>
       </HeaderWrapper>

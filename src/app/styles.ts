@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 // Theme
 import { theme } from "@/theme/globalStyles";
+import { Swiper } from "swiper/react";
 
 export const Title = styled.h1`
   font-size: 2.5em;
@@ -17,6 +18,9 @@ export const Title = styled.h1`
 export const HomeContent = styled.section`
   background-color: ${theme.colors.white};
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 
   &::before {
     content: '';
@@ -25,7 +29,35 @@ export const HomeContent = styled.section`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: ${theme.colors.gray[100]};
+    background-color: ${theme.colors.gray[200]};
     border-radius: 24px 24px 0 0;
   }
 `;
+
+export const HomeWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const HomeCTAs = styled.ul`
+  margin: 0;
+
+  li {
+    list-style: none;
+  }
+`;
+
+export const HomeTexts = styled.div`
+  max-width: 680px;
+`
+
+export const HomeHeroSlider = styled(Swiper)`
+  position: relative;
+  width: 400px;
+  height: 550px;
+
+  .swiper-slide {
+    overflow: unset;
+  }
+`

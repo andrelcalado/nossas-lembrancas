@@ -1,3 +1,6 @@
+// Types
+import { StaticImageData } from "next/image";
+
 export type ColorLightEnum = 100 | 200 | 300 | 400 | 500 | 600 | 700;
 export interface Theme {
   colors: {
@@ -15,4 +18,10 @@ export interface ButtonProps {
   href?: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   size?: ElementSizeENUM;
+}
+
+export interface HeroSliderCardProps {
+  photo: StaticImageData;
+  desc: string;
+  date: string;
 }

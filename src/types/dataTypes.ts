@@ -1,7 +1,4 @@
-export interface LoginFormType {
-  phone: {
-    value: '',
-    code: '',
-    formCode: boolean,
-  }
-}
+// Types
+import { HeroSliderCardProps } from "./layoutTypes";
+
+export type HeroSliderDataType = Array<HeroSliderCardProps>

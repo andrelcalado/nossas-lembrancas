@@ -16,7 +16,6 @@ import 'swiper/css';
 import 'swiper/css/effect-cards';
 import 'swiper/css/autoplay';
 
-
 // Components
 import Button from "@/components/Button";
 import LoginForm from "@/components/LoginForm";
@@ -51,8 +50,9 @@ export default function Home() {
             perSlideOffset: 8,
             perSlideRotate: 3,
           }}
+          speed={500}
           autoplay={{
-            delay: 2000,
+            delay: 4000,
             disableOnInteraction: false,
             pauseOnMouseEnter: false,
             stopOnLastSlide: false,

@@ -3,6 +3,13 @@
 // Core
 import styled from "styled-components";
 
+// Styles
+import {
+  HeroSliderCardPhoto,
+  HeroSliderDate,
+  HeroSliderDescription  
+} from "@/components/HeroSliderCard/styles";
+
 // Theme
 import { theme } from "@/theme/globalStyles";
 import { Swiper } from "swiper/react";
@@ -18,9 +25,10 @@ export const Title = styled.h1`
 export const HomeContent = styled.section`
   background-color: ${theme.colors.white};
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 76px);
   display: flex;
   align-items: center;
+  overflow: hidden;
 
   &::before {
     content: '';
@@ -55,9 +63,25 @@ export const HomeTexts = styled.div`
 export const HomeHeroSlider = styled(Swiper)`
   position: relative;
   width: 400px;
-  height: 550px;
+  height: 500px;
 
   .swiper-slide {
     overflow: unset;
+
+    &.swiper-slide-active {
+      ${HeroSliderDate}, ${HeroSliderDescription} {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      ${HeroSliderCardPhoto} img {
+        animation: sizeGrown 15s ease;
+      }
+    }
+
+    &-shadow {
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, .6);
+    }
   }
 `

@@ -12,35 +12,40 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const Aeonik = localFont({
+const Poppins = localFont({
   src: [
     {
-      path: "./fonts/Aeonik-Light.woff",
+      path: "./fonts/Poppins-Light.woff",
       style: 'normal',
       weight: "300",
     },
     {
-      path: "./fonts/Aeonik-LightItalic.woff",
-      style: 'italic',
-      weight: "300",
-    },
-    {
-      path: "./fonts/Aeonik-Regular.woff",
+      path: "./fonts/Poppins-Regular.woff",
       style: 'normal',
       weight: "400",
     },
     {
-      path: "./fonts/Aeonik-RegularItalic.woff",
+      path: "./fonts/Poppins-Italic.woff",
       style: 'italic',
       weight: "400",
     },
     {
-      path: "./fonts/Aeonik-Bold.woff",
+      path: "./fonts/Poppins-Medium.woff",
+      style: 'normal',
+      weight: "500",
+    },
+    {
+      path: "./fonts/Poppins-MediumItalic.woff",
+      style: 'italic',
+      weight: "500",
+    },
+    {
+      path: "./fonts/Poppins-Bold.woff",
       style: 'normal',
       weight: "700",
     },
     {
-      path: "./fonts/Aeonik-BoldItalic.woff",
+      path: "./fonts/Poppins-BoldItalic.woff",
       style: 'italic',
       weight: "700",
     },
@@ -60,7 +65,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={Aeonik.className}>
+      <body className={Poppins.className}>
         <main>
           <StyledComponentsRegistry>
             <Header />

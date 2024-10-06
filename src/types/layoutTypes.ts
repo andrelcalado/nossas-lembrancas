@@ -1,5 +1,6 @@
 // Types
 import { StaticImageData } from "next/image";
+import { HTMLAttributeAnchorTarget } from "react";
 
 export type ColorLightEnum = 100 | 200 | 300 | 400 | 500 | 600 | 700;
 export interface Theme {
@@ -26,4 +27,10 @@ export interface HeroSliderCardProps {
   photo: StaticImageData;
   desc: string;
   date: string;
+}
+
+export interface SocialButtonProps {
+  icon: JSX.Element;
+  url: string;
+  target?: HTMLAttributeAnchorTarget;
 }

@@ -4,9 +4,6 @@ import styled from "styled-components";
 // Theme
 import { theme } from "@/theme/globalStyles";
 import {
-  textLgBold,
-  textLgRegular,
-  textMdBold,
   textMdMedium,
   textMdRegular
 } from "@/theme/typography";

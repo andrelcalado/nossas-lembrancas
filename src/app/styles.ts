@@ -8,14 +8,19 @@ import { Swiper } from "swiper/react";
 
 // Styles
 import {
-  HeroSliderCardPhoto,
   HeroSliderDate,
   HeroSliderDescription  
 } from "@/components/HeroSliderCard/styles";
 
 // Theme
 import { theme } from "@/theme/globalStyles";
-import { displayX1Regular, textMdRegular } from "@/theme/typography";
+import {
+  displayLgRegular,
+  displayMdRegular,
+  displayX1Regular,
+  textMdRegular,
+  textSmRegular
+} from "@/theme/typography";
 
 // Components
 import { ButtonComponent } from "@/components/Button/styles";
@@ -28,6 +33,11 @@ export const HomeContent = styled.section`
   align-items: center;
   overflow: hidden;
   margin-top: 76px;
+  padding: 56px 0 86px;
+
+  @media (max-width: 800px) {
+    padding: 48px 0 56px;
+  }
 
   &::before {
     content: '';
@@ -62,6 +72,14 @@ export const HomeWrapper = styled.div`
   align-items: center;
   gap: 7vw;
 
+  @media (max-width: 1024px) {
+    gap: 80px;
+  }
+
+  @media (max-width: 800px) {
+    flex-direction: column-reverse;
+  }
+
   &::before, &::after {
     content: '';
     width: 200px;
@@ -91,12 +109,20 @@ export const HomeCTAs = styled.ul`
   display: flex;
   gap: 12px;
 
+  @media (max-width: 800px) {
+    justify-content: center;
+  }
+
   li {
     list-style: none;
 
     &:first-child {
       ${ButtonComponent} {
         padding: 10px 38px;
+
+        @media (max-width: 1024px) {
+          padding: 10px 20px;
+        }
       }
     }
   }
@@ -105,11 +131,24 @@ export const HomeCTAs = styled.ul`
 export const HomeTexts = styled.div`
   max-width: 650px;
 
+  @media (max-width: 800px) {
+    max-width: 450px;
+  }
+
   h1 {
     ${displayX1Regular}
     color: ${theme.colors.black};
     text-transform: uppercase;
     margin-bottom: 8px;
+
+    @media (max-width: 1024px) {
+      ${displayLgRegular}
+    }
+
+    @media (max-width: 800px) {
+      ${displayMdRegular}
+      text-align: center;
+    }
 
     strong {
       color: ${theme.colors.primary[400]};
@@ -120,6 +159,15 @@ export const HomeTexts = styled.div`
     ${textMdRegular}
     color: ${theme.colors.gray[700]};
     max-width: 500px;
+
+    @media (max-width: 1024px) {
+      max-width: 450px;
+    }
+
+    @media (max-width: 800px) {
+      ${textSmRegular}
+      text-align: center;
+    }
   }
 `
 
@@ -127,7 +175,17 @@ export const HomeHeroSlider = styled(Swiper)`
   position: relative;
   width: 400px;
   height: 500px;
-  margin: 0;
+  margin: 0 40px 0 0;
+
+  @media (max-width: 1024px) {
+    width: 300px;
+    height: 420px;
+  }
+
+  @media (max-width: 800px) {
+    width: 250px;
+    height: 370px;
+  }
 
   .swiper-slide {
     overflow: unset;
@@ -136,10 +194,12 @@ export const HomeHeroSlider = styled(Swiper)`
       ${HeroSliderDate}, ${HeroSliderDescription} {
         opacity: 1;
         pointer-events: all;
-      }
 
-      ${HeroSliderCardPhoto} img {
-        animation: sizeGrown 15s ease;
+        p, time {
+          @media (max-width: 1024px) {
+            font-size: 14px;
+          }
+        }
       }
     }
 

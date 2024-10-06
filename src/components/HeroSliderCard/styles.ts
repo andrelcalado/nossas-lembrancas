@@ -18,6 +18,10 @@ export const HeroSliderCardContent = styled.div`
   align-items: center;
   position: relative;
   border-radius: 12px;
+
+  @media (max-width: 800px) {
+    padding: 8px;
+  }
 `
 
 export const HeroSliderCardPhoto = styled.div`
@@ -31,6 +35,7 @@ export const HeroSliderCardPhoto = styled.div`
     width: 100%;
     max-width: unset;
     object-fit: cover;
+    animation: sizeGrown 15s ease;
   }
 `
 

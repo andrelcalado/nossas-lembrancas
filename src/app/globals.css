@@ -38,3 +38,10 @@ html::-webkit-scrollbar-thumb {
     transform: scale(1.1);
   }  
 }
+
+@media (max-width: 800px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}

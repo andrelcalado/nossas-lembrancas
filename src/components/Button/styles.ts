@@ -2,7 +2,7 @@
 
 // Core
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // Theme
 import { theme } from "../../theme/globalStyles";
@@ -11,7 +11,7 @@ import { theme } from "../../theme/globalStyles";
 import { textSmMedium } from "../../theme/typography";
 
 // Types
-import { ButtonProps, ElementSizeENUM } from "@/types/layoutTypes";
+import { ButtonProps, ButtonVariationENUM, ElementSizeENUM } from "@/types/layoutTypes";
 
 const getPaddingSize = (size?: ElementSizeENUM) => {
   switch (size) {
@@ -29,26 +29,49 @@ const getPaddingSize = (size?: ElementSizeENUM) => {
   }
 }
 
-export const ButtonComponent = styled(Link)<Pick<ButtonProps, 'size'>>`
-  ${textSmMedium}
-  padding: ${({ size }) => getPaddingSize(size)};
-  background-color: ${theme.colors.primary[400]};
-  color: ${theme.colors.white};
-  text-align: center;
-  border-radius: 8px;
-  align-items: center;
-  display: flex;
-  gap: 6px;
+const getVariationnSize = (variation?: ButtonVariationENUM) => {
+  switch (variation) {
+    case 'fill':
+    default:
+      return css`
+        background-color: ${theme.colors.primary[400]};
+        color: ${theme.colors.white};
 
-  @media (max-width: 910px) {
-    padding: 9px 17px;
-  }
+        &:hover {
+          background-color: ${theme.colors.primary[300]};
+        }
+      `;
+    case 'border':
+      return css`
+        background-color: transparent;
+        border: 1px solid ${theme.colors.primary[400]};
+        color: ${theme.colors.primary[400]};
 
-  & svg {
-    width: 15px;
-  }
+        &:hover {
+          background-color: ${theme.colors.primary[400]};
+          color: ${theme.colors.white};
+        }
+      `;
+  }  
+}
 
-  &:hover {
-    background-color: ${theme.colors.primary[300]};
-  }
+export const ButtonComponent = styled(Link)<Pick<ButtonProps, 'size' | 'variation'>>`
+  ${({ size, variation }) => css`
+    ${textSmMedium}
+    padding: ${getPaddingSize(size)};
+    text-align: center;
+    border-radius: 8px;
+    align-items: center;
+    display: flex;
+    gap: 6px;
+    ${getVariationnSize(variation)}
+
+    @media (max-width: 910px) {
+      padding: 9px 17px;
+    }
+
+    & svg {
+      width: 15px;
+    }
+  `}
 `;

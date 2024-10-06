@@ -7,6 +7,7 @@ import {
   textLgBold,
   textLgRegular,
   textMdBold,
+  textMdMedium,
   textMdRegular
 } from "@/theme/typography";
 
@@ -96,7 +97,7 @@ export const HeroSliderDate = styled.div`
     padding: 8px 14px;
     border-radius: 8px;
     color: ${theme.colors.gray[700]};
-    ${textMdBold}
+    ${textMdMedium}
     letter-spacing: 1px;
     background-color: rgba(255, 255, 255, .7);
     box-shadow: 0 0 20px 0 #00000033;

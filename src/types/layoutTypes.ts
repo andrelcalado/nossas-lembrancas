@@ -13,11 +13,13 @@ export interface Theme {
 }
 
 export type ElementSizeENUM = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ButtonVariationENUM = 'fill' | 'border';
 export interface ButtonProps {
   children: React.ReactNode;
   href?: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   size?: ElementSizeENUM;
+  variation?: ButtonVariationENUM;
 }
 
 export interface HeroSliderCardProps {

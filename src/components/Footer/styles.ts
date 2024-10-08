@@ -3,6 +3,9 @@
 // Libraries
 import styled from "styled-components";
 
+// Styles
+import { SocialButtonContent } from "../SocialButton/styles";
+
 // Theme
 import { theme } from "@/theme/globalStyles";
 import { textXsRegular } from "@/theme/typography";
@@ -41,9 +44,22 @@ export const FooterTopContent = styled.div`
   padding: 32px 0 12px;
   width: 100%;
 
+  @media (max-width: 1024px) {
+    padding: 24px 0;
+  }
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    gap: 24px;
+  }
+
   > img {
     max-height: 50px;
     width: fit-content;
+
+    @media (max-width: 1024px) {
+      max-height: 40px;
+    }
   }
 `
 
@@ -53,6 +69,11 @@ export const FooterBottomContent = styled.div`
   padding-bottom: 16px;
   color: ${theme.colors.gray[200]};
   ${textXsRegular}
+
+  @media (max-width: 500px) {
+    max-width: 300px;
+    margin: 0 auto;    
+  }
 `
 
 export const FooterSocialMedia = styled.ul`
@@ -62,5 +83,12 @@ export const FooterSocialMedia = styled.ul`
   li {
     list-style: none;
     flex-shrink: 0;
+
+    @media (max-width: 500px) {
+      ${SocialButtonContent} {
+        height: 40px;
+        width: 40px;
+      }      
+    }
   }
 `

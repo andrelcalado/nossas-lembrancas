@@ -16,7 +16,6 @@ import {
 import { theme } from "@/theme/globalStyles";
 import {
   displayLgRegular,
-  displayMdRegular,
   displayX1Regular,
   textMdRegular,
   textSmRegular
@@ -36,7 +35,7 @@ export const HomeContent = styled.section`
   padding: 56px 0 86px;
 
   @media (max-width: 800px) {
-    padding: 48px 0 56px;
+    padding: 36px 0 48px;
   }
 
   &::before {
@@ -78,6 +77,7 @@ export const HomeWrapper = styled.div`
 
   @media (max-width: 800px) {
     flex-direction: column-reverse;
+    gap: 0;
   }
 
   &::before, &::after {
@@ -133,6 +133,8 @@ export const HomeTexts = styled.div`
 
   @media (max-width: 800px) {
     max-width: 450px;
+    z-index: 10;
+    margin-top: -70px;
   }
 
   h1 {
@@ -146,7 +148,8 @@ export const HomeTexts = styled.div`
     }
 
     @media (max-width: 800px) {
-      ${displayMdRegular}
+      font-size: 33px;
+      line-height: 105%;
       text-align: center;
     }
 
@@ -185,6 +188,20 @@ export const HomeHeroSlider = styled(Swiper)`
   @media (max-width: 800px) {
     width: 250px;
     height: 370px;
+    position: relative;
+    margin: 0;
+
+    &::before {
+      content: '';
+      width: 150%;
+      height: 300px;
+      position: absolute;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #dfced7 85%);
+      transform: translateX(-50%);
+      z-index: 5;
+      bottom: -1px;
+      left: 50%;
+    }
   }
 
   .swiper-slide {
@@ -206,6 +223,12 @@ export const HomeHeroSlider = styled(Swiper)`
     &-shadow {
       border-radius: 12px;
       background-color: rgba(255, 255, 255, .6);
+    }
+
+    @media (max-width: 800px) {
+      ${HeroSliderDescription} {
+        display: none;
+      }      
     }
   }
 `

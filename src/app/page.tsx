@@ -18,7 +18,6 @@ import 'swiper/css/autoplay';
 
 // Components
 import Button from "@/components/Button";
-import LoginForm from "@/components/LoginForm";
 import HeroSliderCard from '@/components/HeroSliderCard';
 
 // Constants

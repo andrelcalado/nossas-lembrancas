@@ -1,6 +1,10 @@
 // Types
 import { StaticImageData } from "next/image";
-import { HTMLAttributeAnchorTarget } from "react";
+import { 
+  Dispatch,
+  HTMLAttributeAnchorTarget,
+  SetStateAction
+} from "react";
 
 export type ColorLightEnum = 100 | 200 | 300 | 400 | 500 | 600 | 700;
 export interface Theme {
@@ -17,8 +21,7 @@ export type ElementSizeENUM = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type ButtonVariationENUM = 'fill' | 'border';
 export interface ButtonProps {
   children: React.ReactNode;
-  href?: string;
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   size?: ElementSizeENUM;
   variation?: ButtonVariationENUM;
 }
@@ -33,4 +36,9 @@ export interface SocialButtonProps {
   icon: JSX.Element;
   url: string;
   target?: HTMLAttributeAnchorTarget;
+}
+
+export interface LoginFormProps {
+  openModal: boolean;
+  setOpenModal: Dispatch<SetStateAction<boolean>>
 }

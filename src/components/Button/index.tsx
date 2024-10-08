@@ -12,14 +12,12 @@ import { ButtonProps } from "@/types/layoutTypes";
 export default function Button({
   children,
   variation = 'fill',
-  href,
   onClick,
   size = 'sm'
 }: ButtonProps) {
   return (
     <ButtonComponent
       size={size}
-      href={href || '#'}
       onClick={onClick}
       variation={variation}
     >

@@ -1,7 +1,6 @@
 'use client'
 
 // Core
-import Link from "next/link";
 import styled, { css } from "styled-components";
 
 // Theme
@@ -35,6 +34,7 @@ const getVariationnSize = (variation?: ButtonVariationENUM) => {
     default:
       return css`
         background-color: ${theme.colors.primary[400]};
+        border: 1px solid transparent;
         color: ${theme.colors.white};
 
         &:hover {
@@ -55,16 +55,18 @@ const getVariationnSize = (variation?: ButtonVariationENUM) => {
   }  
 }
 
-export const ButtonComponent = styled(Link)<Pick<ButtonProps, 'size' | 'variation'>>`
+export const ButtonComponent = styled.button<Pick<ButtonProps, 'size' | 'variation'>>`
   ${({ size, variation }) => css`
     ${textSmMedium}
     padding: ${getPaddingSize(size)};
+    justify-content: center;
+    align-items: center;
     text-align: center;
     border-radius: 8px;
-    align-items: center;
     display: flex;
     gap: 6px;
     ${getVariationnSize(variation)}
+    cursor: pointer;
 
     @media (max-width: 910px) {
       padding: 9px 17px;

@@ -1,5 +1,8 @@
 'use client'
 
+// Core
+import React from 'react'
+
 // Libraries
 import { SwiperSlide } from 'swiper/react';
 import { EffectCards, Autoplay } from 'swiper/modules';
@@ -16,16 +19,29 @@ import 'swiper/css';
 import 'swiper/css/effect-cards';
 import 'swiper/css/autoplay';
 
+// Hooks
+import useHome from './useHome';
+
 // Components
 import Button from "@/components/Button";
+import LoginForm from "@/components/LoginForm";
 import HeroSliderCard from '@/components/HeroSliderCard';
 
 // Constants
 import { heroSliderData } from '@/constants/dataArray';
 
 export default function Home() {
+  const {
+    openModal,
+    setOpenModal,
+  } = useHome();
   return (
     <HomeContent>
+      <LoginForm
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      />
+
       <HomeWrapper className="container">
         <HomeTexts>
           <h1>Um <strong>Presente</strong> Cheio de Memórias <strong>Únicas</strong></h1>
@@ -33,7 +49,7 @@ export default function Home() {
 
           <HomeCTAs>
             <li>
-              <Button>Criar o nosso</Button>
+              <Button onClick={() => setOpenModal(true)}>Criar o nosso</Button>
             </li>
             <li>
               <Button variation="border">Ver exemplo</Button>
@@ -70,7 +86,6 @@ export default function Home() {
         </HomeHeroSlider>
 
 
-        {/* <LoginForm /> */}
       </HomeWrapper>
     </HomeContent>
   );

@@ -10,6 +10,10 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 .container {
   max-width: calc(1640px + 80px);
   padding: 0 40px;

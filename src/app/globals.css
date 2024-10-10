@@ -2,7 +2,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  transition: .3s ease-in-out;
+  transition: .25s ease;
 }
 
 a {
@@ -12,6 +12,13 @@ a {
 
 li {
   list-style: none;
+}
+
+button {
+  background: unset;
+  border: unset;
+  outline: unset;
+  stroke: unset;
 }
 
 .container {

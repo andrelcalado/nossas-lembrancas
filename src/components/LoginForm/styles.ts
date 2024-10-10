@@ -7,10 +7,9 @@ import styled, { css } from "styled-components";
 import { theme } from "@/theme/globalStyles";
 import { ButtonComponent } from "../Button/styles";
 import {
-  displayMdMedium,
   displaySmBold,
-  displayXsBold,
   textSmRegular,
+  textXsRegular,
 } from "@/theme/typography";
 
 export const LoginModalContent = styled.div<{ active: boolean }>`
@@ -60,6 +59,7 @@ export const LoginModalContainer = styled.div`
   > h3 {
     ${displaySmBold}
     color: ${theme.colors.primary[400]};
+    margin-top: 28px;
     margin-bottom: 6px;
   }
 
@@ -73,13 +73,78 @@ export const LoginModalContainer = styled.div`
 
 export const LoginModalMethods = styled.ul`
   display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-  gap: 8px;
+  gap: 14px;
 
   li {
+    width: 100%;
+    
     ${ButtonComponent} {
       width: 100%;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        transition: .2s ease-in-out;
+      }
+    }
+  }
+`
+
+export const LoginModalMethodsSeparator = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: ${theme.colors.gray[200]};
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  }
+
+  span {
+    display: block;
+    background-color: ${theme.colors.white};
+    ${textXsRegular}
+    width: fit-content;
+    text-align: center;
+    position: relative;
+    padding: 0 10px;
+    color: ${theme.colors.gray[500]};
+  }
+`
+
+export const LoginWithEmailForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  > ${ButtonComponent} {
+    margin-top: 8px;
+  }
+`
+
+export const AlreadyLogin = styled.button`
+  ${textXsRegular}
+  color: ${theme.colors.gray[400]};
+  margin-top: 8px;
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
+
+  strong {
+    color: ${theme.colors.primary[400]};
+  }
+
+  &:hover {
+    strong {
+      color: ${theme.colors.primary[200]};
     }
   }
 `

@@ -11,8 +11,9 @@ import "./globals.css";
 // Components
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { ProvidersWrapper } from "@/components/ProvidersWrapper";
 
-const Poppins = localFont({
+export const Poppins = localFont({
   src: [
     {
       path: "./fonts/Poppins-Light.woff",
@@ -54,7 +55,7 @@ const Poppins = localFont({
 );
 
 export const metadata: next.Metadata = {
-  title: "Nossas Memórias",
+  title: "Nossas Lembranças",
   description: "Cada segundo da nossa história.",
 };
 
@@ -68,9 +69,11 @@ export default function RootLayout({
       <body className={Poppins.className}>
         <main>
           <StyledComponentsRegistry>
-            <Header />
-            {children}
-            <Footer />
+            <ProvidersWrapper>
+              <Header />
+              {children}
+              <Footer />
+            </ProvidersWrapper>
           </StyledComponentsRegistry>
         </main>
       </body>

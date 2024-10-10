@@ -1,3 +1,5 @@
+'use client'
+
 // Core
 import React from 'react'
 
@@ -10,6 +12,9 @@ import Button from '../Button'
 // Assets
 import logoLabel from '@/app/assets/icon/logo-label.svg'
 
+// Hooks
+import { useAppContext } from '../ProvidersWrapper'
+
 // Styles
 import {
   HeaderButtons,
@@ -18,6 +23,8 @@ import {
 } from './styles'
 
 const Header = (): JSX.Element => {
+  const { setLoginModal } = useAppContext()
+
   return (
     <HeaderContent>
       <HeaderWrapper className="container">
@@ -25,7 +32,12 @@ const Header = (): JSX.Element => {
 
         <HeaderButtons>
           <li>
-            <Button size='xs'>Conectar</Button>
+            <Button
+              onClick={() => setLoginModal(true)}
+              size='xs'
+            >
+              Conectar
+            </Button>
           </li>
         </HeaderButtons>
       </HeaderWrapper>

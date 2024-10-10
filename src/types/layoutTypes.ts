@@ -38,6 +38,14 @@ export interface SocialButtonProps {
   target?: HTMLAttributeAnchorTarget;
 }
 
+export type InputTypeENUM = "text" | "email" | "password";
+export interface InputProps {
+  placeholder?: string;
+  value?: string; 
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  type: InputTypeENUM;
+}
+
 export interface LoginFormProps {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>

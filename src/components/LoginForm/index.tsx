@@ -6,21 +6,27 @@ import Image from 'next/image';
 
 // Styles
 import {
+  AlreadyLogin,
   CloseButton,
   LoginModalContainer,
   LoginModalContent,
   LoginModalIllustration,
   LoginModalMethods,
+  LoginModalMethodsSeparator,
   LoginModalWrapper,
+  LoginWithEmailForm,
   ModalOverlay,  
 } from './styles';
 
 // Assets
 import { CgClose } from "react-icons/cg";
+import { AiOutlineGoogle } from "react-icons/ai";
+import { MdPermPhoneMsg } from "react-icons/md";
 import modalIllustration from '@/app/assets/img/login-illustration.svg';
 
 // Components
 import Button from '../Button';
+import Input from '../Input';
 
 // Hooks
 import usePhoneForm from './usePhoneForm';
@@ -47,20 +53,35 @@ const LoginForm = ({ openModal, setOpenModal }: LoginFormProps) => {
         </CloseButton>
 
         <LoginModalContainer>
-          <h3>Acessar</h3>
-          <p>Escolha a melhor forma de salvar o seu presente</p>
+          <h3>Criar o nosso</h3>
+          <p>Escolha a melhor forma de salvar os seus momentos</p>
 
           <LoginModalMethods>
             <li>
-              <Button onClick={handleGoogleLogin}>Google</Button>
+              <Button variation="border" onClick={handleGoogleLogin}>
+                <AiOutlineGoogle />
+                <span>Google</span>                
+              </Button>
             </li>
             <li>
-              <Button onClick={handleGoogleLogin}>Número Telefone</Button>
-            </li>
-            <li>
-              <Button onClick={handleGoogleLogin}>Email e Senha</Button>
+              <Button variation="border" onClick={handleGoogleLogin}>
+                <MdPermPhoneMsg />
+                <span>Número Telefone</span>
+              </Button>
             </li>
           </LoginModalMethods>
+
+          <LoginModalMethodsSeparator>
+            <span>ou email e senha</span>
+          </LoginModalMethodsSeparator>
+
+          <LoginWithEmailForm>
+            <Input type="email" placeholder="Email" />
+            <Input type="password" placeholder="Senha" />
+            <Input type="password" placeholder="Confirme a senha" />
+            <AlreadyLogin>Já tenho <strong>nossas lembranças</strong></AlreadyLogin>
+            <Button>Criar</Button>
+          </LoginWithEmailForm>
 
           <div style={{ display: 'none' }}>
             <form>

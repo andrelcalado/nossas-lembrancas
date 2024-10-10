@@ -32,16 +32,13 @@ import { heroSliderData } from '@/constants/dataArray';
 
 export default function Home() {
   const {
-    loginModal,
+    setLoginMode,
     setLoginModal,
   } = useAppContext();
 
   return (
     <HomeContent>
-      <LoginForm
-        openModal={loginModal}
-        setOpenModal={setLoginModal}
-      />
+      <LoginForm />
 
       <HomeWrapper className="container">
         <HomeTexts>
@@ -50,7 +47,10 @@ export default function Home() {
 
           <HomeCTAs>
             <li>
-              <Button onClick={() => setLoginModal(true)}>Criar o nosso</Button>
+              <Button onClick={() => {
+                setLoginMode(false);
+                setLoginModal(true);
+              }}>Criar o nosso</Button>
             </li>
             <li>
               <Button variation="border">Ver exemplo</Button>
@@ -85,8 +85,6 @@ export default function Home() {
             </SwiperSlide>
           ))}
         </HomeHeroSlider>
-
-
       </HomeWrapper>
     </HomeContent>
   );

@@ -1,7 +1,7 @@
 'use client'
 
 // Core
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image';
 
 // Styles
@@ -30,11 +30,16 @@ import Input from '../Input';
 
 // Hooks
 import usePhoneForm from './usePhoneForm';
+import { useAppContext } from '../ProvidersWrapper';
 
-// Types
-import { LoginFormProps } from '@/types/layoutTypes';
+const LoginForm = () => {
+  const {
+    loginModal,
+    setLoginModal,
+    setLoginMode,
+    loginMode
+  } = useAppContext();
 
-const LoginForm = ({ openModal, setOpenModal }: LoginFormProps) => {
   const {
     phoneForm,
     handleSetPhoneForm,
@@ -43,18 +48,26 @@ const LoginForm = ({ openModal, setOpenModal }: LoginFormProps) => {
     handleGoogleLogin
   } = usePhoneForm();
 
+  useEffect(() => {
+    if (loginModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [loginModal])
+
   return (
-    <LoginModalContent active={openModal}>
+    <LoginModalContent active={loginModal}>
       <ModalOverlay />
 
       <LoginModalWrapper>
-        <CloseButton onClick={() => setOpenModal(false)}>
+        <CloseButton onClick={() => setLoginModal(false)}>
           <CgClose />
         </CloseButton>
 
         <LoginModalContainer>
-          <h3>Criar o nosso</h3>
-          <p>Escolha a melhor forma de salvar os seus momentos</p>
+          <h3>{loginMode ? 'Nossas Lembranças' : 'Criar o nosso'}</h3>
+          <p>{loginMode ? 'Escolha a opção de acesso as suas lembranças' : 'Escolha a melhor forma de salvar os seus momentos'}</p>
 
           <LoginModalMethods>
             <li>
@@ -78,9 +91,20 @@ const LoginForm = ({ openModal, setOpenModal }: LoginFormProps) => {
           <LoginWithEmailForm>
             <Input type="email" placeholder="Email" />
             <Input type="password" placeholder="Senha" />
-            <Input type="password" placeholder="Confirme a senha" />
-            <AlreadyLogin>Já tenho <strong>nossas lembranças</strong></AlreadyLogin>
-            <Button>Criar</Button>
+            {!loginMode && (
+              <Input type="password" placeholder="Confirme a senha" />
+            )}
+            <AlreadyLogin onClick={(e) => {
+              e.preventDefault();
+              setLoginMode(!loginMode);
+            }}>
+              {loginMode ? (
+                <span>Ainda <strong>não tenho</strong> nossas lembranças</span>
+              ) : (
+                <span>Já tenho <strong>nossas lembranças</strong></span>
+              )}
+            </AlreadyLogin>
+            <Button>{loginMode ? 'Acessar' : 'Criar'}</Button>
           </LoginWithEmailForm>
 
           <div style={{ display: 'none' }}>

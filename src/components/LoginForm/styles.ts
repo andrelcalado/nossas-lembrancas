@@ -8,6 +8,7 @@ import { theme } from "@/theme/globalStyles";
 import { ButtonComponent } from "../Button/styles";
 import {
   displaySmBold,
+  displayXsBold,
   textSmRegular,
   textXsRegular,
 } from "@/theme/typography";
@@ -25,6 +26,7 @@ export const LoginModalContent = styled.div<{ active: boolean }>`
     justify-content: center;
     opacity: ${active ? 1 : 0};
     pointer-events: ${active ? 'all' : 'none'};
+    padding: 24px;
   `}
 `
 
@@ -56,11 +58,20 @@ export const LoginModalContainer = styled.div`
   width: 100%;
   text-align: center;
 
+  @media (max-width: 600px) {
+    padding: 16px;    
+  }
+
   > h3 {
     ${displaySmBold}
     color: ${theme.colors.primary[400]};
     margin-top: 28px;
     margin-bottom: 6px;
+
+    @media (max-width: 600px) {
+      ${displayXsBold}
+      margin-bottom: 4px;
+    }
   }
 
   > p {
@@ -68,12 +79,23 @@ export const LoginModalContainer = styled.div`
     color: ${theme.colors.gray[600]};
     max-width: 300px;
     margin: 0 auto 36px;
+
+    @media (max-width: 600px) {
+      ${textXsRegular}
+      margin-bottom: 20px;
+      max-width: 250px;
+    }
   }
 `
 
 export const LoginModalMethods = styled.ul`
   display: flex;
   gap: 14px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 8px;
+  }
 
   li {
     width: 100%;
@@ -96,6 +118,10 @@ export const LoginModalMethodsSeparator = styled.div`
   align-items: center;
   justify-content: center;
   margin: 16px 0;
+
+  @media (max-width: 600px) {
+    margin: 10px 0;
+  }
 
   &::before {
     content: '';
@@ -127,6 +153,10 @@ export const LoginWithEmailForm = styled.form`
 
   > ${ButtonComponent} {
     margin-top: 8px;
+
+    @media (max-width: 600px) {
+      margin: 0;      
+    }
   }
 `
 
@@ -137,6 +167,11 @@ export const AlreadyLogin = styled.button`
   width: 100%;
   text-align: right;
   cursor: pointer;
+
+  @media (max-width: 600px) {
+    margin: 0;
+    font-size: 11px;
+  }
 
   strong {
     color: ${theme.colors.primary[400]};
@@ -160,16 +195,26 @@ export const CloseButton = styled(ButtonComponent)`
   align-items: center;
   justify-content: center;
   padding: 0;
+
+  @media (max-width: 600px) {
+    top: 8px;
+    right: 8px;
+  }
 `
 
 export const LoginModalIllustration = styled.div`
   width: 100%;
   height: 135px;
 
+  @media (max-width: 600px) {
+    height: 60px;
+  }
+
   img {
     max-width: 100%;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top;
   }
 `

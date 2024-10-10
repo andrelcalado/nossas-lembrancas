@@ -21,7 +21,6 @@ export const InputContent = styled.label`
     border: unset;
     stroke: unset;
     outline: unset;
-    font-family: '__Poppins_b041e5';
     color: ${theme.colors.black};
 
     &::placeholder {

@@ -21,7 +21,7 @@ const INITIAL_PHONE_FORM: Record<string, string | boolean> = {
 }
 
 const usePhoneForm = () => {
-  const [phoneForm, setPhoneForm] = useState<Record<string, string | boolean>>(INITIAL_PHONE_FORM)
+  const [phoneForm, setPhoneForm] = useState<Record<string, string | boolean>>(INITIAL_PHONE_FORM);
 
   const handleSetPhoneForm = (
     field: string,

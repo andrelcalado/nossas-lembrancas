@@ -7,8 +7,10 @@ import firebaseAuth from "@/auth/firebase";
 import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
-  signInWithPopup,
   GoogleAuthProvider,
+  signInWithRedirect,
+  onAuthStateChanged,
+  getRedirectResult,
 } from "firebase/auth";
 
 // Core
@@ -62,19 +64,9 @@ const usePhoneForm = () => {
     }
   }
   
-  const handleGoogleLogin = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    ev.preventDefault()
-    const provider = new GoogleAuthProvider;
-
-    signInWithPopup(firebaseAuth, provider)
-    .then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
-      const user = result.user;
-      console.log('token', token, 'user', user)
-    }).catch((error) => {
-      console.log('error', error)
-    });
+  const handleGoogleLogin = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithRedirect(firebaseAuth, provider);
   }
 
   useEffect(() => {
@@ -82,7 +74,30 @@ const usePhoneForm = () => {
       'size': 'invisible'
     });
   }, [])
-  
+
+  useEffect(() => {
+    // Verificar o estado da autenticação com redirecionamento
+    getRedirectResult(firebaseAuth)
+      .then((result) => {
+        if (result) {
+          console.log('User after redirect:', result);
+        }
+      })
+      .catch((error) => {
+        console.log('Error after redirect:', error);
+      });
+
+    // Escutar mudanças de autenticação (como no fluxo normal)
+    const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
+      if (user) {
+        console.log('User from onAuthStateChanged:', user);
+      } else {
+        console.log('No user is signed in.');
+      }
+    });
+
+    return () => unsubscribe();
+  }, [])  
 
   return {
     phoneForm,

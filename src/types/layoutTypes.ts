@@ -43,7 +43,8 @@ export interface SocialButtonProps {
 export type InputTypeENUM = "text" | "email" | "password";
 export interface InputProps {
   placeholder?: string;
-  value?: string; 
+  value?: string;
+  error?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type: InputTypeENUM;
 }

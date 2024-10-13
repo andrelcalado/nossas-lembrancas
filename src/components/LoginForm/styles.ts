@@ -10,6 +10,7 @@ import {
   displaySmBold,
   displayXsBold,
   textSmRegular,
+  textX1sMedium,
   textXsRegular,
 } from "@/theme/typography";
 
@@ -158,6 +159,13 @@ export const LoginWithEmailForm = styled.form`
       margin: 0;      
     }
   }
+`
+
+export const ErrorMessage = styled.span`
+  ${textX1sMedium}
+  display: block;
+  color: ${theme.colors.primary[500]};
+  text-align: left;
 `
 
 export const AlreadyLogin = styled.button`

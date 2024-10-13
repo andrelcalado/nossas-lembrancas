@@ -26,9 +26,11 @@ const INITIAL_PHONE_FORM: Record<string, string | boolean> = {
 const INITIAL_USER_FORM: Record<string, string> = {
   user: '',
   pwd: '',
+  confirmPWD: '',
 }
 
 const usePhoneForm = () => { 
+  const [errorLabel, setErrorLabel] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [phoneForm, setPhoneForm] = useState<Record<string, string | boolean>>(INITIAL_PHONE_FORM);
   const [userPasswordForm, setUserPasswordForm] = useState<Record<string, string>>(INITIAL_USER_FORM);
@@ -47,6 +49,20 @@ const usePhoneForm = () => {
     field: string,
     value: string,
   ) => {
+    if (field === 'confirmPWD') {
+      if (value.length >= userPasswordForm.pwd.length && value !== userPasswordForm.pwd) {
+        setErrorLabel('As senhas devem ser iguais');
+      } else {
+        setErrorLabel("");
+      }
+    } else if (field === 'pwd') {
+      if (value.length < 6) {
+        setErrorLabel('A senha deve ter pelo menos 6 digitos');
+      } else {
+        setErrorLabel("");
+      }
+    }
+
     setUserPasswordForm((prev) => ({
       ...prev,
       [field]: value
@@ -153,6 +169,7 @@ const usePhoneForm = () => {
     handleUserRegister,
     handleUserLogin,
     loading,
+    errorLabel,
   }
 }
 

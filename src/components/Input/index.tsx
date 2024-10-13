@@ -17,7 +17,7 @@ import {
   AiFillLock,  
 } from "react-icons/ai";
 
-const Input = ({ type, value, onChange, placeholder } : InputProps) => {
+const Input = ({ type, value, onChange, error, placeholder } : InputProps) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const getTypeIcon = (): JSX.Element => {
@@ -32,7 +32,7 @@ const Input = ({ type, value, onChange, placeholder } : InputProps) => {
   }
 
   return (
-    <InputContent>
+    <InputContent error={error}>
       {getTypeIcon()}
 
       <input

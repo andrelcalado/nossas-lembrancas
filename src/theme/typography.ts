@@ -14,6 +14,7 @@ const textLg = `font-size: 18px; line-height: 28px;`;
 const textMd = `font-size: 16px; line-height: 24px;`;
 const textSm = `font-size: 14px; line-height: 20px;`;
 const textXs = `font-size: 12px; line-height: 18px;`;
+const textX1s = `font-size: 10px; line-height: 16px;`;
 
 export const displayX2Regular = `${x2}${regular}`;
 export const displayX2Medium = `${x2}${medium}`;
@@ -60,3 +61,7 @@ export const textXsRegular = `${textXs}${regular}`;
 export const textXsMedium = `${textXs}${medium}`;
 export const textXsSemiBold = `${textXs}${semiBold}`;
 export const textXsBold = `${textXs}${bold}`;
+export const textX1sRegular = `${textX1s}${regular}`;
+export const textX1sMedium = `${textX1s}${medium}`;
+export const textX1sSemiBold = `${textX1s}${semiBold}`;
+export const textX1sBold = `${textX1s}${bold}`;

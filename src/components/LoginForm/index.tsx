@@ -8,6 +8,7 @@ import Image from 'next/image';
 import {
   AlreadyLogin,
   CloseButton,
+  ErrorMessage,
   LoginModalContainer,
   LoginModalContent,
   LoginModalIllustration,
@@ -51,7 +52,21 @@ const LoginForm = () => {
     handleUserLogin,
     handleUserRegister,
     loading,
+    errorLabel,
   } = usePhoneForm();
+
+  const getLoginButtonDisabled = () => {
+    if (loginMode) {
+      return !userPasswordForm.user || !userPasswordForm.pwd;
+    } else {
+      return (
+        !userPasswordForm.user ||
+        !userPasswordForm.pwd ||
+        !userPasswordForm.confirmPWD ||
+        !(userPasswordForm.pwd.length === userPasswordForm.confirmPWD.length) ||
+        errorLabel.length > 0);
+    }
+  }
 
   return (
     <LoginModalContent active={loginModal}>
@@ -98,6 +113,7 @@ const LoginForm = () => {
               placeholder="Email"
             />
             <Input
+              error={errorLabel.length > 0}
               type="password"
               placeholder="Senha"
               value={userPasswordForm.pwd}
@@ -106,7 +122,20 @@ const LoginForm = () => {
               }}
             />
             {!loginMode && (
-              <Input type="password" placeholder="Confirme a senha" />
+              <>
+                <Input
+                  error={errorLabel.length > 0}
+                  value={userPasswordForm.confirmPWD}
+                  onChange={({ target }) => {
+                    handleSetUserForm('confirmPWD', target.value);
+                  }}
+                  type="password"
+                  placeholder="Confirme a senha"
+                />
+                {errorLabel && (
+                  <ErrorMessage>{errorLabel}</ErrorMessage>
+                )}
+              </>
             )}
             <AlreadyLogin onClick={(e) => {
               e.preventDefault();
@@ -120,6 +149,7 @@ const LoginForm = () => {
             </AlreadyLogin>
             <Button
               loading={loading}
+              disabled={getLoginButtonDisabled()}
               onClick={loginMode ? handleUserLogin : handleUserRegister}
             >
               {loginMode ? 'Acessar' : 'Criar'}

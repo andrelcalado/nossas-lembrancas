@@ -10,7 +10,7 @@ import React, {
 import { useRouter } from 'next/navigation'
 
 // Libraries
-import { onAuthStateChanged, User } from 'firebase/auth'
+import { onAuthStateChanged, signOut, User } from 'firebase/auth'
 
 // Types
 import { ProvidersWrapperContext } from '@/types/dataTypes'
@@ -23,6 +23,7 @@ const INITIAL_CONTEXT: ProvidersWrapperContext = {
   setLoginModal: () => null,
   loginMode: false,
   setLoginMode: () => null,
+  handleUserSignOut: () => null,
   user: null,
 }
 
@@ -35,11 +36,21 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
   const [loginModal, setLoginModal] = useState<boolean>(false);
   const [loginMode, setLoginMode] = useState<boolean>(false);
 
+  const handleUserSignOut = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    ev.preventDefault();
+
+    signOut(firebaseAuth).then(() => {
+      router.push('/');
+      setUser(null);
+    })
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(firebaseAuth, (user: User | null) => {
       if (user) {
         console.log('User', user);
         setUser(user);
+        setLoginModal(false);
         router.push('/linha-do-tempo');
       } else {
         console.log('No user is signed in.');
@@ -47,7 +58,15 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
     });
 
     return () => unsubscribe();
-  }, []) 
+  }, [])
+
+  useEffect(() => {
+    if (loginModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [loginModal])
 
   return (
     <AppContext.Provider
@@ -56,6 +75,7 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
         setLoginModal,
         loginMode,
         setLoginMode,
+        handleUserSignOut,
         user,
       }}
     >

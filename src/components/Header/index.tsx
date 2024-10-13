@@ -23,7 +23,12 @@ import {
 } from './styles'
 
 const Header = (): JSX.Element => {
-  const { setLoginModal, setLoginMode } = useAppContext()
+  const {
+    setLoginModal,
+    setLoginMode,
+    user,
+    handleUserSignOut,    
+  } = useAppContext()
 
   return (
     <HeaderContent>
@@ -33,13 +38,13 @@ const Header = (): JSX.Element => {
         <HeaderButtons>
           <li>
             <Button
-              onClick={() => {
+              onClick={user ? handleUserSignOut : () => {
                 setLoginMode(true);
                 setLoginModal(true);
               }}
               size='xs'
             >
-              Conectar
+              {user ? 'Sair' : 'Conectar'}
             </Button>
           </li>
         </HeaderButtons>

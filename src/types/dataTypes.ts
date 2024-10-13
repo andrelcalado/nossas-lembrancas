@@ -14,5 +14,6 @@ export interface ProvidersWrapperContext {
   setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
   loginMode: boolean;
   setLoginMode: React.Dispatch<React.SetStateAction<boolean>>;
+  handleUserSignOut: (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   user: User | null;
 }

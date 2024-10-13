@@ -1,7 +1,7 @@
 'use client'
 
 // Core
-import React, { useEffect } from 'react'
+import React from 'react'
 import Image from 'next/image';
 
 // Styles
@@ -52,14 +52,6 @@ const LoginForm = () => {
     handleUserRegister,
     loading,
   } = usePhoneForm();
-
-  useEffect(() => {
-    if (loginModal) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [loginModal])
 
   return (
     <LoginModalContent active={loginModal}>

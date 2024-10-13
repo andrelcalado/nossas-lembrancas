@@ -11,7 +11,7 @@ import {
   signInWithRedirect,
   getRedirectResult,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 // Core
@@ -112,13 +112,7 @@ const usePhoneForm = () => {
       setLoading(false);
       console.log('loginErr', err);
     })
-  }  
-
-  useEffect(() => {
-    window.recaptchaVerifier = new RecaptchaVerifier(firebaseAuth, 'sign-in-button', {
-      'size': 'invisible'
-    });
-  }, [])
+  }
 
   const handleGoogleLogin = () => {
     setLoading(true);
@@ -141,6 +135,12 @@ const usePhoneForm = () => {
     .catch((error) => {
       console.log('Error after redirect:', error);
     }); 
+
+  useEffect(() => {
+    window.recaptchaVerifier = new RecaptchaVerifier(firebaseAuth, 'sign-in-button', {
+      'size': 'invisible'
+    });
+  }, [])
 
   return {
     phoneForm,

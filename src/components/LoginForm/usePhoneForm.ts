@@ -14,6 +14,9 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
+// Hooks
+import { useAppContext } from "../ProvidersWrapper";
+
 // Core
 import { useState, useEffect } from 'react'
 
@@ -35,6 +38,8 @@ const usePhoneForm = () => {
   const [phoneForm, setPhoneForm] = useState<Record<string, string | boolean>>(INITIAL_PHONE_FORM);
   const [userPasswordForm, setUserPasswordForm] = useState<Record<string, string>>(INITIAL_USER_FORM);
 
+  const { loginMode } = useAppContext();
+
   const handleSetPhoneForm = (
     field: string,
     value: string | boolean,
@@ -49,17 +54,19 @@ const usePhoneForm = () => {
     field: string,
     value: string,
   ) => {
-    if (field === 'confirmPWD') {
-      if (value.length >= userPasswordForm.pwd.length && value !== userPasswordForm.pwd) {
-        setErrorLabel('As senhas devem ser iguais');
-      } else {
-        setErrorLabel("");
-      }
-    } else if (field === 'pwd') {
-      if (value.length < 6) {
-        setErrorLabel('A senha deve ter pelo menos 6 digitos');
-      } else {
-        setErrorLabel("");
+    if (!loginMode) {
+      if (field === 'confirmPWD') {
+        if (value.length >= userPasswordForm.pwd.length && value !== userPasswordForm.pwd) {
+          setErrorLabel('As senhas devem ser iguais');
+        } else {
+          setErrorLabel("");
+        }
+      } else if (field === 'pwd') {
+        if (value.length < 6) {
+          setErrorLabel('A senha deve ter pelo menos 6 digitos');
+        } else {
+          setErrorLabel("");
+        }
       }
     }
 
@@ -126,6 +133,7 @@ const usePhoneForm = () => {
       setLoading(false);
     }).catch((err) => {
       setLoading(false);
+      setErrorLabel("Email ou senha incorreto, tente novamente");
       console.log('loginErr', err);
     })
   }

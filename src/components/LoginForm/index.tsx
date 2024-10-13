@@ -122,20 +122,18 @@ const LoginForm = () => {
               }}
             />
             {!loginMode && (
-              <>
-                <Input
-                  error={errorLabel.length > 0}
-                  value={userPasswordForm.confirmPWD}
-                  onChange={({ target }) => {
-                    handleSetUserForm('confirmPWD', target.value);
-                  }}
-                  type="password"
-                  placeholder="Confirme a senha"
-                />
-                {errorLabel && (
-                  <ErrorMessage>{errorLabel}</ErrorMessage>
-                )}
-              </>
+              <Input
+                error={errorLabel.length > 0}
+                value={userPasswordForm.confirmPWD}
+                onChange={({ target }) => {
+                  handleSetUserForm('confirmPWD', target.value);
+                }}
+                type="password"
+                placeholder="Confirme a senha"
+              />
+            )}
+            {errorLabel && (
+              <ErrorMessage>{errorLabel}</ErrorMessage>
             )}
             <AlreadyLogin onClick={(e) => {
               e.preventDefault();

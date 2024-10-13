@@ -1,5 +1,8 @@
 'use client'
 
+// Core
+import { useState, useEffect } from 'react'
+
 // Auth
 import firebaseAuth from "@/auth/firebase";
 
@@ -17,8 +20,8 @@ import {
 // Hooks
 import { useAppContext } from "../ProvidersWrapper";
 
-// Core
-import { useState, useEffect } from 'react'
+// Types
+import { LoginMethod } from "@/types/layoutTypes";
 
 const INITIAL_PHONE_FORM: Record<string, string | boolean> = {
   phone: '',
@@ -33,6 +36,7 @@ const INITIAL_USER_FORM: Record<string, string> = {
 }
 
 const usePhoneForm = () => { 
+  const [loginMethod, setLoginMethod] = useState<LoginMethod>("email_pwd");
   const [errorLabel, setErrorLabel] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [phoneForm, setPhoneForm] = useState<Record<string, string | boolean>>(INITIAL_PHONE_FORM);
@@ -161,10 +165,12 @@ const usePhoneForm = () => {
     }); 
 
   useEffect(() => {
-    window.recaptchaVerifier = new RecaptchaVerifier(firebaseAuth, 'sign-in-button', {
-      'size': 'invisible'
-    });
-  }, [])
+    if (loginMethod === "phone") {
+      window.recaptchaVerifier = new RecaptchaVerifier(firebaseAuth, 'sign-in-button', {
+        'size': 'invisible'
+      });
+    }
+  }, [loginMethod])
 
   useEffect(() => {
     setErrorLabel("");
@@ -183,6 +189,8 @@ const usePhoneForm = () => {
     handleUserLogin,
     loading,
     errorLabel,
+    loginMethod,
+    setLoginMethod,
   }
 }
 

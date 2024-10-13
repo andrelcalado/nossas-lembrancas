@@ -46,13 +46,15 @@ const LoginForm = () => {
     handleSetPhoneForm,
     handleSendCode,
     handleLoginWithCode,
-    handleGoogleLogin,
+    // handleGoogleLogin,
     userPasswordForm,
     handleSetUserForm,
     handleUserLogin,
     handleUserRegister,
     loading,
     errorLabel,
+    loginMethod,
+    setLoginMethod,
   } = usePhoneForm();
 
   const getLoginButtonDisabled = () => {
@@ -84,121 +86,129 @@ const LoginForm = () => {
           <h3>{loginMode ? 'Nossas Lembranças' : 'Criar o nosso'}</h3>
           <p>{loginMode ? 'Escolha a opção de acesso as suas lembranças' : 'Escolha a melhor forma de salvar os seus momentos'}</p>
 
-          <LoginModalMethods>
-            {/* <li>
-              <Button variation="border" onClick={handleGoogleLogin}>
-                <AiOutlineGoogle />
-                <span>Google</span>                
-              </Button>
-            </li> */}
-            <li>
-              <Button variation="border" onClick={handleGoogleLogin}>
-                <MdPermPhoneMsg />
-                <span>Número Telefone</span>
-              </Button>
-            </li>
-          </LoginModalMethods>
-
-          <LoginModalMethodsSeparator>
-            <span>ou email e senha</span>
-          </LoginModalMethodsSeparator>
-
-          <LoginWithEmailForm>
-            <Input
-              type="email"
-              value={userPasswordForm.user}
-              onChange={({ target }) => {
-                handleSetUserForm('user', target.value);
-              }}
-              placeholder="Email"
-            />
-            <Input
-              error={errorLabel.length > 0}
-              type="password"
-              placeholder="Senha"
-              value={userPasswordForm.pwd}
-              onChange={({ target }) => {
-                handleSetUserForm('pwd', target.value);
-              }}
-            />
-            {!loginMode && (
-              <Input
-                error={errorLabel.length > 0}
-                value={userPasswordForm.confirmPWD}
-                onChange={({ target }) => {
-                  handleSetUserForm('confirmPWD', target.value);
-                }}
-                type="password"
-                placeholder="Confirme a senha"
-              />
-            )}
-            {errorLabel && (
-              <ErrorMessage>{errorLabel}</ErrorMessage>
-            )}
-            <AlreadyLogin onClick={(e) => {
-              e.preventDefault();
-              setLoginMode(!loginMode);
-            }}>
-              {loginMode ? (
-                <span>Ainda <strong>não tenho</strong> nossas lembranças</span>
-              ) : (
-                <span>Já tenho <strong>nossas lembranças</strong></span>
-              )}
-            </AlreadyLogin>
-            <Button
-              loading={loading}
-              disabled={getLoginButtonDisabled()}
-              onClick={loginMode ? handleUserLogin : handleUserRegister}
-            >
-              {loginMode ? 'Acessar' : 'Criar'}
-            </Button>
-          </LoginWithEmailForm>
-
-          <div style={{ display: 'none' }}>
-            <form>
-              <label>
-                Número telefone
-                <input
-                  type="text"
-                  value={phoneForm.phone as string}
-                  onChange={({ target }) => {
-                    handleSetPhoneForm('phone', target.value);
-                  }}
-                />
-              </label>
-              <button
-                id="sign-in-button"
-                name="sign-in-button"
-                onClick={handleSendCode}
-              >
-                Enviar
-              </button>
-            </form>
-
-            {phoneForm.formCode && (
-              <form style={{ marginTop: 20 }}>
+          {loginMethod === 'phone' ? (
+            <div>
+              <form>
                 <label>
-                  Código Enviado
+                  Número telefone
                   <input
                     type="text"
-                    value={phoneForm.code as string}
-                    placeholder='XXXXXX'
+                    value={phoneForm.phone as string}
                     onChange={({ target }) => {
-                      handleSetPhoneForm('code', target.value);
+                      handleSetPhoneForm('phone', target.value);
                     }}
                   />
                 </label>
-                <button
+                <Button
                   id="sign-in-button"
                   name="sign-in-button"
-                  onClick={handleLoginWithCode}
-                  disabled={!phoneForm.code}
+                  onClick={handleSendCode}
                 >
-                  Login
-                </button>
+                  Enviar
+                </Button>
               </form>
-            )}
-          </div>
+
+              {phoneForm.formCode && (
+                <form style={{ marginTop: 20 }}>
+                  <label>
+                    Código Enviado
+                    <input
+                      type="text"
+                      value={phoneForm.code as string}
+                      placeholder='XXXXXX'
+                      onChange={({ target }) => {
+                        handleSetPhoneForm('code', target.value);
+                      }}
+                    />
+                  </label>
+                  <button
+                    id="sign-in-button"
+                    name="sign-in-button"
+                    onClick={handleLoginWithCode}
+                    disabled={!phoneForm.code}
+                  >
+                    Login
+                  </button>
+                </form>
+              )}
+
+              <Button size="xs" variation="border" onClick={() => setLoginMethod('email_pwd')}>
+                Voltar
+              </Button>
+            </div>
+          ) : (
+            <>
+              <LoginModalMethods>
+                {/* <li>
+                  <Button variation="border" onClick={handleGoogleLogin}>
+                    <AiOutlineGoogle />
+                    <span>Google</span>                
+                  </Button>
+                </li> */}
+                <li>                  
+                  <Button variation="border" onClick={() => setLoginMethod('phone')}>
+                    <MdPermPhoneMsg />
+                    <span>Número Telefone</span>
+                  </Button>
+                </li>
+              </LoginModalMethods>
+
+              <LoginModalMethodsSeparator>
+                <span>ou email e senha</span>
+              </LoginModalMethodsSeparator>
+
+              <LoginWithEmailForm>
+                <Input
+                  type="email"
+                  value={userPasswordForm.user}
+                  onChange={({ target }) => {
+                    handleSetUserForm('user', target.value);
+                  }}
+                  placeholder="Email"
+                />
+                <Input
+                  error={errorLabel.length > 0}
+                  type="password"
+                  placeholder="Senha"
+                  value={userPasswordForm.pwd}
+                  onChange={({ target }) => {
+                    handleSetUserForm('pwd', target.value);
+                  }}
+                />
+                {!loginMode && (
+                  <Input
+                    error={errorLabel.length > 0}
+                    value={userPasswordForm.confirmPWD}
+                    onChange={({ target }) => {
+                      handleSetUserForm('confirmPWD', target.value);
+                    }}
+                    type="password"
+                    placeholder="Confirme a senha"
+                  />
+                )}
+                {errorLabel && (
+                  <ErrorMessage>{errorLabel}</ErrorMessage>
+                )}
+                <AlreadyLogin onClick={(e) => {
+                  e.preventDefault();
+                  setLoginMode(!loginMode);
+                }}>
+                  {loginMode ? (
+                    <span>Ainda <strong>não tenho</strong> nossas lembranças</span>
+                  ) : (
+                    <span>Já tenho <strong>nossas lembranças</strong></span>
+                  )}
+                </AlreadyLogin>
+                <Button
+                  loading={loading}
+                  disabled={getLoginButtonDisabled()}
+                  onClick={loginMode ? handleUserLogin : handleUserRegister}
+                >
+                  {loginMode ? 'Acessar' : 'Criar'}
+                </Button>
+              </LoginWithEmailForm>
+            </>
+          )}
         </LoginModalContainer>
 
         <LoginModalIllustration>

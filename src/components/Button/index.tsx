@@ -18,10 +18,14 @@ export default function Button({
   onClick,
   size = 'sm',
   loading = false,
-  disabled
+  disabled,
+  id,
+  name,
 }: ButtonProps) {
   return (
     <ButtonComponent
+      id={id}
+      name={name}
       size={size}
       onClick={onClick}
       variation={variation}

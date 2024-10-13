@@ -26,6 +26,8 @@ export interface ButtonProps {
   variation?: ButtonVariationENUM;
   loading?: boolean;
   disabled?: boolean;
+  id?: string;
+  name?: string;
 }
 
 export interface HeroSliderCardProps {
@@ -58,3 +60,5 @@ export interface LoadingProps {
   loading: boolean;
   size?: ElementSizeENUM;
 }
+
+export type LoginMethod = "email_pwd" | "phone";

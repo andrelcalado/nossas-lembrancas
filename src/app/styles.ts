@@ -24,7 +24,7 @@ import {
 // Components
 import { ButtonComponent } from "@/components/Button/styles";
 
-export const HomeContent = styled.section`
+export const PageContent = styled.section`
   background-color: ${theme.colors.white};
   position: relative;
   min-height: calc(100vh - 76px);

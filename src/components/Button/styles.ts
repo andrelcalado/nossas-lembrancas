@@ -28,14 +28,15 @@ const getPaddingSize = (size?: ElementSizeENUM) => {
   }
 }
 
-const getVariationnSize = (variation?: ButtonVariationENUM) => {
+const getVariationSize = (disabled: boolean, variation?: ButtonVariationENUM) => {
   switch (variation) {
     case 'fill':
     default:
       return css`
-        background-color: ${theme.colors.primary[400]};
+        background-color: ${disabled ? theme.colors.primary[200] : theme.colors.primary[400]};
         border: 1px solid transparent;
         color: ${theme.colors.white};
+        pointer-events: ${disabled ? 'none' : 'all'};
 
         &:hover {
           background-color: ${theme.colors.primary[300]};
@@ -43,9 +44,10 @@ const getVariationnSize = (variation?: ButtonVariationENUM) => {
       `;
     case 'border':
       return css`
-        background-color: transparent;
-        border: 1px solid ${theme.colors.primary[400]};
+        background-color: ${disabled ? theme.colors.primary[100] : 'transparent'};
+        border: 1px solid ${disabled ? theme.colors.primary[200] : theme.colors.primary[400]};
         color: ${theme.colors.primary[400]};
+        pointer-events: ${disabled ? 'none' : 'all'};
 
         &:hover {
           background-color: ${theme.colors.primary[400]};
@@ -55,8 +57,8 @@ const getVariationnSize = (variation?: ButtonVariationENUM) => {
   }  
 }
 
-export const ButtonComponent = styled.button<Pick<ButtonProps, 'size' | 'variation'>>`
-  ${({ size, variation }) => css`
+export const ButtonComponent = styled.button<Pick<ButtonProps, 'size' | 'variation' | 'disabled'>>`
+  ${({ size, variation = 'fill', disabled = false }) => css`
     ${textSmMedium}
     padding: ${getPaddingSize(size)};
     justify-content: center;
@@ -65,7 +67,7 @@ export const ButtonComponent = styled.button<Pick<ButtonProps, 'size' | 'variati
     border-radius: 8px;
     display: flex;
     gap: 6px;
-    ${getVariationnSize(variation)}
+    ${getVariationSize(disabled, variation)}
     cursor: pointer;
 
     @media (max-width: 910px) {

@@ -24,6 +24,8 @@ export interface ButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   size?: ElementSizeENUM;
   variation?: ButtonVariationENUM;
+  loading?: boolean;
+  disabled?: boolean;
 }
 
 export interface HeroSliderCardProps {
@@ -49,4 +51,9 @@ export interface InputProps {
 export interface LoginFormProps {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>
+}
+
+export interface LoadingProps {
+  loading: boolean;
+  size?: ElementSizeENUM;
 }

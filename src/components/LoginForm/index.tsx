@@ -20,7 +20,7 @@ import {
 
 // Assets
 import { CgClose } from "react-icons/cg";
-import { AiOutlineGoogle } from "react-icons/ai";
+// import { AiOutlineGoogle } from "react-icons/ai";
 import { MdPermPhoneMsg } from "react-icons/md";
 import modalIllustration from '@/app/assets/img/login-illustration.svg';
 
@@ -37,7 +37,7 @@ const LoginForm = () => {
     loginModal,
     setLoginModal,
     setLoginMode,
-    loginMode
+    loginMode,
   } = useAppContext();
 
   const {
@@ -45,7 +45,12 @@ const LoginForm = () => {
     handleSetPhoneForm,
     handleSendCode,
     handleLoginWithCode,
-    handleGoogleLogin
+    handleGoogleLogin,
+    userPasswordForm,
+    handleSetUserForm,
+    handleUserLogin,
+    handleUserRegister,
+    loading,
   } = usePhoneForm();
 
   useEffect(() => {
@@ -58,7 +63,10 @@ const LoginForm = () => {
 
   return (
     <LoginModalContent active={loginModal}>
-      <ModalOverlay />
+      <ModalOverlay
+        role="button"
+        onClick={() => setLoginModal(false)}
+      />
 
       <LoginModalWrapper>
         <CloseButton onClick={() => setLoginModal(false)}>
@@ -70,12 +78,12 @@ const LoginForm = () => {
           <p>{loginMode ? 'Escolha a opção de acesso as suas lembranças' : 'Escolha a melhor forma de salvar os seus momentos'}</p>
 
           <LoginModalMethods>
-            <li>
+            {/* <li>
               <Button variation="border" onClick={handleGoogleLogin}>
                 <AiOutlineGoogle />
                 <span>Google</span>                
               </Button>
-            </li>
+            </li> */}
             <li>
               <Button variation="border" onClick={handleGoogleLogin}>
                 <MdPermPhoneMsg />
@@ -89,8 +97,22 @@ const LoginForm = () => {
           </LoginModalMethodsSeparator>
 
           <LoginWithEmailForm>
-            <Input type="email" placeholder="Email" />
-            <Input type="password" placeholder="Senha" />
+            <Input
+              type="email"
+              value={userPasswordForm.user}
+              onChange={({ target }) => {
+                handleSetUserForm('user', target.value);
+              }}
+              placeholder="Email"
+            />
+            <Input
+              type="password"
+              placeholder="Senha"
+              value={userPasswordForm.pwd}
+              onChange={({ target }) => {
+                handleSetUserForm('pwd', target.value);
+              }}
+            />
             {!loginMode && (
               <Input type="password" placeholder="Confirme a senha" />
             )}
@@ -104,7 +126,12 @@ const LoginForm = () => {
                 <span>Já tenho <strong>nossas lembranças</strong></span>
               )}
             </AlreadyLogin>
-            <Button>{loginMode ? 'Acessar' : 'Criar'}</Button>
+            <Button
+              loading={loading}
+              onClick={loginMode ? handleUserLogin : handleUserRegister}
+            >
+              {loginMode ? 'Acessar' : 'Criar'}
+            </Button>
           </LoginWithEmailForm>
 
           <div style={{ display: 'none' }}>

@@ -9,11 +9,11 @@ import { EffectCards, Autoplay } from 'swiper/modules';
 
 // Styles
 import {
-  HomeContent,
   HomeWrapper,
   HomeCTAs,
   HomeTexts,
-  HomeHeroSlider,  
+  HomeHeroSlider,
+  PageContent,  
 } from "./styles";
 import 'swiper/css';
 import 'swiper/css/effect-cards';
@@ -37,7 +37,7 @@ export default function Home() {
   } = useAppContext();
 
   return (
-    <HomeContent>
+    <PageContent>
       <LoginForm />
 
       <HomeWrapper className="container">
@@ -86,6 +86,6 @@ export default function Home() {
           ))}
         </HomeHeroSlider>
       </HomeWrapper>
-    </HomeContent>
+    </PageContent>
   );
 }

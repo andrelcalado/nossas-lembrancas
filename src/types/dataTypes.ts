@@ -3,6 +3,7 @@ import React from "react";
 
 // Types
 import { HeroSliderCardProps } from "./layoutTypes";
+import { User } from "firebase/auth";
 
 export type HeroSliderDataType = Array<HeroSliderCardProps>
 
@@ -13,4 +14,5 @@ export interface ProvidersWrapperContext {
   setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
   loginMode: boolean;
   setLoginMode: React.Dispatch<React.SetStateAction<boolean>>;
+  user: User | null;
 }

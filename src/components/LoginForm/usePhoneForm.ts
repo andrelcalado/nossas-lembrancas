@@ -133,7 +133,7 @@ const usePhoneForm = () => {
       setLoading(false);
     }).catch((err) => {
       setLoading(false);
-      setErrorLabel("Email ou senha incorreto, tente novamente");
+      setErrorLabel("Email ou senha incorreta, tente novamente");
       console.log('loginErr', err);
     })
   }
@@ -165,6 +165,11 @@ const usePhoneForm = () => {
       'size': 'invisible'
     });
   }, [])
+
+  useEffect(() => {
+    setErrorLabel("");
+  }, [loginMode])
+  
 
   return {
     phoneForm,

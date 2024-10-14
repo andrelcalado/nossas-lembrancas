@@ -5,8 +5,10 @@ import React from 'react'
 import Image from 'next/image';
 
 // Styles
+import 'react-phone-number-input/style.css'
 import {
   AlreadyLogin,
+  BottomButtons,
   CloseButton,
   ErrorMessage,
   LoginModalContainer,
@@ -16,12 +18,14 @@ import {
   LoginModalMethodsSeparator,
   LoginModalWrapper,
   LoginWithEmailForm,
-  ModalOverlay,  
+  ModalOverlay,
+  PhoneInputComponent,  
 } from './styles';
 
 // Assets
 import { CgClose } from "react-icons/cg";
 // import { AiOutlineGoogle } from "react-icons/ai";
+import { BiSolidSend, BiArrowFromRight } from "react-icons/bi";
 import { MdPermPhoneMsg } from "react-icons/md";
 import modalIllustration from '@/app/assets/img/login-illustration.svg';
 
@@ -55,6 +59,7 @@ const LoginForm = () => {
     errorLabel,
     loginMethod,
     setLoginMethod,
+    handleGoBackLoginForm,
   } = usePhoneForm();
 
   const getLoginButtonDisabled = () => {
@@ -83,61 +88,63 @@ const LoginForm = () => {
         </CloseButton>
 
         <LoginModalContainer>
-          <h3>{loginMode ? 'Nossas Lembranças' : 'Criar o nosso'}</h3>
-          <p>{loginMode ? 'Escolha a opção de acesso as suas lembranças' : 'Escolha a melhor forma de salvar os seus momentos'}</p>
-
           {loginMethod === 'phone' ? (
-            <div>
+            <>
+              <h3>
+                {phoneForm.formCode ? 'Código Enviado' : 'Entrar com seu telefone'}
+              </h3>
+              <p>
+                {phoneForm.formCode ? 'Você poderá visualizar o código nas notificações do seu dispositivo' : 'Enviaremos um SMS com um código para o número informado'}
+              </p>
+              
               <form>
-                <label>
-                  Número telefone
-                  <input
-                    type="text"
-                    value={phoneForm.phone as string}
+                {phoneForm.formCode ? (
+                  <Input
+                    type='text'
+                    value={phoneForm.code as string}
+                    placeholder='XXXXXXX'
                     onChange={({ target }) => {
-                      handleSetPhoneForm('phone', target.value);
+                      handleSetPhoneForm('code', target.value);
                     }}
                   />
-                </label>
+                ) : (
+                  <PhoneInputComponent
+                    value={phoneForm.phone}
+                    onChange={(phone: string) => handleSetPhoneForm('phone', phone)}
+                    placeholder="(99) 99999-9999"
+                    defaultCountry="BR"
+                    maxLength={15}
+                  />
+                )}
+                
+                {errorLabel && (
+                  <ErrorMessage>{errorLabel}</ErrorMessage>
+                )}
+              </form>
+
+              <BottomButtons>
+                <Button size="xs" variation="border" onClick={handleGoBackLoginForm}>
+                  <BiArrowFromRight />
+                  <span>Voltar</span>                  
+                </Button>
+
                 <Button
                   id="sign-in-button"
                   name="sign-in-button"
-                  onClick={handleSendCode}
+                  loading={loading}
+                  disabled={String(phoneForm.phone).length < 14}
+                  onClick={phoneForm.formCode ? handleLoginWithCode : handleSendCode}
                 >
-                  Enviar
+                  {!phoneForm.formCode && <BiSolidSend />}
+                  {phoneForm.formCode ? 'Acessar' : 'Enviar'}
                 </Button>
-              </form>
-
-              {phoneForm.formCode && (
-                <form style={{ marginTop: 20 }}>
-                  <label>
-                    Código Enviado
-                    <input
-                      type="text"
-                      value={phoneForm.code as string}
-                      placeholder='XXXXXX'
-                      onChange={({ target }) => {
-                        handleSetPhoneForm('code', target.value);
-                      }}
-                    />
-                  </label>
-                  <button
-                    id="sign-in-button"
-                    name="sign-in-button"
-                    onClick={handleLoginWithCode}
-                    disabled={!phoneForm.code}
-                  >
-                    Login
-                  </button>
-                </form>
-              )}
-
-              <Button size="xs" variation="border" onClick={() => setLoginMethod('email_pwd')}>
-                Voltar
-              </Button>
-            </div>
+              </BottomButtons>              
+            </>
           ) : (
             <>
+              <h3>{loginMode ? 'Nossas Lembranças' : 'Criar o nosso'}</h3>
+              <p>{loginMode ? 'Escolha a opção de acesso as suas lembranças' : 'Escolha a melhor forma de salvar os seus momentos'}</p>
+
               <LoginModalMethods>
                 {/* <li>
                   <Button variation="border" onClick={handleGoogleLogin}>

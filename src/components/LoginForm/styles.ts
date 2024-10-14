@@ -2,6 +2,7 @@
 
 // Libraries
 import styled, { css } from "styled-components";
+import PhoneInput from 'react-phone-number-input'
 
 // Theme
 import { theme } from "@/theme/globalStyles";
@@ -86,6 +87,12 @@ export const LoginModalContainer = styled.div`
       margin-bottom: 20px;
       max-width: 250px;
     }
+  }
+
+  > form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 `
 
@@ -224,5 +231,46 @@ export const LoginModalIllustration = styled.div`
     height: 100%;
     object-fit: cover;
     object-position: top;
+  }
+`
+
+export const PhoneInputComponent = styled(PhoneInput)`
+  width: 100%;
+  padding: 0 12px;
+  background-color: ${theme.colors.gray[100]};
+  border-radius: 12px;
+  border: 1px solid ${theme.colors.gray[200]};
+  gap: 3px;
+
+  .PhoneInputCountrySelectArrow {
+    margin-left: 12px;
+  }
+
+  input {
+    padding: 12px 0;
+    width: 100%;
+    background: unset;
+    border: unset;
+    stroke: unset;
+    outline: unset;
+    color: ${theme.colors.black};
+
+    &::placeholder {
+      color: ${theme.colors.gray[300]};
+    }
+  }
+`
+
+export const BottomButtons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  width: 100%;
+
+  ${ButtonComponent}:last-child {
+    svg {
+      transform: rotate(-45deg);
+    }
   }
 `

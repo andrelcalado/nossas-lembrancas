@@ -82,6 +82,7 @@ const usePhoneForm = () => {
 
   const handleSendCode = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     ev.preventDefault();
+    setLoading(true);
 
     signInWithPhoneNumber(
       firebaseAuth,
@@ -90,23 +91,36 @@ const usePhoneForm = () => {
     )
     .then((confirmationResult) => {
       window.confirmationResult = confirmationResult;
-      handleSetPhoneForm('formCode', true)
+      setLoading(false);
+      setErrorLabel("");
+      handleSetPhoneForm('formCode', true);
     })
     .catch((error) => {
-      console.log('error', error)
+      setLoading(false);
+      console.log('error', error);
+      setErrorLabel('Telefone inválido, tente novamente');
     });
   }
 
   const handleLoginWithCode = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     ev.preventDefault()
+    setLoading(true);
 
     if (window.confirmationResult) {
-      window.confirmationResult.confirm(phoneForm.code as string).then((res) => {
-        console.log('code-validate', res)
+      window.confirmationResult.confirm(phoneForm.code as string).then(() => {
+        setLoading(false);
       }).catch((err) => {
-        console.log('code-invalidate', err)
+        setLoading(false);
+        setErrorLabel('Código inválido, tente novamente');
+        console.log('code-invalidate', err);
       })
     }
+  }
+
+  const handleGoBackLoginForm = () => {
+    setErrorLabel("");
+    setPhoneForm(INITIAL_PHONE_FORM);
+    setLoginMethod('email_pwd');
   }
 
   const handleUserRegister = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -191,6 +205,7 @@ const usePhoneForm = () => {
     errorLabel,
     loginMethod,
     setLoginMethod,
+    handleGoBackLoginForm,
   }
 }
 

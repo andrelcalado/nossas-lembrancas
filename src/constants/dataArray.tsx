@@ -10,14 +10,17 @@ import {
   BiLogoLinkedin,
   BiLogoTiktok,
   BiLogoGmail,
+  BiSolidVideos
 } from "react-icons/bi"
+import { IoIosText } from "react-icons/io";
+import { TbPhotoFilled } from "react-icons/tb";
 
 // Types
 import {
   FooterSocialMediaType,
   HeroSliderDataType,
+  TimelineItemDataType,
 } from '@/types/dataTypes'
-
 
 export const heroSliderData: HeroSliderDataType = [
   {
@@ -45,7 +48,7 @@ export const heroSliderData: HeroSliderDataType = [
     desc: 'A tarde que passamos rindo no café onde nos conhecemos',
     date: '01/01/2023'
   }
-]
+];
 
 export const footerSocialMediaData: Array<FooterSocialMediaType> = [
   {
@@ -68,4 +71,23 @@ export const footerSocialMediaData: Array<FooterSocialMediaType> = [
     icon: <BiLogoGmail />,
     url: 'mailto:2bWkA@example.com',
   },
-]
+];
+
+export const MemoryTypes: Array<TimelineItemDataType> = [
+  {
+    typeLabel: 'Frase',
+    typeIcon: <IoIosText />,
+    type: 'phrase',
+  },
+  {
+    typeLabel: 'Foto',
+    typeIcon: <TbPhotoFilled />,
+    type: 'photo',
+  },
+  {
+    typeLabel: 'Vídeo (Em breve)',
+    typeIcon: <BiSolidVideos />,
+    type: 'video',
+    disabled: true,
+  }
+];

@@ -36,7 +36,6 @@ const getVariationSize = (disabled: boolean, variation?: ButtonVariationENUM) =>
         background-color: ${disabled ? theme.colors.primary[200] : theme.colors.primary[400]};
         border: 1px solid transparent;
         color: ${theme.colors.white};
-        pointer-events: ${disabled ? 'none' : 'all'};
 
         &:hover {
           background-color: ${theme.colors.primary[300]};
@@ -47,7 +46,6 @@ const getVariationSize = (disabled: boolean, variation?: ButtonVariationENUM) =>
         background-color: ${disabled ? theme.colors.primary[100] : 'transparent'};
         border: 1px solid ${disabled ? theme.colors.primary[200] : theme.colors.primary[400]};
         color: ${theme.colors.primary[400]};
-        pointer-events: ${disabled ? 'none' : 'all'};
 
         &:hover {
           background-color: ${theme.colors.primary[400]};
@@ -69,6 +67,7 @@ export const ButtonComponent = styled.button<Pick<ButtonProps, 'size' | 'variati
     gap: 6px;
     ${getVariationSize(disabled, variation)}
     cursor: pointer;
+    ${disabled && 'pointer-events: none;'}
 
     @media (max-width: 910px) {
       padding: 9px 17px;
@@ -76,6 +75,7 @@ export const ButtonComponent = styled.button<Pick<ButtonProps, 'size' | 'variati
 
     & svg {
       width: 15px;
+      flex-shrink: 0;
     }
   `}
 `;

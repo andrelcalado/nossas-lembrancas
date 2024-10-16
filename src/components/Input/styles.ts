@@ -18,7 +18,11 @@ export const InputContent = styled.label<Pick<InputProps, 'error'>>`
     border: 1px solid ${error ? theme.colors.primary[500] : theme.colors.gray[200]};
     align-items: center;
 
-    input {
+    &:hover, &:focus-within {
+      border-color: ${theme.colors.secondary[300]};
+    }
+
+    input, textarea {
       padding: 12px 0;
       width: 100%;
       background: unset;
@@ -30,6 +34,10 @@ export const InputContent = styled.label<Pick<InputProps, 'error'>>`
       &::placeholder {
         color: ${error ? theme.colors.primary[500] : theme.colors.gray[300]};
       }
+    }
+
+    textarea {
+      resize: none;
     }
 
     svg {

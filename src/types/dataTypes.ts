@@ -2,7 +2,7 @@
 import React from "react";
 
 // Types
-import { HeroSliderCardProps } from "./layoutTypes";
+import { HeroSliderCardProps, TimelineItemTypeENUM } from "./layoutTypes";
 import { User } from "firebase/auth";
 
 export type HeroSliderDataType = Array<HeroSliderCardProps>
@@ -16,4 +16,15 @@ export interface ProvidersWrapperContext {
   setLoginMode: React.Dispatch<React.SetStateAction<boolean>>;
   handleUserSignOut: (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   user: User | null;
+}
+
+export interface TimelineItemDataType {
+  type: TimelineItemTypeENUM;
+  typeLabel?: string;
+  typeIcon?: JSX.Element;
+  desc?: string;
+  date?: string;
+  photo?: string;
+  video?: string;
+  disabled?: boolean;
 }

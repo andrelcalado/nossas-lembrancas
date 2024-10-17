@@ -27,7 +27,7 @@ import { CgClose } from "react-icons/cg";
 // import { AiOutlineGoogle } from "react-icons/ai";
 import { BiSolidSend, BiArrowFromRight } from "react-icons/bi";
 import { MdPermPhoneMsg } from "react-icons/md";
-import modalIllustration from '@/app/assets/img/login-illustration.svg';
+import modalIllustration from '@/assets/img/login-illustration.svg';
 
 // Components
 import Button from '../Button';

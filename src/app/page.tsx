@@ -75,10 +75,11 @@ export default function Home() {
             waitForTransition: true,
           }}
         >
-          {heroSliderData?.map(({ photo, desc, date }, index) => (
+          {heroSliderData?.map(({ media, mediaType, desc, date }, index) => (
             <SwiperSlide key={index}>
               <HeroSliderCard
-                photo={photo}
+                media={media}
+                mediaType={mediaType}
                 desc={desc}
                 date={date}
               />

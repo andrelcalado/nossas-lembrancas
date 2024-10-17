@@ -34,9 +34,10 @@ export interface ButtonProps {
 }
 
 export interface HeroSliderCardProps {
-  photo: StaticImageData;
+  media: string | StaticImageData;
   desc: string;
   date: string;
+  mediaType: 'photo' | 'video';
 }
 
 export interface SocialButtonProps {

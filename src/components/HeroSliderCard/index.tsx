@@ -17,11 +17,26 @@ import {
   HeroSliderHearts
 } from './styles'
 
-const HeroSliderCard = ({ photo, desc, date }: HeroSliderCardProps) => {
+const HeroSliderCard = ({
+  media,
+  mediaType,
+  desc,
+  date,
+}: HeroSliderCardProps) => {
   return (
     <HeroSliderCardContent>
       <HeroSliderCardPhoto>
-        <Image src={photo} alt={desc} />
+        {mediaType === 'photo' ? (
+          <Image src={media} alt={desc} />
+        ) : (
+          <video
+            src={media as string}
+            autoPlay
+            muted
+            loop
+            controls={false}
+          />
+        )}
       </HeroSliderCardPhoto>
       <HeroSliderDescription>
         <p>{desc}</p>

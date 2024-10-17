@@ -10,7 +10,7 @@ import Image from 'next/image'
 import Button from '../Button'
 
 // Assets
-import logoLabel from '@/app/assets/icon/logo-label.svg'
+import logoLabel from '@/assets/icon/logo-label.svg'
 
 // Hooks
 import { useAppContext } from '../ProvidersWrapper'

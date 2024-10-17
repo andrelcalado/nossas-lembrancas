@@ -8,6 +8,7 @@ import {
   TimelineItemAdd,
   TimelineItemAddBall,
   TimelineItemContent,
+  TimelineItemImageUpload,
   TimelineItemPhrase,
   TimelineItemTime,
   TimelineItemWrapper  
@@ -19,7 +20,7 @@ import { DropdownPopup } from '../DropdownPopup';
 
 // Assets
 import { BsPlus } from "react-icons/bs";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdAddAPhoto } from "react-icons/md";
 
 // Hooks
 import useTimelineItem from './useTimelineItem';
@@ -114,6 +115,20 @@ const TimelineItem = ({
               </Button>
             )}
           </TimelineItemPhrase>
+        )}
+
+        {type === 'photo' && (
+          <TimelineItemImageUpload>
+            <MdAddAPhoto />
+            <p>Click para selecionar uma fotografia</p>
+
+            <video autoPlay loop muted src={photo && URL.createObjectURL(photo)} />
+
+            <input
+              type="file"
+              onChange={(event) => setPhoto && setPhoto(event.target.files[0])}
+            />
+          </TimelineItemImageUpload>
         )}
       </TimelineItemWrapper>
     </TimelineItemContent>

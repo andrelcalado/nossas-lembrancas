@@ -28,6 +28,7 @@ const useTimeline = () => {
     index: number,
     value: string
   ) => {
+    console.log('value', value);
     setTimelineData((prev) => {
       return prev.map((item, i) => {
         if (i === index) {

@@ -2,7 +2,7 @@
 
 // Theme
 import { theme } from "@/theme/globalStyles"
-import { textMdRegular, textSmMedium } from "@/theme/typography"
+import { textLgRegular, textMdRegular, textSmMedium } from "@/theme/typography"
 
 // Libraries
 import styled from "styled-components"
@@ -128,5 +128,45 @@ export const TimelineItemPhrase = styled.div`
 
   textarea {
     text-align: center;
+  }
+`
+
+export const TimelineItemImageUpload = styled.label`
+  width: 100%;
+  max-width: 500px;
+  border: 2px dashed ${theme.colors.primary[200]};
+  background-color: ${theme.colors.gray[200]};
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  opacity: .8;
+
+  > p {
+    ${textLgRegular}
+    color: ${theme.colors.gray[600]};
+    max-width: 300px;
+  }
+
+  svg {
+    width: 45px;
+    height: 45px;
+    color: ${theme.colors.gray[600]};
+  }
+
+  &:hover {
+    opacity: 1;
+
+    svg, p {
+      color: ${theme.colors.primary[400]};
+    }
+  }
+
+  input {
+    display: none;
   }
 `

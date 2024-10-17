@@ -2,7 +2,7 @@
 import Image from 'next/image'
 
 // Assets
-import logoWhite from '@/app/assets/icon/logo-white.svg'
+import logoWhite from '@/assets/icon/logo-white.svg'
 
 // Components
 import SocialButton from '../SocialButton'

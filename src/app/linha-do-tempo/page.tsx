@@ -53,6 +53,8 @@ const TimeLine = () => {
                 key={index}
                 type={item.type}
                 desc={item.desc}
+                photo={item.photo}
+                setPhoto={(files) => handleSetTimelineData('photo', index, files)}
                 setDesc={(value) => handleSetTimelineData('desc', index, value)}
                 date={item.date}
                 setDate={(value) => handleSetTimelineData('date', index, value)}

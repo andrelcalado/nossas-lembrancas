@@ -46,7 +46,7 @@ export interface SocialButtonProps {
   target?: HTMLAttributeAnchorTarget;
 }
 
-export type InputTypeENUM = "text" | "email" | "password" | "textarea";
+export type InputTypeENUM = "text" | "email" | "password" | "textarea" | "date";
 export interface InputProps {
   placeholder?: string;
   value?: string;
@@ -85,14 +85,14 @@ export type TimelineItemTypeENUM = "add" | "initial-phrase" | "phrase" | "photo"
 
 export interface TimelineItemProps {
   type: TimelineItemTypeENUM;
-  photo?: string;
-  setPhoto?: () => void;
+  photo?: File | Blob;
+  setPhoto?: (el: File | null | undefined ) => void;
   video?: string;
   setVideo?: () => void;
   desc?: string;
   setDesc?: (value: string) => void;
   date?: string;
-  setDate?: () => void;
+  setDate?: (value: string) => void;
   addItem?: (item: TimelineItemDataType) => void;
   deleteItem?: (index: number) => void;
 }

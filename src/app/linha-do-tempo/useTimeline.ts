@@ -8,7 +8,6 @@ import { useAppContext } from '@/components/ProvidersWrapper';
 
 // Types
 import { TimelineItemDataType } from '@/types/dataTypes';
-import { TimelineItemTypeENUM } from '@/types/layoutTypes';
 
 const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
   {
@@ -26,9 +25,8 @@ const useTimeline = () => {
   const handleSetTimelineData = (
     field: 'desc' | 'date' | 'photo' | 'video',
     index: number,
-    value: string
+    value: string | File | Blob
   ) => {
-    console.log('value', value);
     setTimelineData((prev) => {
       return prev.map((item, i) => {
         if (i === index) {
@@ -41,12 +39,7 @@ const useTimeline = () => {
 
   const handleDeleteTimelineItem = (index: number) => {
     setTimelineData((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  useEffect(() => {
-    console.log('aq', timelineData);
-  }, [timelineData])
-  
+  };  
 
   const handleAddTimelineItem = (item: TimelineItemDataType) => {
     setTimelineData((prev) => ([...prev, item]));

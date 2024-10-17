@@ -2,31 +2,20 @@
 
 // Theme
 import { theme } from "@/theme/globalStyles"
-import { textLgRegular, textMdRegular, textSmMedium } from "@/theme/typography"
+import {
+  textLgRegular,
+  textMdMedium,
+  textMdRegular,
+  textSmMedium
+} from "@/theme/typography"
 
 // Libraries
 import styled from "styled-components"
+
+// Styles
 import { ButtonComponent } from "../Button/styles"
-
-export const TimelineItemContent = styled.div`
-  position: relative;
-  width: 100%;
-
-  &::before {
-    content: '';
-    height: 1px;
-    left: 50%;
-    top: 60%;
-    transform: translate(-50%, -50%);
-    width: 97%;
-    position: absolute;
-    border-bottom: 1px solid ${theme.colors.primary[100]};
-    border-style: dashed solid;
-    border-left: unset;
-    border-top: unset;
-    border-right: unset;
-  }
-`
+import { HeroSliderCardContent } from "../HeroSliderCard/styles"
+import { InputContent } from "../Input/styles"
 
 export const TimelineItemTime = styled.div`
   position: absolute;
@@ -113,6 +102,46 @@ export const TimelineItemAdd = styled.div`
   }
 `
 
+export const TimelineItemContent = styled.div`
+  position: relative;
+  width: 100%;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    border-style: dashed solid;
+    border-left: unset;
+    border-top: unset;
+  }
+
+  &::before {
+    height: 1px;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    width: 97%;
+    border-bottom: 1px dashed ${theme.colors.primary[100]};
+    border-right: unset;
+  }
+
+  &::after {
+    width: 1px;
+    left: 50%;
+    bottom: -48px;
+    transform: translateX(-50%);
+    height: 48px;
+    border-right: 1px dashed ${theme.colors.primary[100]};;
+    border-bottom: unset;
+    z-index: -1;
+  }
+
+  &:has(${TimelineItemAdd}) {
+    &::after {
+      content: unset;
+    }
+  }
+`
+
 export const TimelineItemPhrase = styled.div`
   width: 100%;
   max-width: 500px;
@@ -135,7 +164,7 @@ export const TimelineItemImageUpload = styled.label`
   width: 100%;
   max-width: 500px;
   border: 2px dashed ${theme.colors.primary[200]};
-  background-color: ${theme.colors.gray[200]};
+  background-color: ${theme.colors.gray[100]};
   border-radius: 12px;
   padding: 32px;
   display: flex;
@@ -145,6 +174,7 @@ export const TimelineItemImageUpload = styled.label`
   gap: 8px;
   cursor: pointer;
   opacity: .8;
+  position: relative;
 
   > p {
     ${textLgRegular}
@@ -152,7 +182,7 @@ export const TimelineItemImageUpload = styled.label`
     max-width: 300px;
   }
 
-  svg {
+  > svg {
     width: 45px;
     height: 45px;
     color: ${theme.colors.gray[600]};
@@ -161,12 +191,66 @@ export const TimelineItemImageUpload = styled.label`
   &:hover {
     opacity: 1;
 
-    svg, p {
+    > svg, p {
       color: ${theme.colors.primary[400]};
     }
   }
 
   input {
     display: none;
+  }
+`
+
+export const TimelineImageItem = styled.div`
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 12px;
+  border-radius: 12px;
+  background-color: ${theme.colors.gray[200]};
+  border: 2px dashed ${theme.colors.primary[100]};
+  position: relative;
+
+  ${HeroSliderCardContent} {
+    height: 300px;
+    width: 220px;
+    padding: 4px;
+  }
+
+  input, textarea {
+    text-align: center;
+  }
+
+  ${InputContent}:has(input[type="date"]) {
+    max-width: 220px;
+  }
+
+  > h4 {
+    ${textMdMedium}
+    color: ${theme.colors.primary[500]};
+    margin-top: 4px;
+  }
+`
+
+export const TimelineItemActions = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  gap: 8px;
+  top: 60%;
+  right: -50px;
+  transform: translateY(-50%);
+  background-color: ${theme.colors.gray[200]};
+  border-radius: 8px;
+  padding: 8px;
+  border: 2px dashed ${theme.colors.primary[100]};
+  border-left: unset;
+
+  ${ButtonComponent} {
+    position: unset;
+    transform: unset;
   }
 `

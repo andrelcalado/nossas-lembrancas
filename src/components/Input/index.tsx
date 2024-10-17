@@ -7,9 +7,10 @@ import React, { useState } from 'react'
 import { InputProps } from '@/types/layoutTypes'
 
 // Style
-import { InputContent } from './styles'
+import { InputContent, InputIconFloating } from './styles'
 
 // Assets
+import { LuCalendarHeart } from "react-icons/lu";
 import {
   AiFillEye,
   AiFillEyeInvisible,
@@ -32,6 +33,12 @@ const Input = ({
         return <AiFillMail size={19} />
       case 'password':
         return <AiFillLock size={20} />
+      case 'date':
+        return (
+          <InputIconFloating>
+            <LuCalendarHeart />
+          </InputIconFloating>
+        )
       default:
         return <></>
     }

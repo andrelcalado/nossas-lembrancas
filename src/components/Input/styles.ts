@@ -17,6 +17,7 @@ export const InputContent = styled.label<Pick<InputProps, 'error'>>`
     border-radius: 12px;
     border: 1px solid ${error ? theme.colors.primary[500] : theme.colors.gray[200]};
     align-items: center;
+    position: relative;
 
     &:hover, &:focus-within {
       border-color: ${theme.colors.secondary[300]};
@@ -61,4 +62,21 @@ export const InputContent = styled.label<Pick<InputProps, 'error'>>`
       }
     }
   `}
+`
+
+export const InputIconFloating = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  background-color: ${theme.colors.gray[100]};
+  height: fit-content;
+  width: 18px;
+  height: 18px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `

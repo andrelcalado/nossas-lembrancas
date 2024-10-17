@@ -24,7 +24,7 @@ export interface TimelineItemDataType {
   typeIcon?: JSX.Element;
   desc?: string;
   date?: string;
-  photo?: string;
+  photo?: File | Blob;
   video?: string;
   disabled?: boolean;
 }

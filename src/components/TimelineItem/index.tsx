@@ -5,6 +5,8 @@ import React from 'react'
 
 // Styles
 import {
+  TimelineImageItem,
+  TimelineItemActions,
   TimelineItemAdd,
   TimelineItemAddBall,
   TimelineItemContent,
@@ -13,6 +15,10 @@ import {
   TimelineItemTime,
   TimelineItemWrapper  
 } from './styles'
+import {
+  HeroSliderCardContent,
+  HeroSliderCardPhoto,  
+} from '../HeroSliderCard/styles';
 
 // Components
 import Input from '../Input';
@@ -21,6 +27,7 @@ import { DropdownPopup } from '../DropdownPopup';
 // Assets
 import { BsPlus } from "react-icons/bs";
 import { MdDelete, MdAddAPhoto } from "react-icons/md";
+import { FaUndoAlt } from "react-icons/fa";
 
 // Hooks
 import useTimelineItem from './useTimelineItem';
@@ -118,17 +125,58 @@ const TimelineItem = ({
         )}
 
         {type === 'photo' && (
-          <TimelineItemImageUpload>
-            <MdAddAPhoto />
-            <p>Click para selecionar uma fotografia</p>
+          <>
+            {photo ? (
+              <TimelineImageItem>
+                <HeroSliderCardContent>
+                  <HeroSliderCardPhoto>
+                    <img
+                      src={URL.createObjectURL(photo)}
+                      alt="Fotografia Casal"
+                    />
+                  </HeroSliderCardPhoto>
+                </HeroSliderCardContent>
 
-            <video autoPlay loop muted src={photo && URL.createObjectURL(photo)} />
+                <Input
+                  value={date}
+                  onChange={({ target }) => setDate && setDate(target.value)}
+                  placeholder="24/07/2021"
+                  type="date"
+                />
 
-            <input
-              type="file"
-              onChange={(event) => setPhoto && setPhoto(event.target.files[0])}
-            />
-          </TimelineItemImageUpload>
+                <h4>O que essa lembrança representa</h4>
+                <Input
+                  type="textarea"
+                  placeholder="O dia do nosso primeiro beijo"
+                  onChange={({ target }) => setDesc && setDesc(target.value)}
+                  value={desc}
+                />
+
+                <TimelineItemActions>
+                  <Button variation="border" onClick={() => setPhoto && setPhoto(undefined)}>
+                    <FaUndoAlt />
+                  </Button>
+                  <Button onClick={deleteItem}>
+                    <MdDelete />
+                  </Button>
+                </TimelineItemActions>
+              </TimelineImageItem>
+            ) : (
+              <TimelineItemImageUpload>
+                <MdAddAPhoto />
+                <p>Click para selecionar uma fotografia</p>                
+
+                <input
+                  type="file"
+                  onChange={(event) => setPhoto && setPhoto(event.target.files?.[0])}
+                />
+
+                <Button onClick={deleteItem}>
+                  <MdDelete />
+                </Button>
+              </TimelineItemImageUpload>
+            )}
+          </>
         )}
       </TimelineItemWrapper>
     </TimelineItemContent>

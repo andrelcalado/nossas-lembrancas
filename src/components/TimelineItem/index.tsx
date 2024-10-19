@@ -32,9 +32,6 @@ import { FaUndoAlt } from "react-icons/fa";
 // Hooks
 import useTimelineItem from './useTimelineItem';
 
-// Constants
-import { MemoryTypes } from '@/constants/dataArray';
-
 // Types
 import { TimelineItemProps } from '@/types/layoutTypes';
 import Button from '../Button';
@@ -51,6 +48,7 @@ const TimelineItem = ({
   setDate,
   addItem,
   deleteItem,
+  memoriesAvailable,
 }: TimelineItemProps) => {
   const {
     openAddPopup,
@@ -88,7 +86,7 @@ const TimelineItem = ({
         {type === 'add' && (
           <TimelineItemAdd ref={PopupContentRef}>
             <DropdownPopup
-              list={MemoryTypes}
+              list={memoriesAvailable}
               position='center'
               openDropdown={openAddPopup}
               onChange={(item) => {
@@ -138,7 +136,7 @@ const TimelineItem = ({
                 </HeroSliderCardContent>
 
                 <Input
-                  value={date}
+                  value={date || new Date().toISOString()}
                   onChange={({ target }) => setDate && setDate(target.value)}
                   placeholder="24/07/2021"
                   type="date"

@@ -48,7 +48,6 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(firebaseAuth, (user: User | null) => {
       if (user) {
-        console.log('User', user);
         setUser(user);
         setLoginModal(false);
         router.push('/linha-do-tempo');

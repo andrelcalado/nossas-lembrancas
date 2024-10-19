@@ -108,16 +108,23 @@ export const MemoryTypes: Array<TimelineItemDataType> = [
 export const PlansResourcers: Array<PlanResourceDataType> = [
   {
     plan: 'Essencial',
-    phrases: 5,
-    videos: 1,
-    photos: 5,
+    phrase: 2,
+    video: 1,
+    photo: 5,
     albumMode: false,
   },
   {
     plan: 'Especial',
-    phrases: -1,
-    videos: 1,
-    photos: 5,
+    phrase: 6,
+    video: 3,
+    photo: 10,
+    albumMode: true,
+  },
+  {
+    plan: 'Inesquecível',
+    phrase: 14,
+    video: 7,
+    photo: 22,
     albumMode: true,
   },
 ];
@@ -125,17 +132,17 @@ export const PlansResourcers: Array<PlanResourceDataType> = [
 export const IndicatorsArray: Array<IndicatorItemDataType>  = [
   {
     icon: <IoIosText />,
-    field: 'phrases',
+    field: 'phrase',
     type: 'phrase',
   },
   {
     icon: <TbPhotoFilled />,
-    field: 'photos',
+    field: 'photo',
     type: 'photo',
   },
   {
     icon: <BiSolidVideos />,
-    field: 'videos',
+    field: 'video',
     type: 'video',
   },
 ]

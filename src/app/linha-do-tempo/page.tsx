@@ -45,6 +45,7 @@ const TimeLine = () => {
     handleAddTimelineItem,
     handleDeleteTimelineItem,
     planSelected,
+    memoriesAvailable,
   } = useTimeline();
 
   return (
@@ -61,7 +62,7 @@ const TimeLine = () => {
             type="text"
             value={coupleNames}
             onChange={({ target }) => setCoupleNames(target.value)}
-            placeholder="André e Bia"
+            placeholder="Bianca e André"
           />
 
           <TimelineItems>
@@ -80,11 +81,16 @@ const TimeLine = () => {
                 date={item.date}
                 setDate={(value) => handleSetTimelineData('date', index, value)}
                 deleteItem={() => handleDeleteTimelineItem(index)}
-                addItem={handleAddTimelineItem}
               />
             ))}
-            <TimelineItem addItem={handleAddTimelineItem} type="add" />
 
+            {memoriesAvailable.filter((eachMemory) => eachMemory.disabled).length < 3 && (
+              <TimelineItem
+                addItem={handleAddTimelineItem}
+                memoriesAvailable={memoriesAvailable}
+                type="add"
+              />
+            )}
           </TimelineItems>
 
           <IndicatorsPlansContent>

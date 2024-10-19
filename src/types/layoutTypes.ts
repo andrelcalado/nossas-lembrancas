@@ -66,7 +66,7 @@ export interface TimelineItemType {
 export interface DropdownProps {
   openDropdown: boolean;
   position: ElementsPositionType;
-  list: Array<TimelineItemType | TimelineItemDataType | any>;
+  list?: Array<TimelineItemType | TimelineItemDataType | any>;
   onChange?: (item: TimelineItemType | TimelineItemDataType | any) => void;
 }
 
@@ -96,4 +96,5 @@ export interface TimelineItemProps {
   setDate?: (value: string) => void;
   addItem?: (item: TimelineItemDataType) => void;
   deleteItem?: (index: number) => void;
+  memoriesAvailable?: Array<TimelineItemDataType>;
 }

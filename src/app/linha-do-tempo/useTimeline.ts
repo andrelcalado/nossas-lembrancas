@@ -13,7 +13,7 @@ import {
 } from '@/types/dataTypes';
 
 // Constants
-import { PlansResourcers } from '@/constants/dataArray';
+import { MemoryTypes, PlansResourcers } from '@/constants/dataArray';
 
 const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
   {
@@ -28,6 +28,7 @@ const useTimeline = () => {
   const [coupleNames, setCoupleNames] = useState<string>();
   const [timelineData, setTimelineData] = useState<Array<TimelineItemDataType>>(INITIAL_TIMELINE_DATA);
   const [planSelected, setPlanSelected] = useState<PlanResourceDataType>(PlansResourcers[0]);
+  const [memoriesAvailable, setMemoriesAvailable] = useState<Array<TimelineItemDataType>>(MemoryTypes);
 
   const handleSetTimelineData = (
     field: 'desc' | 'date' | 'photo' | 'video',
@@ -45,10 +46,45 @@ const useTimeline = () => {
   };
 
   const handleDeleteTimelineItem = (index: number) => {
+    const item = timelineData[index];
+
+    if (Number(
+      planSelected[item.type as keyof PlanResourceDataType]
+    ) - timelineData.filter(
+      (eachItem) => item.type === eachItem.type
+    ).length >= 0) {
+      setMemoriesAvailable((prev) => prev.map((eachMemory) => {
+        if (eachMemory.type === item.type) {
+          return { ...eachMemory, disabled: false };
+        }
+        return eachMemory;
+      }));
+    }
+
     setTimelineData((prev) => prev.filter((_, i) => i !== index));
   };  
 
   const handleAddTimelineItem = (item: TimelineItemDataType) => {
+    if (Number(
+      planSelected[item.type as keyof PlanResourceDataType]
+    ) - timelineData.filter(
+      (eachItem) => item.type === eachItem.type
+    ).length <= 1) {
+      setMemoriesAvailable((prev) => prev.map((eachMemory) => {
+        if (eachMemory.type === item.type) {
+          return { ...eachMemory, disabled: true };
+        }
+        return eachMemory;
+      }));
+    } else {
+      setMemoriesAvailable((prev) => prev.map((eachMemory) => {
+        if (eachMemory.type === item.type) {
+          return { ...eachMemory, disabled: false };
+        }
+        return eachMemory;
+      }));
+    }
+
     setTimelineData((prev) => ([...prev, item]));
   }
 
@@ -58,12 +94,7 @@ const useTimeline = () => {
     } else {
       setLoading(true);
     }
-  }, [user]);
-
-  useEffect(() => {
-    console.log('aq', timelineData);
-  }, [timelineData])
-  
+  }, [user]);  
   
   return {
     loading,
@@ -75,6 +106,7 @@ const useTimeline = () => {
     handleDeleteTimelineItem,
     planSelected,
     setPlanSelected,
+    memoriesAvailable,
   }
 }
 

@@ -31,9 +31,9 @@ export interface TimelineItemDataType {
 
 export interface PlanResourceDataType {
   plan: string;
-  phrases: number;
-  videos: number;
-  photos: number;
+  phrase: number;
+  video: number;
+  photo: number;
   albumMode: boolean;
 }
 

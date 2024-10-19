@@ -45,6 +45,7 @@ export const PageContent = styled.section`
     left: 0;
     width: 100%;
     height: 100%;
+    pointer-events: none;
     background-color: ${theme.colors.gray[200]};
     border-radius: 24px 24px 0 0;
   }
@@ -62,6 +63,7 @@ export const PageContent = styled.section`
     width: 100%;
     height: 100%;
     border-radius: 24px 24px 0 0;
+    pointer-events: none;
   }
 `;
 
@@ -88,6 +90,7 @@ export const HomeWrapper = styled.div`
     border-radius: 100%;
     filter: blur(150px);
     z-index: -1;
+    pointer-events: none;
   }
 
   &::before {
@@ -196,6 +199,7 @@ export const HomeHeroSlider = styled(Swiper)`
       width: 150%;
       height: 300px;
       position: absolute;
+      pointer-events: none;
       background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #dfced7 85%);
       transform: translateX(-50%);
       z-index: 5;

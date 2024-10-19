@@ -192,7 +192,7 @@ export const AlreadyLogin = styled.button`
     color: ${theme.colors.primary[400]};
   }
 
-  &:hover {
+  &:hover, &:focus-visible, &:focus-within {
     strong {
       color: ${theme.colors.primary[200]};
     }

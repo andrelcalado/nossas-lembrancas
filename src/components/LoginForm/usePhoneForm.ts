@@ -19,6 +19,7 @@ import {
 
 // Hooks
 import { useAppContext } from "../ProvidersWrapper";
+import { useRouter } from 'next/navigation';
 
 // Types
 import { LoginMethod } from "@/types/layoutTypes";
@@ -41,6 +42,7 @@ const usePhoneForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [phoneForm, setPhoneForm] = useState<Record<string, string | boolean>>(INITIAL_PHONE_FORM);
   const [userPasswordForm, setUserPasswordForm] = useState<Record<string, string>>(INITIAL_USER_FORM);
+  const router = useRouter();
 
   const { loginMode } = useAppContext();
 
@@ -132,6 +134,7 @@ const usePhoneForm = () => {
       userPasswordForm.user,
       userPasswordForm.pwd,
     ).then(() => {
+      router.replace('/linha-do-tempo');
       setLoading(false)
     }).catch((err) => {
       console.log('registerErr', err);
@@ -148,6 +151,7 @@ const usePhoneForm = () => {
       userPasswordForm.user,
       userPasswordForm.pwd,
     ).then(() => {
+      router.replace('/linha-do-tempo');
       setLoading(false);
     }).catch((err) => {
       setLoading(false);

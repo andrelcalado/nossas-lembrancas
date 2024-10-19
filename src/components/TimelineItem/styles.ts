@@ -96,7 +96,7 @@ export const TimelineItemAddBall = styled.button`
     color: ${theme.colors.primary[500]};
   }
 
-  &:hover {
+  &:hover, &:focus-visible, &:focus-within {
     background-color: ${theme.colors.primary[400]};
     height: 85px;
     width: 85px;

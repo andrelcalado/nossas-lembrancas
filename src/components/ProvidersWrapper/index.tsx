@@ -25,6 +25,7 @@ const INITIAL_CONTEXT: ProvidersWrapperContext = {
   setLoginMode: () => null,
   handleUserSignOut: () => null,
   user: null,
+  loading: false,
 }
 
 const AppContext = createContext<ProvidersWrapperContext>(INITIAL_CONTEXT)
@@ -35,13 +36,16 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
   const [user, setUser] = useState<User | null>(null);
   const [loginModal, setLoginModal] = useState<boolean>(false);
   const [loginMode, setLoginMode] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleUserSignOut = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     ev.preventDefault();
+    setLoading(true);
 
     signOut(firebaseAuth).then(() => {
-      router.push('/');
       setUser(null);
+      router.replace('/');
+      setLoading(false);
     })
   }
 
@@ -49,10 +53,9 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
     const unsubscribe = onAuthStateChanged(firebaseAuth, (user: User | null) => {
       if (user) {
         setUser(user);
-        setLoginModal(false);
-        router.push('/linha-do-tempo');
+        router.replace('/linha-do-tempo');
       } else {
-        console.log('No user is signed in.');
+        router.replace('/');
       }
     });
 
@@ -70,6 +73,7 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
   return (
     <AppContext.Provider
       value={{
+        loading,
         loginModal,
         setLoginModal,
         loginMode,

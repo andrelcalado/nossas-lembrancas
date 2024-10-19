@@ -37,7 +37,7 @@ const getVariationStyle = (disabled: boolean, variation?: ButtonVariationENUM) =
         border: 1px solid transparent;
         color: ${theme.colors.white};
 
-        &:hover {
+        &:hover, &:focus-visible, &:focus-within {
           background-color: ${theme.colors.primary[300]};
         }
       `;
@@ -47,7 +47,7 @@ const getVariationStyle = (disabled: boolean, variation?: ButtonVariationENUM) =
         border: 1px solid transparent;
         color: ${theme.colors.white};
 
-        &:hover {
+        &:hover, &:focus-visible, &:focus-within {
           background-color: ${theme.colors.blue[400]};
         }
       `;
@@ -57,7 +57,7 @@ const getVariationStyle = (disabled: boolean, variation?: ButtonVariationENUM) =
         border: 1px solid ${disabled ? theme.colors.primary[200] : theme.colors.primary[400]};
         color: ${theme.colors.primary[400]};
 
-        &:hover {
+        &:hover, &:focus-visible, &:focus-within {
           background-color: ${theme.colors.primary[400]};
           color: ${theme.colors.white};
         }

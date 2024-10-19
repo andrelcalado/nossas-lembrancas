@@ -55,9 +55,9 @@ export const InputContent = styled.label<Pick<InputProps, 'error'>>`
       height: 20px;
       cursor: pointer;
       
-      &:hover {
+      &:hover, &:focus-visible, &:focus-within {
         svg {
-          color: ${theme.colors.secondary[400]};
+          color: ${theme.colors.secondary[500]};
         }
       }
     }

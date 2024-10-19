@@ -27,7 +27,8 @@ const Header = (): JSX.Element => {
     setLoginModal,
     setLoginMode,
     user,
-    handleUserSignOut,    
+    handleUserSignOut,
+    loading,
   } = useAppContext()
 
   return (
@@ -43,6 +44,7 @@ const Header = (): JSX.Element => {
                 setLoginModal(true);
               }}
               size='xs'
+              loading={loading}
             >
               {user ? 'Sair' : 'Conectar'}
             </Button>

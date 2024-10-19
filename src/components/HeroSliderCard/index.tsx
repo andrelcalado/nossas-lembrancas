@@ -30,12 +30,14 @@ const HeroSliderCard = ({
           <Image src={media} alt={desc} />
         ) : (
           <video
-            src={media as string}
+            playsInline
             autoPlay
             muted
             loop
             controls={false}
-          />
+          >
+            <source src={media as string} type="video/mp4" />
+          </video>
         )}
       </HeroSliderCardPhoto>
       <HeroSliderDescription>

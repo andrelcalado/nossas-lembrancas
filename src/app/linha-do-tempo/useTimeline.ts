@@ -7,7 +7,13 @@ import { useState, useEffect } from 'react'
 import { useAppContext } from '@/components/ProvidersWrapper';
 
 // Types
-import { TimelineItemDataType } from '@/types/dataTypes';
+import {
+  PlanResourceDataType,
+  TimelineItemDataType,
+} from '@/types/dataTypes';
+
+// Constants
+import { PlansResourcers } from '@/constants/dataArray';
 
 const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
   {
@@ -21,6 +27,7 @@ const useTimeline = () => {
   const { user } = useAppContext();
   const [coupleNames, setCoupleNames] = useState<string>();
   const [timelineData, setTimelineData] = useState<Array<TimelineItemDataType>>(INITIAL_TIMELINE_DATA);
+  const [planSelected, setPlanSelected] = useState<PlanResourceDataType>(PlansResourcers[0]);
 
   const handleSetTimelineData = (
     field: 'desc' | 'date' | 'photo' | 'video',
@@ -51,7 +58,12 @@ const useTimeline = () => {
     } else {
       setLoading(true);
     }
-  }, [user])
+  }, [user]);
+
+  useEffect(() => {
+    console.log('aq', timelineData);
+  }, [timelineData])
+  
   
   return {
     loading,
@@ -61,6 +73,8 @@ const useTimeline = () => {
     setCoupleNames,
     handleAddTimelineItem,
     handleDeleteTimelineItem,
+    planSelected,
+    setPlanSelected,
   }
 }
 

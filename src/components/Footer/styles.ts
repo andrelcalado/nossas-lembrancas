@@ -48,7 +48,7 @@ export const FooterTopContent = styled.div`
     padding: 24px 0;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 760px) {
     flex-direction: column;
     gap: 24px;
   }
@@ -70,7 +70,7 @@ export const FooterBottomContent = styled.div`
   color: ${theme.colors.gray[200]};
   ${textXsRegular}
 
-  @media (max-width: 500px) {
+  @media (max-width: 760px) {
     max-width: 300px;
     margin: 0 auto;    
   }
@@ -84,7 +84,7 @@ export const FooterSocialMedia = styled.ul`
     list-style: none;
     flex-shrink: 0;
 
-    @media (max-width: 500px) {
+    @media (max-width: 760px) {
       ${SocialButtonContent} {
         height: 40px;
         width: 40px;

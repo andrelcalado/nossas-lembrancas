@@ -28,3 +28,17 @@ export interface TimelineItemDataType {
   video?: string;
   disabled?: boolean;
 }
+
+export interface PlanResourceDataType {
+  plan: string;
+  phrases: number;
+  videos: number;
+  photos: number;
+  albumMode: boolean;
+}
+
+export interface IndicatorItemDataType {
+  icon: JSX.Element;
+  field: string;
+  type: TimelineItemTypeENUM;
+}

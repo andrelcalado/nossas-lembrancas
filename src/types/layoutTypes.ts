@@ -16,12 +16,13 @@ export interface Theme {
     black: string,
     gray: Record<ColorLightEnum, string>,
     secondary: Record<ColorLightEnum, string>,
-    primary: Record<ColorLightEnum, string>
+    primary: Record<ColorLightEnum, string>,
+    blue: Record<ColorLightEnum, string>,
   }
 }
 
 export type ElementSizeENUM = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type ButtonVariationENUM = 'fill' | 'border';
+export type ButtonVariationENUM = 'fill' | 'border' | 'fill-blue';
 export interface ButtonProps {
   children: React.ReactNode;
   onClick?: (el: any) => void | React.MouseEventHandler<HTMLButtonElement>;

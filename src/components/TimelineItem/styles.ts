@@ -25,6 +25,13 @@ export const TimelineItemTime = styled.div`
   width: 1.5px;
   top: 40px;
 
+  @media (max-width: 760px) {
+    left: -12px;
+    width: 1px;
+    top: 17px;
+    height: calc(100% + 37px);
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -35,6 +42,13 @@ export const TimelineItemTime = styled.div`
     border: 2px solid ${theme.colors.primary[200]};
     height: 12px;
     width: 12px;
+
+    @media (max-width: 760px) {
+      height: 8px;
+      width: 8px;
+      left: -5px;
+      top: -15px;
+    }
   }
 `
 
@@ -50,6 +64,14 @@ export const TimelineItemWrapper = styled.div`
     right: -50px;
     transform: translateY(-50%);
     padding: 10px;
+
+    @media (max-width: 760px) {
+      transform: translateX(-50%);
+      top: unset;
+      left: 50%;
+      right: unset;
+      bottom: -38px;
+    }
 
     svg {
       width: 17px;
@@ -82,6 +104,17 @@ export const TimelineItemAddBall = styled.button`
     svg {
       color: ${theme.colors.white};
     }
+  }
+
+  @media (max-width: 760px) {
+    height: 70px;
+    width: 70px;
+
+    &:hover {
+      height: 75px;
+      width: 75px;
+    }
+    
   }
 `
 
@@ -133,6 +166,11 @@ export const TimelineItemContent = styled.div`
     border-right: 1px dashed ${theme.colors.primary[100]};;
     border-bottom: unset;
     z-index: -1;
+
+    @media (max-width: 760px) {
+      height: 64px;
+      bottom: -58px;
+    }
   }
 
   &:has(${TimelineItemAdd}) {
@@ -248,6 +286,17 @@ export const TimelineItemActions = styled.div`
   padding: 8px;
   border: 2px dashed ${theme.colors.primary[100]};
   border-left: unset;
+
+  @media (max-width: 760px) {
+    transform: translateX(-50%);
+    top: unset;
+    left: 50%;
+    right: unset;
+    bottom: -45px;
+    flex-direction: row;
+    border-top: unset;
+    border-left: 2px dashed ${theme.colors.primary[100]};
+  }
 
   ${ButtonComponent} {
     position: unset;

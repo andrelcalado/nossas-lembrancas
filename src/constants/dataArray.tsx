@@ -19,6 +19,8 @@ import { TbPhotoFilled } from "react-icons/tb";
 import {
   FooterSocialMediaType,
   HeroSliderDataType,
+  IndicatorItemDataType,
+  PlanResourceDataType,
   TimelineItemDataType,
 } from '@/types/dataTypes'
 
@@ -102,3 +104,38 @@ export const MemoryTypes: Array<TimelineItemDataType> = [
     disabled: true,
   }
 ];
+
+export const PlansResourcers: Array<PlanResourceDataType> = [
+  {
+    plan: 'Essencial',
+    phrases: 5,
+    videos: 1,
+    photos: 5,
+    albumMode: false,
+  },
+  {
+    plan: 'Especial',
+    phrases: -1,
+    videos: 1,
+    photos: 5,
+    albumMode: true,
+  },
+];
+
+export const IndicatorsArray: Array<IndicatorItemDataType>  = [
+  {
+    icon: <IoIosText />,
+    field: 'phrases',
+    type: 'phrase',
+  },
+  {
+    icon: <TbPhotoFilled />,
+    field: 'photos',
+    type: 'photo',
+  },
+  {
+    icon: <BiSolidVideos />,
+    field: 'videos',
+    type: 'video',
+  },
+]

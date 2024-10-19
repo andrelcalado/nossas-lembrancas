@@ -10,16 +10,26 @@ import {
   displayX1Regular,
   textMdMedium,
   textMdRegular,
-  textSmRegular,
+  textSmMedium,
+  textX1sBold,
+  textX1sMedium,
+  textX1sRegular,
+  textXsBold,
+  textXsRegular,
 } from "@/theme/typography"
 import { theme } from "@/theme/globalStyles"
 
 // Components
 import { InputContent } from "@/components/Input/styles"
+import { ButtonComponent } from "@/components/Button/styles"
 
 export const TimelineWrapper = styled.div`
   z-index: 5;
   text-align: center;
+
+  @media (max-width: 760px) {
+    padding-right: calc(70px + 12px);    
+  }
 
   > h1 {
     ${displayX1Regular}
@@ -31,11 +41,12 @@ export const TimelineWrapper = styled.div`
 
     @media (max-width: 1024px) {
       ${displayLgRegular}
+      line-height: 90%;
     }
 
     @media (max-width: 800px) {
       font-size: 33px;
-      line-height: 105%;
+      max-width: 500px;
     }
 
     strong {
@@ -60,14 +71,21 @@ export const TimelineWrapper = styled.div`
     }
 
     @media (max-width: 800px) {
-      ${textSmRegular}
-      text-align: center;
+      ${textXsRegular}
+    }
+
+    @media (max-width: 760px) {
+      max-width: 90%;
     }
   }
 
   > ${InputContent} {
     max-width: 500px;
     margin: 0 auto 56px;
+
+    input {
+      text-align: center;
+    }
   }
 `
 
@@ -78,6 +96,10 @@ export const TimelineItems = styled.ul`
   position: relative;
   margin-top: 24px;
   gap: 32px;
+
+  @media (max-width: 760px) {
+    gap: 56px;
+  }
 
   &::before {
     content: '';
@@ -97,5 +119,135 @@ export const TimelineItems = styled.ul`
   > h2 {
     ${displayMdMedium}
     color: ${theme.colors.primary[300]};
+  }
+`
+
+export const IndicatorsPlansContent = styled.aside`
+  position: fixed;
+  transform: translateY(-50%);
+  top: 55%;
+  right: 0;
+
+  > h4 {
+    ${textXsBold}
+    margin-bottom: 4px;
+    color: ${theme.colors.primary[300]};
+    text-transform: uppercase;
+
+    @media (max-width: 760px) {
+      ${textX1sBold}
+      margin-bottom: -1px;
+    }
+  }
+`
+
+export const IndicatorsContent = styled.div`
+  padding: 12px;
+  border-radius: 12px 0 0 12px;
+  border: 2px solid ${theme.colors.primary[200]};
+  border-right: unset;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  backdrop-filter: blur(2px);
+
+  @media (max-width: 760px) {
+    padding: 8px;
+  }
+
+  > h5 {
+    ${textX1sRegular}
+    margin-bottom: -8px;
+    letter-spacing: -.1px;
+  }
+
+  > p {
+    ${textX1sMedium}
+    margin-top: -4px;
+    letter-spacing: -.1px;
+    color: ${theme.colors.primary[500]};
+  }
+  
+  &.actions {
+    ${ButtonComponent} {
+      padding: 10px;
+      aspect-ratio: 1 / 1;
+      
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    ${ButtonComponent}:last-child {
+      box-shadow: 0 0 10px 0 rgba(255, 0, 180, 0.4);
+
+      &:hover {
+        box-shadow: 0 0 15px 0 rgba(255, 0, 180, 0.5);
+      }
+    }
+  }
+`
+
+export const ItemIndicator = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  > span {
+    ${textSmMedium}
+    color: ${theme.colors.primary[400]};
+  }
+`
+
+export const ItemIndicatorBall = styled.div`
+  padding: 8px;
+  border-radius: 8px;
+  background-color: ${theme.colors.primary[400]};
+  height: 36px;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 760px) {
+    width: 30px;
+    height: 30px;
+    padding: 6px;
+  }
+
+  > svg {
+    color: ${theme.colors.white};
+    height: 18px;
+    width: 18px;
+  }
+`
+
+export const PlanSelected = styled.button`
+  display: block;
+  height: 56px;
+  width: 56px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 5px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 5px 0 rgb(255 0 222 / 40%);
+  cursor: pointer;
+
+  @media (max-width: 760px) {
+    height: 53px;
+    width: 53px;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px 0 rgb(255 0 222 / 50%);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `

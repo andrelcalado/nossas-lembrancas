@@ -28,7 +28,7 @@ const getPaddingSize = (size?: ElementSizeENUM) => {
   }
 }
 
-const getVariationSize = (disabled: boolean, variation?: ButtonVariationENUM) => {
+const getVariationStyle = (disabled: boolean, variation?: ButtonVariationENUM) => {
   switch (variation) {
     case 'fill':
     default:
@@ -39,6 +39,16 @@ const getVariationSize = (disabled: boolean, variation?: ButtonVariationENUM) =>
 
         &:hover {
           background-color: ${theme.colors.primary[300]};
+        }
+      `;
+    case 'fill-blue':
+      return css`
+        background-color: ${disabled ? theme.colors.blue[200] : theme.colors.blue[500]};
+        border: 1px solid transparent;
+        color: ${theme.colors.white};
+
+        &:hover {
+          background-color: ${theme.colors.blue[400]};
         }
       `;
     case 'border':
@@ -65,7 +75,7 @@ export const ButtonComponent = styled.button<Pick<ButtonProps, 'size' | 'variati
     border-radius: 8px;
     display: flex;
     gap: 6px;
-    ${getVariationSize(disabled, variation)}
+    ${getVariationStyle(disabled, variation)}
     cursor: pointer;
     ${disabled && 'pointer-events: none;'}
 

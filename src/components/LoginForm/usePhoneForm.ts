@@ -110,6 +110,7 @@ const usePhoneForm = () => {
 
     if (window.confirmationResult) {
       window.confirmationResult.confirm(phoneForm.code as string).then(() => {
+        router.replace('/linha-do-tempo');
         setLoading(false);
       }).catch((err) => {
         setLoading(false);
@@ -135,7 +136,7 @@ const usePhoneForm = () => {
       userPasswordForm.pwd,
     ).then(() => {
       router.replace('/linha-do-tempo');
-      setLoading(false)
+      setLoading(false);
     }).catch((err) => {
       console.log('registerErr', err);
       setLoading(false);
@@ -165,6 +166,7 @@ const usePhoneForm = () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(firebaseAuth, provider)
       .then(() => {
+        router.replace('/linha-do-tempo');
         setLoading(false);
       })
       .catch(() => {

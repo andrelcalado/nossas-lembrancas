@@ -89,6 +89,10 @@ const useTimeline = () => {
   }
 
   useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, [])
+
+  useEffect(() => {
     if(user) {
       setLoading(false);
     } else {

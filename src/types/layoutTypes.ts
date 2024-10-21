@@ -22,7 +22,7 @@ export interface Theme {
 }
 
 export type ElementSizeENUM = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type ButtonVariationENUM = 'fill' | 'border' | 'fill-blue';
+export type ButtonVariationENUM = 'fill' | 'border' | 'border-white' | 'fill-blue';
 export interface ButtonProps {
   children: React.ReactNode;
   onClick?: (el: any) => void | React.MouseEventHandler<HTMLButtonElement>;
@@ -97,4 +97,9 @@ export interface TimelineItemProps {
   addItem?: (item: TimelineItemDataType) => void;
   deleteItem?: (index: number) => void;
   memoriesAvailable?: Array<TimelineItemDataType>;
+}
+
+export interface PlansModalProps {
+  openPlansModal: boolean;
+  setPlansModal: Dispatch<SetStateAction<boolean>>;
 }

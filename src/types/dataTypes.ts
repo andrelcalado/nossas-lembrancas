@@ -4,6 +4,7 @@ import React from "react";
 // Types
 import { HeroSliderCardProps, TimelineItemTypeENUM } from "./layoutTypes";
 import { User } from "firebase/auth";
+import { StaticImageData } from "next/image";
 
 export type HeroSliderDataType = Array<HeroSliderCardProps>
 
@@ -17,6 +18,8 @@ export interface ProvidersWrapperContext {
   setLoginMode: React.Dispatch<React.SetStateAction<boolean>>;
   handleUserSignOut: (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   user: User | null;
+  planSelected: PlanResourceDataType;
+  setPlanSelected: React.Dispatch<React.SetStateAction<PlanResourceDataType>>;
 }
 
 export interface TimelineItemDataType {
@@ -36,6 +39,10 @@ export interface PlanResourceDataType {
   video: number;
   photo: number;
   albumMode: boolean;
+  music: boolean;
+  icon: StaticImageData;
+  price: number;
+  planPeriod: boolean;
 }
 
 export interface IndicatorItemDataType {

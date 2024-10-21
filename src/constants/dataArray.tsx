@@ -14,6 +14,9 @@ import {
 } from "react-icons/bi"
 import { IoIosText } from "react-icons/io";
 import { TbPhotoFilled } from "react-icons/tb";
+import Plan0 from '@/assets/icon/plan-0.jpg';
+import Plan1 from '@/assets/icon/plan-1.jpg';
+import Plan2 from '@/assets/icon/plan-2.jpg';
 
 // Types
 import {
@@ -105,13 +108,17 @@ export const MemoryTypes: Array<TimelineItemDataType> = [
   }
 ];
 
-export const PlansResourcers: Array<PlanResourceDataType> = [
+export const PlansData: Array<PlanResourceDataType> = [
   {
     plan: 'Essencial',
     phrase: 2,
     video: 1,
     photo: 5,
     albumMode: false,
+    icon: Plan0,
+    price: 23.97,
+    planPeriod: true,
+    music: false,
   },
   {
     plan: 'Especial',
@@ -119,6 +126,10 @@ export const PlansResourcers: Array<PlanResourceDataType> = [
     video: 3,
     photo: 10,
     albumMode: true,
+    icon: Plan1,
+    price: 34.97,
+    planPeriod: true,
+    music: true,
   },
   {
     plan: 'Inesquecível',
@@ -126,6 +137,10 @@ export const PlansResourcers: Array<PlanResourceDataType> = [
     video: 7,
     photo: 22,
     albumMode: true,
+    icon: Plan2,
+    price: 67.37,
+    planPeriod: false,
+    music: true,
   },
 ];
 
@@ -145,4 +160,4 @@ export const IndicatorsArray: Array<IndicatorItemDataType>  = [
     field: 'video',
     type: 'video',
   },
-]
+];

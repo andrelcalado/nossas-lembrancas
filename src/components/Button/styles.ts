@@ -62,6 +62,18 @@ const getVariationStyle = (disabled: boolean, variation?: ButtonVariationENUM) =
           color: ${theme.colors.white};
         }
       `;
+    case 'border-white':
+      return css`
+        background-color: ${disabled ? theme.colors.primary[100] : 'transparent'};
+        border: 1px solid ${disabled ? theme.colors.primary[200] : theme.colors.white};
+        color: ${theme.colors.white};
+
+        &:hover, &:focus-visible, &:focus-within {
+          background-color: ${theme.colors.primary[500]};
+          color: ${theme.colors.primary[100]};
+          border-color: transparent;
+        }
+      `;
   }  
 }
 

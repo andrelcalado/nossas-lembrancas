@@ -13,7 +13,10 @@ import { useRouter } from 'next/navigation'
 import { onAuthStateChanged, signOut, User } from 'firebase/auth'
 
 // Types
-import { ProvidersWrapperContext } from '@/types/dataTypes'
+import { PlanResourceDataType, ProvidersWrapperContext } from '@/types/dataTypes'
+
+// Constants
+import { PlansData } from '@/constants/dataArray'
 
 // Auth
 import firebaseAuth from '@/auth/firebase'
@@ -26,6 +29,8 @@ const INITIAL_CONTEXT: ProvidersWrapperContext = {
   handleUserSignOut: () => null,
   user: null,
   loading: false,
+  planSelected: PlansData[0],
+  setPlanSelected: () => null,
 }
 
 const AppContext = createContext<ProvidersWrapperContext>(INITIAL_CONTEXT)
@@ -37,6 +42,7 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
   const [loginModal, setLoginModal] = useState<boolean>(false);
   const [loginMode, setLoginMode] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [planSelected, setPlanSelected] = useState<PlanResourceDataType>(PlansData[0]);
 
   const handleUserSignOut = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     ev.preventDefault();
@@ -80,6 +86,8 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
         setLoginMode,
         handleUserSignOut,
         user,
+        planSelected,
+        setPlanSelected,
       }}
     >
       {children}

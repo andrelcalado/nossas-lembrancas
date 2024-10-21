@@ -13,7 +13,7 @@ import {
 } from '@/types/dataTypes';
 
 // Constants
-import { MemoryTypes, PlansResourcers } from '@/constants/dataArray';
+import { MemoryTypes } from '@/constants/dataArray';
 
 const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
   {
@@ -24,11 +24,11 @@ const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
 
 const useTimeline = () => {
   const [loading, setLoading] = useState(true);
-  const { user } = useAppContext();
+  const { user, planSelected } = useAppContext();
   const [coupleNames, setCoupleNames] = useState<string>();
   const [timelineData, setTimelineData] = useState<Array<TimelineItemDataType>>(INITIAL_TIMELINE_DATA);
-  const [planSelected, setPlanSelected] = useState<PlanResourceDataType>(PlansResourcers[0]);
   const [memoriesAvailable, setMemoriesAvailable] = useState<Array<TimelineItemDataType>>(MemoryTypes);
+  const [openPlansModal, setOpenPlansModal] = useState(false);
 
   const handleSetTimelineData = (
     field: 'desc' | 'date' | 'photo' | 'video',
@@ -89,8 +89,12 @@ const useTimeline = () => {
   }
 
   useEffect(() => {
-    document.body.style.overflow = 'auto';
-  }, [])
+    if(openPlansModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [openPlansModal]);
 
   useEffect(() => {
     if(user) {
@@ -108,9 +112,9 @@ const useTimeline = () => {
     setCoupleNames,
     handleAddTimelineItem,
     handleDeleteTimelineItem,
-    planSelected,
-    setPlanSelected,
     memoriesAvailable,
+    openPlansModal,
+    setOpenPlansModal,
   }
 }
 

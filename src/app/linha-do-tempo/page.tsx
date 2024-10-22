@@ -4,6 +4,9 @@
 import React from 'react'
 import Image from 'next/image'
 
+// Libraries
+import YouTube from "react-youtube";
+
 // Styles
 import { PageContent } from '../styles'
 import {
@@ -78,7 +81,16 @@ const TimeLine = () => {
               placeholder="Bianca e André"
             />
 
-            <div id="youtube-test"></div>
+            <YouTube
+              opts={{ playerVars: { autoplay: 1 } }}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              onReady={(event: any) => {
+                console.log('aq', event.target);
+                event.target.pauseVideo();
+                event.target.playVideo();
+              }}
+              videoId="JVpTp8IHdEg"
+            />
 
             <TimelineItems>
               {coupleNames && (

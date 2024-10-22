@@ -29,6 +29,7 @@ const useTimeline = () => {
   const [timelineData, setTimelineData] = useState<Array<TimelineItemDataType>>(INITIAL_TIMELINE_DATA);
   const [memoriesAvailable, setMemoriesAvailable] = useState<Array<TimelineItemDataType>>(MemoryTypes);
   const [openPlansModal, setOpenPlansModal] = useState(false);
+  const [spotifyAccessToken, setSpotifyAccessToken] = useState();
 
   const handleSetTimelineData = (
     field: 'desc' | 'date' | 'photo' | 'video',
@@ -102,7 +103,23 @@ const useTimeline = () => {
     } else {
       setLoading(true);
     }
-  }, [user]);  
+  }, [user]);
+
+  useEffect(() => {
+    const authParameters = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `grant_type=client_credentials&client_id=${process.env.NEXT_PUBLIC_SPOTIFY_CLIENTID}&client_secret=${process.env.NEXT_PUBLIC_SPOTIFY_CLIENTSECRET}`,
+    }
+
+    fetch('https://accounts.spotify.com/api/token', authParameters)
+      .then((res) => res.json())
+      .then((data) => {
+        setSpotifyAccessToken(data.access_token);
+      })
+  }, [])  
   
   return {
     loading,
@@ -115,6 +132,7 @@ const useTimeline = () => {
     memoriesAvailable,
     openPlansModal,
     setOpenPlansModal,
+    spotifyAccessToken,
   }
 }
 

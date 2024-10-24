@@ -2,7 +2,7 @@
 
 // Types
 import { StaticImageData } from "next/image";
-import { 
+import React, { 
   Dispatch,
   HTMLAttributeAnchorTarget,
   SetStateAction
@@ -32,6 +32,7 @@ export interface ButtonProps {
   disabled?: boolean;
   id?: string;
   name?: string;
+  className?: string;
 }
 
 export interface HeroSliderCardProps {
@@ -53,6 +54,7 @@ export interface InputProps {
   value?: string;
   error?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onBlur?: () => void;
   type: InputTypeENUM;
 }
 
@@ -102,4 +104,11 @@ export interface TimelineItemProps {
 export interface PlansModalProps {
   openPlansModal: boolean;
   setPlansModal: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface PreviewModalProps {
+  openModal: boolean;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  timelineData: Array<TimelineItemDataType>;
+  musicLink?: string;
 }

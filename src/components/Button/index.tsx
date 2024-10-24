@@ -21,6 +21,7 @@ export default function Button({
   disabled,
   id,
   name,
+  className,
 }: ButtonProps) {
   return (
     <ButtonComponent
@@ -30,6 +31,7 @@ export default function Button({
       onClick={onClick}
       variation={variation}
       disabled={loading || disabled}
+      className={className}
     >
       {loading ? (
         <Loading size="xs" loading={loading} />

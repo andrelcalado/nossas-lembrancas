@@ -90,7 +90,7 @@ const PlansModal = ({ openPlansModal, setPlansModal }: PlansModalProps) => {
                 </li>
                 <li>
                   <BsCheckLg />
-                  <span>Animação exclusiva</span>
+                  <span>Experiência exclusiva</span>
                 </li>
                 <li>
                   <BsCheckLg />

@@ -7,10 +7,13 @@ import styled from "styled-components"
 import {
   displayLgRegular,
   displayMdMedium,
+  displaySmMedium,
   displayX1Regular,
+  displayXsMedium,
   textMdMedium,
   textMdRegular,
   textSmMedium,
+  textSmRegular,
   textX1sBold,
   textX1sMedium,
   textX1sRegular,
@@ -119,6 +122,15 @@ export const TimelineItems = styled.ul`
   > h2 {
     ${displayMdMedium}
     color: ${theme.colors.primary[300]};
+
+    @media (max-width: 760px) {
+      ${displaySmMedium}
+      margin-bottom: -40px;      
+    }
+
+    @media (max-width: 560px) {
+      ${displayXsMedium}
+    }
   }
 `
 
@@ -249,5 +261,61 @@ export const PlanSelected = styled.button`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+`
+
+export const YoutubeForm = styled.div`
+  max-width: 500px;
+  text-align: center;
+  margin: 0 auto 48px;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: ${theme.colors.secondary[100]};
+    position: absolute;
+    top: -30px;
+    left: 0;
+  }
+
+  > h2 {
+    ${displayMdMedium}
+    color: ${theme.colors.black};
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    line-height: 90%;
+
+    @media (max-width: 800px) {
+      ${displaySmMedium}
+      max-width: 400px;
+      margin: 0 auto 8px;
+      line-height: 90%;
+    }
+
+    strong {
+      color: ${theme.colors.primary[400]};
+    }
+  }
+
+  > p {
+    ${textSmRegular}
+    color: ${theme.colors.gray[700]};
+    margin-bottom: 8px;
+
+    @media (max-width: 800px) {
+      ${textXsRegular}
+      max-width: 80%;
+      margin: 0 auto 8px;
+    }
+
+    @media (max-width: 400px) {
+      max-width: 90%;
+    }
+  }
+
+  input {
+    text-align: center;
   }
 `

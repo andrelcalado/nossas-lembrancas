@@ -4,9 +4,6 @@
 import React from 'react'
 import Image from 'next/image'
 
-// Libraries
-import YouTube from "react-youtube";
-
 // Styles
 import { PageContent } from '../styles'
 import {
@@ -17,6 +14,7 @@ import {
   PlanSelected,
   TimelineItems,
   TimelineWrapper,
+  YoutubeForm,
 } from './styles'
 
 // Components
@@ -25,6 +23,7 @@ import Input from '@/components/Input'
 import TimelineItem from '@/components/TimelineItem'
 import Button from '@/components/Button'
 import PlansModal from '@/components/PlansModal'
+import PreviewModal from '@/components/PreviewModal'
 
 // Hooks
 import useTimeline from './useTimeline'
@@ -42,7 +41,7 @@ import { IndicatorsArray } from '@/constants/dataArray'
 // Utils
 import { numberToCurrency } from '@/utils/dataFormats'
 
-const TimeLine = () => {
+const Timeline = () => {
   const {
     loading,
     handleSetTimelineData,
@@ -54,6 +53,12 @@ const TimeLine = () => {
     memoriesAvailable,
     openPlansModal,
     setOpenPlansModal,
+    musicLink,
+    setMusicLink,
+    openPreviewModal,
+    setOpenPreviewModal,
+    previewLoading,
+    setPreviewLoading,
   } = useTimeline();
 
   const { planSelected } = useAppContext();
@@ -69,6 +74,13 @@ const TimeLine = () => {
             setPlansModal={setOpenPlansModal}
           />
 
+          <PreviewModal
+            timelineData={timelineData}
+            musicLink={musicLink}
+            openModal={openPreviewModal}
+            setOpenModal={setOpenPreviewModal}
+          />
+
           <TimelineWrapper className='container'>
             <h1>Recrie os <strong>melhores momentos</strong></h1>
             <p>Informe os nomes de vocês, adicione todos os momentos que deseja compartilhar e surpreenda quem ama com uma experiência inesquecível</p>
@@ -81,16 +93,25 @@ const TimeLine = () => {
               placeholder="Bianca e André"
             />
 
-            <YouTube
-              opts={{ playerVars: { autoplay: 1 } }}
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              onReady={(event: any) => {
-                console.log('aq', event.target);
-                event.target.pauseVideo();
-                event.target.playVideo();
-              }}
-              videoId="JVpTp8IHdEg"
-            />
+            {planSelected.music && (
+              <YoutubeForm>
+                <h2>Escolha a Trilha Sonora <strong>Perfeita</strong></h2>
+                <p>Insira o link de uma música no YouTube que será a trilha sonora de suas lembranças. A música começará logo após a experiência ser iniciada.</p>
+                <Input
+                  type="text"
+                  value={musicLink}
+                  onChange={({ target }) => setMusicLink(target.value)}
+                  placeholder="https://www.youtube.com/watch?v=X8jD3F9PI7Q"
+                  onBlur={() => {
+                    setPreviewLoading(true);
+
+                    setTimeout(() => {
+                      setPreviewLoading(false);                      
+                    }, 1000);
+                  }}
+                />
+              </YoutubeForm>
+            )}
 
             <TimelineItems>
               {coupleNames && (
@@ -154,7 +175,12 @@ const TimeLine = () => {
               <h4>Ações</h4>
               <IndicatorsContent className='actions'>
                 <h5>Conferir</h5>
-                <Button variation='fill-blue'>
+                <Button
+                  onClick={() => setOpenPreviewModal(true)}
+                  className="to-view-animation"
+                  variation='fill-blue'
+                  loading={previewLoading}
+                >
                   <FaEye />
                 </Button>
 
@@ -172,4 +198,4 @@ const TimeLine = () => {
   )
 }
 
-export default TimeLine
+export default Timeline

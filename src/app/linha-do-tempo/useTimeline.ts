@@ -29,7 +29,10 @@ const useTimeline = () => {
   const [timelineData, setTimelineData] = useState<Array<TimelineItemDataType>>(INITIAL_TIMELINE_DATA);
   const [memoriesAvailable, setMemoriesAvailable] = useState<Array<TimelineItemDataType>>(MemoryTypes);
   const [openPlansModal, setOpenPlansModal] = useState(false);
+  const [openPreviewModal, setOpenPreviewModal] = useState(false);
+  const [previewLoading, setPreviewLoading] = useState(false);
   const [spotifyAccessToken, setSpotifyAccessToken] = useState();
+  const [musicLink, setMusicLink] = useState<string>();
 
   const handleSetTimelineData = (
     field: 'desc' | 'date' | 'photo' | 'video',
@@ -133,6 +136,12 @@ const useTimeline = () => {
     openPlansModal,
     setOpenPlansModal,
     spotifyAccessToken,
+    musicLink,
+    setMusicLink,
+    openPreviewModal,
+    setOpenPreviewModal,
+    previewLoading,
+    setPreviewLoading,
   }
 }
 

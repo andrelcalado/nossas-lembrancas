@@ -23,7 +23,8 @@ const Input = ({
   value,
   onChange,
   error,
-  placeholder  
+  placeholder,
+  onBlur,
 } : InputProps) => {
   const [showPassword, setShowPassword] = useState(false)
 
@@ -53,6 +54,7 @@ const Input = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          onBlur={onBlur}
         />
       ) : (
         <input
@@ -60,6 +62,7 @@ const Input = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          onBlur={onBlur}
         />
       )}
 

@@ -59,6 +59,8 @@ const Timeline = () => {
     setOpenPreviewModal,
     previewLoading,
     setPreviewLoading,
+    handleSubmitForm,
+    submitLoading,
   } = useTimeline();
 
   const { planSelected } = useAppContext();
@@ -185,7 +187,13 @@ const Timeline = () => {
                 </Button>
 
                 <h5>Presentear</h5>
-                <Button>
+                <Button
+                  disabled={timelineData.length < 2 || !coupleNames}
+                  onClick={async () => {
+                    await handleSubmitForm()
+                  }}
+                  loading={submitLoading}
+                >
                   <FaGift />
                 </Button>
               </IndicatorsContent>

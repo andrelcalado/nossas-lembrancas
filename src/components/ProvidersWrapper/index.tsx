@@ -19,7 +19,7 @@ import { PlanResourceDataType, ProvidersWrapperContext } from '@/types/dataTypes
 import { PlansData } from '@/constants/dataArray'
 
 // Auth
-import firebaseAuth from '@/auth/firebase'
+import { firebaseAuth } from '@/auth/firebase'
 
 const INITIAL_CONTEXT: ProvidersWrapperContext = {
   loginModal: false,
@@ -59,6 +59,7 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
     const unsubscribe = onAuthStateChanged(firebaseAuth, (user: User | null) => {
       if (user) {
         setUser(user);
+        console.log('user', user);
         router.replace('/linha-do-tempo');
       } else {
         router.replace('/');

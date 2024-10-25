@@ -25,7 +25,7 @@ export type ElementSizeENUM = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type ButtonVariationENUM = 'fill' | 'border' | 'border-white' | 'fill-blue';
 export interface ButtonProps {
   children: React.ReactNode;
-  onClick?: (el: any) => void | React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: (el: any) => void | React.MouseEventHandler<HTMLButtonElement> | Promise<void>;
   size?: ElementSizeENUM;
   variation?: ButtonVariationENUM;
   loading?: boolean;

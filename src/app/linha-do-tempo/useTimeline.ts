@@ -3,8 +3,16 @@
 // Core
 import { useState, useEffect } from 'react'
 
+// Auth
+import { storage, timelinesDB } from '@/auth/firebase';
+
 // Hooks
 import { useAppContext } from '@/components/ProvidersWrapper';
+
+// Libraries
+import imageCompression from 'browser-image-compression';
+import { doc, setDoc } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 
 // Types
 import {
@@ -14,6 +22,7 @@ import {
 
 // Constants
 import { MemoryTypes } from '@/constants/dataArray';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
   {
@@ -31,18 +40,38 @@ const useTimeline = () => {
   const [openPlansModal, setOpenPlansModal] = useState(false);
   const [openPreviewModal, setOpenPreviewModal] = useState(false);
   const [previewLoading, setPreviewLoading] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [spotifyAccessToken, setSpotifyAccessToken] = useState();
   const [musicLink, setMusicLink] = useState<string>();
 
-  const handleSetTimelineData = (
+  const handleSetTimelineData = async (
     field: 'desc' | 'date' | 'photo' | 'video',
     index: number,
     value: string | File | Blob
   ) => {
+    let auxValue = value;
+
+    if (field === 'photo') {
+      console.log(`originalFile size ${(value as File).size / 1024 / 1024} MB`);
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      }
+
+      try {
+        auxValue = await imageCompression(value as File, options);
+        console.log('compressedFile instanceof Blob', auxValue instanceof Blob);
+        console.log(`compressedFile size ${auxValue.size / 1024 / 1024} MB`);
+      } catch (error) {
+        console.log('compress error', error);
+      }
+    }
+
     setTimelineData((prev) => {
       return prev.map((item, i) => {
         if (i === index) {
-          return { ...item, [field]: value };
+          return { ...item, [field]: auxValue };
         }
         return item;
       });
@@ -69,6 +98,9 @@ const useTimeline = () => {
   };  
 
   const handleAddTimelineItem = (item: TimelineItemDataType) => {
+    delete item.typeLabel;
+    delete item.typeIcon;
+
     if (Number(
       planSelected[item.type as keyof PlanResourceDataType]
     ) - timelineData.filter(
@@ -90,6 +122,55 @@ const useTimeline = () => {
     }
 
     setTimelineData((prev) => ([...prev, item]));
+  }
+
+  const handleSubmitForm = async () => {
+    setSubmitLoading(true);
+
+    const uid = user?.uid;
+    const hash = uuidv4();
+    const urlSlug = `${String(coupleNames).toLowerCase().replace(/\s+/g, '-')}-${hash}`;
+
+    const updatedTimelineData = await Promise.all(timelineData.map(async (item, index) => {
+      if (item.photo || item.video) {
+        const fileURL = `timelines/${urlSlug}/media-${index}`;
+        const fileRef = ref(storage, fileURL);
+        const file = item.photo || item.video;
+
+        const snapshot = await uploadBytes(fileRef, file as Blob);
+        const fileUrl = await getDownloadURL(snapshot.ref);
+  
+        if (item.photo) {
+          return {
+            ...item,
+            photo: item.photo ? fileUrl : null,
+            fileRef : fileURL
+          };
+        } else {
+          return {
+            ...item,
+            video: item.video ? fileUrl : null,
+            fileRef : fileURL
+          };
+        }
+      }
+
+      return item;
+    }));
+  
+    await setDoc(doc(timelinesDB, 'timelines', urlSlug), {
+      coupleNames,
+      timelineData: updatedTimelineData,
+      musicLink: musicLink || null,
+      createdAt: new Date().toISOString(),
+      userId: uid,
+      plan: planSelected.plan,
+    }).then(() => {
+      setSubmitLoading(false);
+    }).catch((error) => {
+      console.error('Error saving timeline: ', error);
+      setSubmitLoading(false);
+    });
   }
 
   useEffect(() => {
@@ -142,6 +223,9 @@ const useTimeline = () => {
     setOpenPreviewModal,
     previewLoading,
     setPreviewLoading,
+    handleSubmitForm,
+    submitLoading,
+    setSubmitLoading,
   }
 }
 

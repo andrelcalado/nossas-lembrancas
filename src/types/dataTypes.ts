@@ -5,6 +5,7 @@ import React from "react";
 import { HeroSliderCardProps, TimelineItemTypeENUM } from "./layoutTypes";
 import { User } from "firebase/auth";
 import { StaticImageData } from "next/image";
+import { StorageReference } from "firebase/storage";
 
 export type HeroSliderDataType = Array<HeroSliderCardProps>
 
@@ -31,6 +32,7 @@ export interface TimelineItemDataType {
   photo?: File | Blob;
   video?: string;
   disabled?: boolean;
+  fileRef?: StorageReference;
 }
 
 export interface PlanResourceDataType {

@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react'
 
 // Auth
-import firebaseAuth from "@/auth/firebase";
+import { firebaseAuth } from "@/auth/firebase";
 
 // Libraries
 import {

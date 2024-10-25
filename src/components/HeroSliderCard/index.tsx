@@ -1,8 +1,12 @@
+'use client'
+
+import React, { useEffect, useRef } from 'react';
+
 // Core
-import Image from 'next/image'
+import Image from 'next/image';
 
 // Types
-import { HeroSliderCardProps } from '@/types/layoutTypes'
+import { HeroSliderCardProps } from '@/types/layoutTypes';
 
 // Assets
 import { CiHeart } from "react-icons/ci";
@@ -23,6 +27,14 @@ const HeroSliderCard = ({
   desc,
   date,
 }: HeroSliderCardProps) => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef as React.LegacyRef<HTMLVideoElement> && videoRef.current) {
+      (videoRef.current as HTMLVideoElement).play();
+    }
+  }, [media]);
+
   return (
     <HeroSliderCardContent>
       <HeroSliderCardPhoto>
@@ -30,6 +42,7 @@ const HeroSliderCard = ({
           <Image src={media} alt={desc} />
         ) : (
           <video
+            ref={videoRef}
             playsInline
             autoPlay
             muted

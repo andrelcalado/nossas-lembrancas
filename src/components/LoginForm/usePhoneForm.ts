@@ -194,8 +194,7 @@ const usePhoneForm = () => {
 
   useEffect(() => {
     setErrorLabel("");
-  }, [loginMode])
-  
+  }, [loginMode]);
 
   return {
     phoneForm,

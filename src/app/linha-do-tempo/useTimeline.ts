@@ -11,12 +11,13 @@ import { useAppContext } from '@/components/ProvidersWrapper';
 
 // Libraries
 import imageCompression from 'browser-image-compression';
-import { doc, setDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 
 // Types
 import {
   PlanResourceDataType,
+  TimelineDataType,
   TimelineItemDataType,
 } from '@/types/dataTypes';
 
@@ -51,7 +52,7 @@ const useTimeline = () => {
   ) => {
     let auxValue = value;
 
-    if (field === 'photo') {
+    if (field === 'photo' && value) {
       console.log(`originalFile size ${(value as File).size / 1024 / 1024} MB`);
       const options = {
         maxSizeMB: 1,
@@ -98,9 +99,6 @@ const useTimeline = () => {
   };  
 
   const handleAddTimelineItem = (item: TimelineItemDataType) => {
-    delete item.typeLabel;
-    delete item.typeIcon;
-
     if (Number(
       planSelected[item.type as keyof PlanResourceDataType]
     ) - timelineData.filter(
@@ -121,6 +119,8 @@ const useTimeline = () => {
       }));
     }
 
+    delete item.typeLabel;
+    delete item.typeIcon;
     setTimelineData((prev) => ([...prev, item]));
   }
 
@@ -133,7 +133,7 @@ const useTimeline = () => {
 
     const updatedTimelineData = await Promise.all(timelineData.map(async (item, index) => {
       if (item.photo || item.video) {
-        const fileURL = `timelines/${urlSlug}/media-${index}`;
+        const fileURL = `timelines/${uid}/${urlSlug}/media-${index}`;
         const fileRef = ref(storage, fileURL);
         const file = item.photo || item.video;
 
@@ -182,8 +182,31 @@ const useTimeline = () => {
   }, [openPlansModal]);
 
   useEffect(() => {
+    const getUserTimeline = async () => {
+      const timelineQuery = query(collection(timelinesDB, 'timelines'), where('userId', '==', user?.uid));
+  
+      const querySnapshot = await getDocs(timelineQuery);
+    
+      querySnapshot.forEach((doc) => {
+        const eachItem: TimelineDataType = {
+          id: doc.id,
+          coupleNames: doc.data().coupleNames,
+          timelineData: doc.data().timelineData,
+          musicLink: doc.data().musicLink,
+          createdAt: doc.data().createdAt,
+          userId: doc.data().userId,
+          plan: doc.data().plan,
+        };
+        setCoupleNames(eachItem.coupleNames);
+        setMusicLink(eachItem.musicLink);
+      });
+    }
     if(user) {
-      setLoading(false);
+      getUserTimeline().then(() => {
+        setLoading(false);
+      }).catch(() => {
+        setLoading(false);
+      });
     } else {
       setLoading(true);
     }

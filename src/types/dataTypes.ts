@@ -35,6 +35,16 @@ export interface TimelineItemDataType {
   fileRef?: StorageReference;
 }
 
+export interface TimelineDataType {
+  coupleNames: string;
+  createdAt: string;
+  id: string;
+  musicLink: string;
+  plan: string;
+  timelineData: Array<TimelineItemDataType>;
+  userId: string;
+}
+
 export interface PlanResourceDataType {
   plan: string;
   phrase: number;

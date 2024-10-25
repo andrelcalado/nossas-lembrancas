@@ -42,7 +42,7 @@ export const PlansModalWrapper = styled.div`
   width: 100%;
   max-width: 800px;
   background-color: ${theme.colors.secondary[100]};
-  max-height: calc(100vh - 24px);
+  max-height: calc(100svh - 24px);
   border-radius: 12px;
   padding: 32px 24px;
   position: relative;

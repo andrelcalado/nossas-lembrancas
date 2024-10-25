@@ -31,6 +31,10 @@ button {
   width: 100%;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 html::-webkit-scrollbar {
   width: 8px;
 }

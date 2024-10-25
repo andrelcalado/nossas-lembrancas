@@ -25,6 +25,7 @@ const Input = ({
   error,
   placeholder,
   onBlur,
+  maxLength,
 } : InputProps) => {
   const [showPassword, setShowPassword] = useState(false)
 
@@ -55,6 +56,7 @@ const Input = ({
           onChange={onChange}
           placeholder={placeholder}
           onBlur={onBlur}
+          maxLength={maxLength}
         />
       ) : (
         <input
@@ -63,6 +65,7 @@ const Input = ({
           onChange={onChange}
           placeholder={placeholder}
           onBlur={onBlur}
+          maxLength={maxLength}
         />
       )}
 

@@ -111,6 +111,7 @@ const TimelineItem = ({
               value={desc}
               onChange={({ target }) => setDesc && setDesc(target.value)}
               placeholder={getPhrasePlaceholder()}
+              maxLength={220}
               type="textarea"
             />
 
@@ -129,7 +130,7 @@ const TimelineItem = ({
                 <HeroSliderCardContent>
                   <HeroSliderCardPhoto>
                     <img
-                      src={URL.createObjectURL(photo)}
+                      src={typeof photo === 'string' ? photo :  URL.createObjectURL(photo)}
                       alt="Fotografia Casal"
                     />
                   </HeroSliderCardPhoto>
@@ -147,6 +148,7 @@ const TimelineItem = ({
                   type="textarea"
                   placeholder="O dia do nosso primeiro beijo"
                   onChange={({ target }) => setDesc && setDesc(target.value)}
+                  maxLength={220}
                   value={desc}
                 />
 

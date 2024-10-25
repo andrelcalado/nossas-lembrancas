@@ -35,6 +35,10 @@ export const InputContent = styled.label<Pick<InputProps, 'error'>>`
       &::placeholder {
         color: ${error ? theme.colors.primary[500] : theme.colors.gray[300]};
       }
+
+      @media (max-width: 600px) {
+        font-size: 16px;        
+      }
     }
 
     textarea {

@@ -53,6 +53,7 @@ export interface InputProps {
   placeholder?: string;
   value?: string;
   error?: boolean;
+  maxLength?: number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void;
   onBlur?: () => void;
   type: InputTypeENUM;

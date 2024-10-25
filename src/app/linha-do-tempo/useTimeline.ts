@@ -22,7 +22,7 @@ import {
 } from '@/types/dataTypes';
 
 // Constants
-import { MemoryTypes } from '@/constants/dataArray';
+import { MemoryTypes, PlansData } from '@/constants/dataArray';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
@@ -34,7 +34,7 @@ const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
 
 const useTimeline = () => {
   const [loading, setLoading] = useState(true);
-  const { user, planSelected } = useAppContext();
+  const { user, planSelected, setPlanSelected } = useAppContext();
   const [coupleNames, setCoupleNames] = useState<string>();
   const [timelineData, setTimelineData] = useState<Array<TimelineItemDataType>>(INITIAL_TIMELINE_DATA);
   const [memoriesAvailable, setMemoriesAvailable] = useState<Array<TimelineItemDataType>>(MemoryTypes);
@@ -181,6 +181,7 @@ const useTimeline = () => {
     }
   }, [openPlansModal]);
 
+  // When user has timeline data
   useEffect(() => {
     const getUserTimeline = async () => {
       const timelineQuery = query(collection(timelinesDB, 'timelines'), where('userId', '==', user?.uid));
@@ -188,6 +189,8 @@ const useTimeline = () => {
       const querySnapshot = await getDocs(timelineQuery);
     
       querySnapshot.forEach((doc) => {
+        console.log('doc', doc.data());
+
         const eachItem: TimelineDataType = {
           id: doc.id,
           coupleNames: doc.data().coupleNames,
@@ -199,14 +202,36 @@ const useTimeline = () => {
         };
         setCoupleNames(eachItem.coupleNames);
         setMusicLink(eachItem.musicLink);
+        setTimelineData(eachItem.timelineData);
+
+        const planAux = PlansData.find((eachPlan) => eachPlan.plan === eachItem.plan) || PlansData[0];
+        setPlanSelected(planAux);
+
+        const timelineCount : Record<'photo' | 'video' | 'phrase', number> = {
+          photo: eachItem.timelineData.filter((item) => item.type === 'photo').length,
+          video: eachItem.timelineData.filter((item) => item.type === 'video').length,
+          phrase: eachItem.timelineData.filter((item) => item.type === 'phrase').length,
+        }
+
+        setMemoriesAvailable((prev) => prev.map((eachMemory) => {
+          if (eachMemory.type !== 'photo' && eachMemory.type !== 'video' && eachMemory.type !== 'phrase') {
+            return eachMemory;
+          }
+          if (timelineCount[eachMemory.type] >= planAux[eachMemory.type]) {
+            return { ...eachMemory, disabled: true };
+          }
+          return eachMemory;
+        }));        
       });
     }
     if(user) {
-      getUserTimeline().then(() => {
-        setLoading(false);
-      }).catch(() => {
-        setLoading(false);
-      });
+      getUserTimeline()
+        .then(() => {
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
+        });
     } else {
       setLoading(true);
     }

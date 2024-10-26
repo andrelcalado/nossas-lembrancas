@@ -11,7 +11,15 @@ import { useAppContext } from '@/components/ProvidersWrapper';
 
 // Libraries
 import imageCompression from 'browser-image-compression';
-import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+  where,  
+} from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 
 // Types
@@ -45,6 +53,7 @@ const useTimeline = () => {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [spotifyAccessToken, setSpotifyAccessToken] = useState();
   const [musicLink, setMusicLink] = useState<string>();
+  const [timelineID, setTimelineID] = useState<string>();
 
   const handleSetTimelineData = async (
     field: 'desc' | 'date' | 'photo' | 'video',
@@ -175,6 +184,68 @@ const useTimeline = () => {
     });
   }
 
+  const handleUpdateForm = async () => {
+    setSubmitLoading(true);
+
+    const uid = user?.uid;
+    const urlSlug = timelineID;
+
+    const updatedTimelineData = await Promise.all(timelineData.map(async (item, index) => {
+      if (item.photo || item.video) {
+        const filePath = `timelines/${uid}/${urlSlug}/media-${index}`;
+        const fileRef = ref(storage, filePath);
+        const file = item.photo || item.video;
+
+        if (typeof file === 'string') {
+          if (item.photo) {
+            return {
+              ...item,
+              photo: file ?? null,
+              fileRef : filePath
+            };
+          } else {
+            return {
+              ...item,
+              video: file ?? null,
+              fileRef : filePath
+            };
+          }
+        }
+        const snapshot = await uploadBytes(fileRef, file as Blob);
+        const fileUrl = await getDownloadURL(snapshot.ref);
+  
+        if (item.photo) {
+          return {
+            ...item,
+            photo: item.photo ? fileUrl : null,
+            fileRef : filePath
+          };
+        } else {
+          return {
+            ...item,
+            video: item.video ? fileUrl : null,
+            fileRef : filePath
+          };
+        }
+      }
+
+      return item;
+    }));
+  
+    await updateDoc(doc(timelinesDB, 'timelines', urlSlug as string), {
+      coupleNames,
+      timelineData: updatedTimelineData,
+      musicLink: musicLink || null,
+      userId: uid,
+      plan: planSelected.plan,
+    }).then(() => {
+      setSubmitLoading(false);
+    }).catch((error) => {
+      console.error('Error saving timeline: ', error);
+      setSubmitLoading(false);
+    });
+  }
+
   useEffect(() => {
     if(openPlansModal) {
       document.body.style.overflow = 'hidden';
@@ -205,6 +276,7 @@ const useTimeline = () => {
         setCoupleNames(eachItem.coupleNames);
         setMusicLink(eachItem.musicLink);
         setTimelineData(eachItem.timelineData);
+        setTimelineID(eachItem.id);
 
         const planAux = PlansData.find((eachPlan) => eachPlan.plan === eachItem.plan) || PlansData[0];
         setPlanSelected(planAux);
@@ -277,6 +349,8 @@ const useTimeline = () => {
     submitLoading,
     setSubmitLoading,
     timelineItemLoading,
+    timelineID,
+    handleUpdateForm,
   }
 }
 

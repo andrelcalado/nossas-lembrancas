@@ -62,6 +62,8 @@ const Timeline = () => {
     handleSubmitForm,
     submitLoading,
     timelineItemLoading,
+    timelineID,
+    handleUpdateForm,
   } = useTimeline();
 
   const { planSelected } = useAppContext();
@@ -193,7 +195,11 @@ const Timeline = () => {
                 <Button
                   disabled={timelineData.length < 2 || !coupleNames}
                   onClick={async () => {
-                    await handleSubmitForm()
+                    if (timelineID) {
+                      await handleUpdateForm();
+                    } else {
+                      await handleSubmitForm()
+                    }
                   }}
                   loading={submitLoading}
                 >

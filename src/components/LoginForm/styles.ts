@@ -255,6 +255,10 @@ export const PhoneInputComponent = styled(PhoneInput)`
     outline: unset;
     color: ${theme.colors.black};
 
+    @media (max-width: 600px) {
+      font-size: 16px;
+    }
+
     &::placeholder {
       color: ${theme.colors.gray[300]};
     }

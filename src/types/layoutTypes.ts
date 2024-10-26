@@ -81,6 +81,7 @@ export interface LoginFormProps {
 export interface LoadingProps {
   loading: boolean;
   size?: ElementSizeENUM;
+  color?: 'white' | 'primary';
 }
 
 export type LoginMethod = "email_pwd" | "phone";
@@ -100,6 +101,7 @@ export interface TimelineItemProps {
   addItem?: (item: TimelineItemDataType) => void;
   deleteItem?: (index: number) => void;
   memoriesAvailable?: Array<TimelineItemDataType>;
+  loading?: boolean;
 }
 
 export interface PlansModalProps {

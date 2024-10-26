@@ -34,6 +34,7 @@ const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
 
 const useTimeline = () => {
   const [loading, setLoading] = useState(true);
+  const [timelineItemLoading, setTimelineItemLoading] = useState(true);
   const { user, planSelected, setPlanSelected } = useAppContext();
   const [coupleNames, setCoupleNames] = useState<string>();
   const [timelineData, setTimelineData] = useState<Array<TimelineItemDataType>>(INITIAL_TIMELINE_DATA);
@@ -53,6 +54,7 @@ const useTimeline = () => {
     let auxValue = value;
 
     if (field === 'photo' && value) {
+      setTimelineItemLoading(true);
       console.log(`originalFile size ${(value as File).size / 1024 / 1024} MB`);
       const options = {
         maxSizeMB: 1,
@@ -62,7 +64,6 @@ const useTimeline = () => {
 
       try {
         auxValue = await imageCompression(value as File, options);
-        console.log('compressedFile instanceof Blob', auxValue instanceof Blob);
         console.log(`compressedFile size ${auxValue.size / 1024 / 1024} MB`);
       } catch (error) {
         console.log('compress error', error);
@@ -77,6 +78,7 @@ const useTimeline = () => {
         return item;
       });
     });
+    setTimelineItemLoading(false);
   };
 
   const handleDeleteTimelineItem = (index: number) => {
@@ -274,6 +276,7 @@ const useTimeline = () => {
     handleSubmitForm,
     submitLoading,
     setSubmitLoading,
+    timelineItemLoading,
   }
 }
 

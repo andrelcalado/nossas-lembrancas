@@ -61,6 +61,7 @@ const Timeline = () => {
     setPreviewLoading,
     handleSubmitForm,
     submitLoading,
+    timelineItemLoading,
   } = useTimeline();
 
   const { planSelected } = useAppContext();
@@ -131,6 +132,7 @@ const Timeline = () => {
                   date={item.date}
                   setDate={(value) => handleSetTimelineData('date', index, value)}
                   deleteItem={() => handleDeleteTimelineItem(index)}
+                  loading={timelineItemLoading}
                 />
               ))}
 
@@ -138,6 +140,7 @@ const Timeline = () => {
                 <TimelineItem
                   addItem={handleAddTimelineItem}
                   memoriesAvailable={memoriesAvailable}
+                  loading={timelineItemLoading}
                   type="add"
                 />
               )}

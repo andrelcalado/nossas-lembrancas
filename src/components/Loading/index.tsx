@@ -7,9 +7,9 @@ import { LoadingProps } from '@/types/layoutTypes'
 // Styles
 import { LoadingContent } from './styles'
 
-const Loading = ({ loading, size }: LoadingProps) => {
+const Loading = ({ loading, size, color = 'white' }: LoadingProps) => {
   return loading ? (
-    <LoadingContent size={size} />
+    <LoadingContent color={color} size={size} />
   ) : (
     <></>
   )

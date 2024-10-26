@@ -15,16 +15,25 @@ const getSize = (size: ElementSizeENUM) => {
     default:
       return '24px';
     case 'md':
-      return '32px';
+      return '56px';
     case 'lg':
-      return '48px';
+      return '78px';
     case 'xl':
-      return '64px';
+      return '104px';
   }
 }
 
-export const LoadingContent = styled.div<Pick<LoadingProps, 'size'>>`
-  ${({ size = 'sm' }) => css`
+const getColor = ({ color }: Pick<LoadingProps, 'color'>) => {
+  switch (color) {
+    case 'primary':
+      return theme.colors.primary[400];
+      default:
+      return theme.colors.white;
+  }  
+}
+
+export const LoadingContent = styled.div<Pick<LoadingProps, 'size' | 'color'>>`
+  ${({ size = 'sm', color = 'white' }) => css`
     width: ${getSize(size)};
     height: ${getSize(size)};
     display: inline-block;
@@ -37,7 +46,7 @@ export const LoadingContent = styled.div<Pick<LoadingProps, 'size'>>`
       width: ${getSize(size)};
       height: ${getSize(size)};
       border-radius: 50%;
-      border: 2px solid ${theme.colors.white};
+      border: 2px solid ${getColor({ color })};
       position: absolute;
       left: 0;
       top: 0;

@@ -35,6 +35,7 @@ import useTimelineItem from './useTimelineItem';
 // Types
 import { TimelineItemProps } from '@/types/layoutTypes';
 import Button from '../Button';
+import Loading from '../Loading';
 
 const TimelineItem = ({
   type,
@@ -49,6 +50,7 @@ const TimelineItem = ({
   addItem,
   deleteItem,
   memoriesAvailable,
+  loading,
 }: TimelineItemProps) => {
   const {
     openAddPopup,
@@ -163,17 +165,27 @@ const TimelineItem = ({
               </TimelineImageItem>
             ) : (
               <TimelineItemImageUpload>
-                <MdAddAPhoto />
-                <p>Click para selecionar uma fotografia</p>                
+                {loading ? (
+                  <Loading
+                    size="xl"
+                    loading
+                    color="primary"
+                  />
+                ) : (
+                  <>
+                    <MdAddAPhoto />
+                    <p>Click para selecionar uma fotografia</p>                
 
-                <input
-                  type="file"
-                  onChange={(event) => setPhoto && setPhoto(event.target.files?.[0])}
-                />
+                    <input
+                      type="file"
+                      onChange={(event) => setPhoto && setPhoto(event.target.files?.[0])}
+                    />
 
-                <Button onClick={deleteItem}>
-                  <MdDelete />
-                </Button>
+                    <Button onClick={deleteItem}>
+                      <MdDelete />
+                    </Button>
+                  </>
+                )}
               </TimelineItemImageUpload>
             )}
           </>

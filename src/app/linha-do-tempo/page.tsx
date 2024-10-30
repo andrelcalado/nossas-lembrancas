@@ -24,6 +24,7 @@ import TimelineItem from '@/components/TimelineItem'
 import Button from '@/components/Button'
 import PlansModal from '@/components/PlansModal'
 import PreviewModal from '@/components/PreviewModal'
+import PaymentMethodsModal from '@/components/PaymentMethodsModal'
 
 // Hooks
 import useTimeline from './useTimeline'
@@ -78,6 +79,8 @@ const Timeline = () => {
             openPlansModal={openPlansModal}
             setPlansModal={setOpenPlansModal}
           />
+
+          <PaymentMethodsModal />
 
           <PreviewModal
             timelineData={timelineData}
@@ -198,7 +201,7 @@ const Timeline = () => {
                     if (timelineID) {
                       await handleUpdateForm();
                     } else {
-                      await handleSubmitForm()
+                      await handleSubmitForm();
                     }
                   }}
                   loading={submitLoading}

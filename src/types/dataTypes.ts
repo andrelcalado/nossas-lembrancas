@@ -15,6 +15,8 @@ export interface ProvidersWrapperContext {
   loginModal: boolean;
   loading: boolean;
   setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
+  paymentMethodsModal: boolean;
+  setPaymentMethodsModal: React.Dispatch<React.SetStateAction<boolean>>;
   loginMode: boolean;
   setLoginMode: React.Dispatch<React.SetStateAction<boolean>>;
   handleUserSignOut: (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -45,8 +47,10 @@ export interface TimelineDataType {
   userId: string;
 }
 
+export type PlanDataENUM = "Essencial" | "Especial" | "Inesquecível";
+
 export interface PlanResourceDataType {
-  plan: string;
+  plan: PlanDataENUM;
   phrase: number;
   video: number;
   photo: number;

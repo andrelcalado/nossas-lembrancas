@@ -7,7 +7,7 @@ import React, {
   HTMLAttributeAnchorTarget,
   SetStateAction
 } from "react";
-import { TimelineItemDataType } from "./dataTypes";
+import { PlanResourceDataType, TimelineItemDataType } from "./dataTypes";
 
 export type ColorLightEnum = 100 | 200 | 300 | 400 | 500 | 600 | 700;
 export interface Theme {
@@ -114,4 +114,11 @@ export interface PreviewModalProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   timelineData: Array<TimelineItemDataType>;
   musicLink?: string;
+}
+
+export interface PlanItemProps {
+  eachPlan: PlanResourceDataType;
+  popular?: boolean;
+  selected?: boolean;
+  handleSelect?: () => void;
 }

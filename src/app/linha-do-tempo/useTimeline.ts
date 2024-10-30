@@ -43,7 +43,6 @@ const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
 const useTimeline = () => {
   const [loading, setLoading] = useState(true);
   const [timelineItemLoading, setTimelineItemLoading] = useState(true);
-  const { user, planSelected, setPlanSelected } = useAppContext();
   const [coupleNames, setCoupleNames] = useState<string>();
   const [timelineData, setTimelineData] = useState<Array<TimelineItemDataType>>(INITIAL_TIMELINE_DATA);
   const [memoriesAvailable, setMemoriesAvailable] = useState<Array<TimelineItemDataType>>(MemoryTypes);
@@ -54,6 +53,12 @@ const useTimeline = () => {
   const [spotifyAccessToken, setSpotifyAccessToken] = useState();
   const [musicLink, setMusicLink] = useState<string>();
   const [timelineID, setTimelineID] = useState<string>();
+  const {
+    user,
+    planSelected,
+    setPlanSelected,
+    setPaymentMethodsModal,    
+  } = useAppContext();
 
   const handleSetTimelineData = async (
     field: 'desc' | 'date' | 'photo' | 'video',
@@ -178,6 +183,7 @@ const useTimeline = () => {
       plan: planSelected.plan,
     }).then(() => {
       setSubmitLoading(false);
+      setPaymentMethodsModal(true);
     }).catch((error) => {
       console.error('Error saving timeline: ', error);
       setSubmitLoading(false);
@@ -240,6 +246,7 @@ const useTimeline = () => {
       plan: planSelected.plan,
     }).then(() => {
       setSubmitLoading(false);
+      setPaymentMethodsModal(true);
     }).catch((error) => {
       console.error('Error saving timeline: ', error);
       setSubmitLoading(false);

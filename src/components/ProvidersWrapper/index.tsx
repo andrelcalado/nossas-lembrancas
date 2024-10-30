@@ -26,6 +26,8 @@ const INITIAL_CONTEXT: ProvidersWrapperContext = {
   setLoginModal: () => null,
   loginMode: false,
   setLoginMode: () => null,
+  paymentMethodsModal: false,
+  setPaymentMethodsModal: () => null,
   handleUserSignOut: () => null,
   user: null,
   loading: false,
@@ -39,6 +41,7 @@ const useAppContext: () => ProvidersWrapperContext = () => useContext(AppContext
 export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const [paymentMethodsModal, setPaymentMethodsModal] = useState<boolean>(false);
   const [loginModal, setLoginModal] = useState<boolean>(false);
   const [loginMode, setLoginMode] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -70,8 +73,8 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = loginModal ? 'hidden' : 'auto';
-  }, [loginModal])
+    document.body.style.overflow = loginModal || paymentMethodsModal ? 'hidden' : 'auto';
+  }, [loginModal, paymentMethodsModal])
 
   return (
     <AppContext.Provider
@@ -85,6 +88,8 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
         user,
         planSelected,
         setPlanSelected,
+        paymentMethodsModal,
+        setPaymentMethodsModal,
       }}
     >
       {children}

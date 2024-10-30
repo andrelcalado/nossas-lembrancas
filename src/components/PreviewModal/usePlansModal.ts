@@ -19,7 +19,7 @@ const usePlansModal = ({
       document.body.style.overflow = 'hidden';
     } else {
       youtubeController?.stopVideo();
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = 'auto';
     }
   }, [openModal])
   

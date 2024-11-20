@@ -48,8 +48,7 @@ const PreviewModal = ({
     handleRepeatTimeline
   } = usePreviewModal({
     openModal,
-    timelineData,
-    musicLink
+    timelineData
   });
 
   return (

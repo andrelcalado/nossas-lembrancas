@@ -104,6 +104,15 @@ export interface TimelineItemProps {
   loading?: boolean;
 }
 
+export interface TimelineItemAnimatedProps {
+  type: TimelineItemTypeENUM;
+  photo?: File | Blob;
+  video?: string;
+  desc?: string;
+  className?: string;
+  date?: string;
+}
+
 export interface PlansModalProps {
   openPlansModal: boolean;
   setPlansModal: Dispatch<SetStateAction<boolean>>;

@@ -72,3 +72,9 @@ html::-webkit-scrollbar-thumb {
     opacity: 0;
   }
 }
+
+@keyframes dashMovement {
+  to {
+    background-position: 100% 0%, 0% 100%, 0% 0%, 100% 100%;
+  }
+}

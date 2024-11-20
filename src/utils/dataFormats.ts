@@ -8,3 +8,9 @@ export function getYouTubeVideoID(url: string) {
   const match = url.match(regex);
   return match && match[1] ? match[1] : null;
 }
+
+export function stringDateToFormatedDate(date: string) {
+  const [ano, mes, dia] = date.split('-');
+  
+  return `${dia}/${mes}/${ano}`;
+}

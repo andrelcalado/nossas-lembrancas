@@ -128,7 +128,7 @@ export const PaymentMethodsWithPlan = styled.div`
   ${PlanItemContent} {
     border-radius: 24px;
     width: 100%;
-    max-width: 260px;
+    max-width: 270px;
     margin: 0;
 
     ${PlanItemBody} {

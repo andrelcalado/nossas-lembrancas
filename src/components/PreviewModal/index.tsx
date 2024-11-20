@@ -5,7 +5,12 @@ import React from 'react'
 
 // Styles
 import { CloseButton, ModalOverlay } from '../LoginForm/styles';
-import { PreviewModalContent, PreviewModalWrapper } from './styles';
+import { TimelineAnimatedTrail } from '../TimelineItemAnimated/styles';
+import {
+  PreviewModalContent,
+  PreviewModalWrapper,
+  TimelineDataContent,
+} from './styles';
 
 // Libraries
 import YouTube, { YouTubeEvent } from "react-youtube";
@@ -23,6 +28,9 @@ import { PreviewModalProps } from '@/types/layoutTypes';
 // Utils
 import { getYouTubeVideoID } from '@/utils/dataFormats';
 
+// Components
+import TimelineItemAnimated from '../TimelineItemAnimated';
+
 const PreviewModal = ({
   openModal,
   setOpenModal,
@@ -30,7 +38,11 @@ const PreviewModal = ({
   musicLink,
 } : PreviewModalProps) => {
   const { planSelected } = useAppContext();
-  const { setYoutubeController } = usePlansModal({ openModal, timelineData, musicLink });
+  const { setYoutubeController } = usePlansModal({
+    openModal,
+    timelineData,
+    musicLink
+  });
 
   return (
     <PreviewModalContent active={openModal}>
@@ -43,6 +55,22 @@ const PreviewModal = ({
         <CloseButton onClick={() => setOpenModal(false)}>
           <CgClose />
         </CloseButton>
+
+        <TimelineDataContent>
+          <TimelineAnimatedTrail className="timeline-track" />
+
+          {timelineData.map((eachData, index) => (
+            <TimelineItemAnimated
+              key={index}
+              className={`timeline-item-${index}`}
+              type={eachData.type}
+              desc={eachData.desc}
+              date={eachData.date}
+              video={eachData.video}
+              photo={eachData.photo}              
+            />
+          ))}
+        </TimelineDataContent>
 
         {(planSelected.music && musicLink) && (
           <YouTube

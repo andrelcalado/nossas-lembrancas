@@ -35,7 +35,7 @@ export const HeroSliderCardPhoto = styled.div`
     width: 100%;
     max-width: unset;
     object-fit: cover;
-    animation: sizeGrown 15s ease;
+    animation: sizeGrown 15s ease alternate-reverse infinite;
   }
 `
 

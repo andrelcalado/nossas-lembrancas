@@ -47,7 +47,7 @@ const useTimeline = () => {
   const [timelineData, setTimelineData] = useState<Array<TimelineItemDataType>>(INITIAL_TIMELINE_DATA);
   const [memoriesAvailable, setMemoriesAvailable] = useState<Array<TimelineItemDataType>>(MemoryTypes);
   const [openPlansModal, setOpenPlansModal] = useState(false);
-  const [openPreviewModal, setOpenPreviewModal] = useState(false);
+  const [openPreviewModal, setOpenPreviewModal] = useState(true);
   const [previewLoading, setPreviewLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [spotifyAccessToken, setSpotifyAccessToken] = useState();

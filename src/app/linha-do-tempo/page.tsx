@@ -87,6 +87,15 @@ const Timeline = () => {
             musicLink={musicLink}
             openModal={openPreviewModal}
             setOpenModal={setOpenPreviewModal}
+            handleToGift={async () => {
+              if (timelineID) {
+                await handleUpdateForm();
+                setOpenPreviewModal(false);
+              } else {
+                await handleSubmitForm();
+                setOpenPreviewModal(false);
+              }
+            }}
           />
 
           <TimelineWrapper className='container'>
@@ -98,7 +107,8 @@ const Timeline = () => {
               type="text"
               value={coupleNames}
               onChange={({ target }) => setCoupleNames(target.value)}
-              placeholder="Bianca e André"
+              placeholder="Jéssica e Marcelo"
+              maxLength={200}
             />
 
             {planSelected.music && (
@@ -110,6 +120,7 @@ const Timeline = () => {
                   value={musicLink}
                   onChange={({ target }) => setMusicLink(target.value)}
                   placeholder="https://www.youtube.com/watch?v=X8jD3F9PI7Q"
+                  maxLength={200}
                   onBlur={() => {
                     setPreviewLoading(true);
 

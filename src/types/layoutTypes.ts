@@ -123,6 +123,7 @@ export interface PreviewModalProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   timelineData: Array<TimelineItemDataType>;
   musicLink?: string;
+  handleToGift: ((el: any) => void | React.MouseEventHandler<HTMLButtonElement> | Promise<void>) | undefined;
 }
 
 export interface PlanItemProps {

@@ -7,9 +7,6 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-// Hooks
-import { useAppContext } from '../ProvidersWrapper';
-
 // Types
 import { PreviewModalProps } from '@/types/layoutTypes'
 import { YouTubePlayer } from 'react-youtube'
@@ -18,13 +15,10 @@ gsap.registerPlugin(useGSAP);
 
 const usePreviewModal = ({
   openModal,
-  setOpenModal,
   timelineData,
-  // musicLink
-}: Pick<PreviewModalProps, 'openModal' | 'setOpenModal' | 'timelineData' | 'musicLink'>) => {
+}: Pick<PreviewModalProps, 'openModal' | 'timelineData'>) => {
   const gsapTimeline = useRef(gsap.timeline({ paused: true }));
   const [youtubeController, setYoutubeController] = useState<YouTubePlayer | null>();
-  const { setPaymentMethodsModal } = useAppContext();
 
   useEffect(() => {
     if (openModal) {
@@ -59,7 +53,7 @@ const usePreviewModal = ({
     // }, "<");
     
     gsapTimeline.current.to('.timeline-item-0', {
-      opacity: 1, filter: 'blur(0)', duration: 3,
+      opacity: 1, filter: 'blur(0)', duration: 2,
     });
     gsapTimeline.current.to('.timeline-item-0', {
       transform: 'translate(-50% -50%)', scale: 1, ease: "power4.out", duration: 20,
@@ -72,15 +66,15 @@ const usePreviewModal = ({
     }, "<+1");
     gsapTimeline.current.to('.timeline-item-0--content', {
       translateX: '-150%', opacity: 0, ease: "power4.out", duration: 2,
-    }, "<+2");
+    }, ">+4");
     gsapTimeline.current.to('.timeline-item-0', {
       scale: .5, ease: "power4.out", duration: 2,
     }, "<");
     gsapTimeline.current.to('.timeline-track', {
-      translateX: '100%', duration: 1.5,
+      translateX: '100%', duration: 1.3,
     }, "<");
     gsapTimeline.current.to('.timeline-track', {
-      translateX: '50%', duration: 1.5,
+      translateX: '50%', duration: 1.3,
     }, ">-.6");
 
     timelineData.forEach((eachItem, index) => {
@@ -101,25 +95,25 @@ const usePreviewModal = ({
           transform: 'translate(-50% -50%)', scale: 1, ease: "power4.out", duration: 20,
         }, "<");
         gsapTimeline.current.to('.timeline-track', {
-          translateX: '50%', ease: "power4.out", duration: 1.5,
+          translateX: '50%', ease: "power4.out", duration: 1.3,
         }, "<+2");
         gsapTimeline.current.to(`.timeline-item-${index}--content`, {
-          translateX: '-150%', opacity: 0, ease: "power4.out", duration: 1.5,
-        }, "<+2");
+          translateX: '-150%', opacity: 0, ease: "power4.out", duration: 1.3,
+        }, ">+5");
         gsapTimeline.current.to('.timeline-track', {
-          translateX: '100%', duration: 1.5,
+          translateX: '100%', duration: 1.3,
         }, "<");
         gsapTimeline.current.to('.timeline-track', {
-          translateX: '50%', duration: 1.5,
+          translateX: '50%', duration: 1.3,
         }, ">-.6");
       }
     });
 
     gsapTimeline.current.to('.timeline-track', {
-      translateX: '100%', duration: 1.5,
+      translateX: '100%', duration: 1.3,
     }, "<");
     gsapTimeline.current.to('.timeline-actions', {
-      left: '50%', opacity: 1, duration: 1.5, ease: "power4.out",
+      left: '50%', opacity: 1, duration: 1.3, ease: "power4.out",
     }, "<-.5");
   }
 
@@ -133,16 +127,10 @@ const usePreviewModal = ({
     });
     gsapTimeline.current.restart();
   }
-
-  const handleToGift = () => {
-    setOpenModal(false);
-    setPaymentMethodsModal(true);
-  }
   
   return {
     setYoutubeController,
-    handleRepeatTimeline,
-    handleToGift
+    handleRepeatTimeline
   }
 }
 

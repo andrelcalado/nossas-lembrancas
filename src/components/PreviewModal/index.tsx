@@ -40,15 +40,14 @@ const PreviewModal = ({
   setOpenModal,
   timelineData,
   musicLink,
+  handleToGift,
 } : PreviewModalProps) => {
   const { planSelected } = useAppContext();
   const {
     setYoutubeController,
-    handleRepeatTimeline,
-    handleToGift,
+    handleRepeatTimeline
   } = usePreviewModal({
     openModal,
-    setOpenModal,
     timelineData,
     musicLink
   });

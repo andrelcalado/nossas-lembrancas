@@ -157,6 +157,10 @@ export const PaymentMethods = styled.div`
   border-radius: 24px;
   background-color: ${theme.colors.white};
 
+  @media (max-width: 560px) {
+    max-width: 100%;
+  }
+
   > h3 {
     ${textLgBold}
     width: 100%;

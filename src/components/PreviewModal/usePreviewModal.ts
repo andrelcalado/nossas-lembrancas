@@ -7,19 +7,24 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
+// Hooks
+import { useAppContext } from '../ProvidersWrapper';
+
 // Types
 import { PreviewModalProps } from '@/types/layoutTypes'
 import { YouTubePlayer } from 'react-youtube'
 
 gsap.registerPlugin(useGSAP);
 
-const usePlansModal = ({
+const usePreviewModal = ({
   openModal,
+  setOpenModal,
   timelineData,
   // musicLink
-}: Pick<PreviewModalProps, 'openModal' | 'timelineData' | 'musicLink'>) => {
+}: Pick<PreviewModalProps, 'openModal' | 'setOpenModal' | 'timelineData' | 'musicLink'>) => {
   const gsapTimeline = useRef(gsap.timeline({ paused: true }));
   const [youtubeController, setYoutubeController] = useState<YouTubePlayer | null>();
+  const { setPaymentMethodsModal } = useAppContext();
 
   useEffect(() => {
     if (openModal) {
@@ -32,10 +37,10 @@ const usePlansModal = ({
       gsapTimeline.current.pause().seek(0);
       document.body.style.overflow = 'auto';
     }
-  }, [openModal])
+  }, [openModal]);
 
-  useEffect(() => {
-    gsapTimeline.current.clear();
+  const initAnimation = () => {
+    gsapTimeline.current.clear(true);
 
     // gsapTimeline.current.to(`.timeline-item-1--heart`, {
     //   width: 50, height: 50, ease: "power4.out", duration: 1,
@@ -68,6 +73,9 @@ const usePlansModal = ({
     gsapTimeline.current.to('.timeline-item-0--content', {
       translateX: '-150%', opacity: 0, ease: "power4.out", duration: 2,
     }, "<+2");
+    gsapTimeline.current.to('.timeline-item-0', {
+      scale: .5, ease: "power4.out", duration: 2,
+    }, "<");
     gsapTimeline.current.to('.timeline-track', {
       translateX: '100%', duration: 1.5,
     }, "<");
@@ -106,11 +114,36 @@ const usePlansModal = ({
         }, ">-.6");
       }
     });
-  }, [timelineData, openModal]);  
+
+    gsapTimeline.current.to('.timeline-track', {
+      translateX: '100%', duration: 1.5,
+    }, "<");
+    gsapTimeline.current.to('.timeline-actions', {
+      left: '50%', opacity: 1, duration: 1.5, ease: "power4.out",
+    }, "<-.5");
+  }
+
+  useEffect(() => {
+    initAnimation();
+  }, [timelineData, openModal]);
+
+  const handleRepeatTimeline = () => {
+    gsap.to('.timeline-actions', {
+      left: '150%', opacity: 0, duration: 1.5, ease: "power4.out",
+    });
+    gsapTimeline.current.restart();
+  }
+
+  const handleToGift = () => {
+    setOpenModal(false);
+    setPaymentMethodsModal(true);
+  }
   
   return {
     setYoutubeController,
+    handleRepeatTimeline,
+    handleToGift
   }
 }
 
-export default usePlansModal
+export default usePreviewModal

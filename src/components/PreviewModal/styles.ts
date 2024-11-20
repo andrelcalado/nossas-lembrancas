@@ -40,3 +40,19 @@ export const TimelineDataContent = styled.div`
   height: 100%;
   position: relative;
 `
+
+export const TimelineActionsContent = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 150%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  max-width: 300px;
+  width: 100%;
+  background-color: ${theme.colors.white};
+  border-radius: 24px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`

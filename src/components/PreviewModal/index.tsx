@@ -9,6 +9,7 @@ import { TimelineAnimatedTrail } from '../TimelineItemAnimated/styles';
 import {
   PreviewModalContent,
   PreviewModalWrapper,
+  TimelineActionsContent,
   TimelineDataContent,
 } from './styles';
 
@@ -17,10 +18,12 @@ import YouTube, { YouTubeEvent } from "react-youtube";
 
 // Hooks
 import { useAppContext } from '../ProvidersWrapper';
-import usePlansModal from './usePlansModal';
+import usePreviewModal from './usePreviewModal';
 
 // Assets
 import { CgClose } from "react-icons/cg";
+import { FaRepeat } from "react-icons/fa6";
+import { FaGift } from "react-icons/fa";
 
 // Types
 import { PreviewModalProps } from '@/types/layoutTypes';
@@ -30,6 +33,7 @@ import { getYouTubeVideoID } from '@/utils/dataFormats';
 
 // Components
 import TimelineItemAnimated from '../TimelineItemAnimated';
+import Button from '../Button';
 
 const PreviewModal = ({
   openModal,
@@ -38,8 +42,13 @@ const PreviewModal = ({
   musicLink,
 } : PreviewModalProps) => {
   const { planSelected } = useAppContext();
-  const { setYoutubeController } = usePlansModal({
+  const {
+    setYoutubeController,
+    handleRepeatTimeline,
+    handleToGift,
+  } = usePreviewModal({
     openModal,
+    setOpenModal,
     timelineData,
     musicLink
   });
@@ -71,6 +80,17 @@ const PreviewModal = ({
             />
           ))}
         </TimelineDataContent>
+
+        <TimelineActionsContent className="timeline-actions">
+          <Button variation="fill-blue" onClick={handleRepeatTimeline}>
+            <FaRepeat />
+            Replay
+          </Button>
+          <Button onClick={handleToGift}>
+            <FaGift />
+            Presentear
+          </Button>
+        </TimelineActionsContent>
 
         {(planSelected.music && musicLink) && (
           <YouTube

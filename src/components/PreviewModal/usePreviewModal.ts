@@ -20,19 +20,6 @@ const usePreviewModal = ({
   const gsapTimeline = useRef(gsap.timeline({ paused: true }));
   const [youtubeController, setYoutubeController] = useState<YouTubePlayer | null>();
 
-  useEffect(() => {
-    if (openModal) {
-      document.body.style.overflow = 'hidden';
-      gsapTimeline.current.play();
-    } else {
-      if (youtubeController) {
-        youtubeController.stopVideo();
-      }
-      gsapTimeline.current.pause().seek(0);
-      document.body.style.overflow = 'auto';
-    }
-  }, [openModal]);
-
   const initAnimation = () => {
     gsapTimeline.current.clear(true);
 
@@ -77,7 +64,7 @@ const usePreviewModal = ({
       translateX: '50%', duration: 1.3,
     }, ">-.6");
 
-    timelineData.forEach((eachItem, index) => {
+    timelineData.forEach((_, index) => {
       if (index !== 0) {
         gsapTimeline.current.to(`.timeline-item-${index}--heart`, {
           width: 50, height: 50, ease: "power4.out", duration: 1,
@@ -118,8 +105,18 @@ const usePreviewModal = ({
   }
 
   useEffect(() => {
-    initAnimation();
-  }, [timelineData, openModal]);
+    if (openModal) {
+      document.body.style.overflow = 'hidden';
+      initAnimation();
+      gsapTimeline.current.play();
+    } else {
+      if (youtubeController) {
+        youtubeController.stopVideo();
+      }
+      gsapTimeline.current.pause().seek(0);
+      document.body.style.overflow = 'auto';
+    }
+  }, [openModal]);
 
   const handleRepeatTimeline = () => {
     gsap.to('.timeline-actions', {

@@ -42,7 +42,7 @@ const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
 
 const useTimeline = () => {
   const [loading, setLoading] = useState(true);
-  const [timelineItemLoading, setTimelineItemLoading] = useState(true);
+  const [timelineItemLoading, setTimelineItemLoading] = useState(false);
   const [coupleNames, setCoupleNames] = useState<string>();
   const [timelineData, setTimelineData] = useState<Array<TimelineItemDataType>>(INITIAL_TIMELINE_DATA);
   const [memoriesAvailable, setMemoriesAvailable] = useState<Array<TimelineItemDataType>>(MemoryTypes);
@@ -251,7 +251,7 @@ const useTimeline = () => {
       console.error('Error saving timeline: ', error);
       setSubmitLoading(false);
     });
-  }
+  }  
 
   useEffect(() => {
     if(openPlansModal) {

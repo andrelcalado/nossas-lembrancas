@@ -58,7 +58,7 @@ const TimelineItemAnimated = ({
         </TimelineItemPhrase>
       )}
 
-      {type === 'photo' && (
+      {(type === 'photo' && photo) && (
         <TimelineItemPhotoContent className={className}>
           <TimelineItemPhoto>
             <img
@@ -67,9 +67,11 @@ const TimelineItemAnimated = ({
             />
           </TimelineItemPhoto>
 
-          <TimelineItemPhotoPhrase className={`${className}--phrase`}>
-            {desc}
-          </TimelineItemPhotoPhrase>          
+          {desc && (
+            <TimelineItemPhotoPhrase className={`${className}--phrase`}>
+              {desc}
+            </TimelineItemPhotoPhrase>          
+          )}
         </TimelineItemPhotoContent>
       )}
     </TimelineItemAnimatedContent>

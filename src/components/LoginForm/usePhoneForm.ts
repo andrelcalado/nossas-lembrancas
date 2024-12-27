@@ -126,6 +126,17 @@ const usePhoneForm = () => {
     setLoginMethod('email_pwd');
   }
 
+  const getErrorMessage = (code: string) : string => {
+    switch (code) {
+      case "auth/email-already-in-use":
+        return "Email já cadastrado";
+      case "auth/too-many-requests":
+        return "Muitas tentativas, tente novamente mais tarde";
+      default:
+        return "Erro inesperado, tente novamente mais tarde";
+    }
+  }
+
   const handleUserRegister = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     ev.preventDefault();
     setLoading(true);
@@ -138,7 +149,7 @@ const usePhoneForm = () => {
       router.replace('/linha-do-tempo');
       setLoading(false);
     }).catch((err) => {
-      console.log('registerErr', err);
+      setErrorLabel(getErrorMessage(err.code));
       setLoading(false);
     })
   }  

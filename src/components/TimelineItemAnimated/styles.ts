@@ -76,7 +76,8 @@ export const TimelineItemPhotoPhrase = styled.p`
   @media (max-width: 560px) {
     right: -20px;
     ${textSmMedium}
-    transform: translateY(20px);    
+    transform: translateY(20px);
+    max-width: 95%;
   }
 `
 

@@ -72,7 +72,10 @@ const Timeline = () => {
   return (
     <PageContent>
       {loading ? (
-        <Loading loading={loading} size="lg" />
+        <Loading
+          loading={loading}
+          type="screen"
+        />
       ) : (
         <>
           <PlansModal

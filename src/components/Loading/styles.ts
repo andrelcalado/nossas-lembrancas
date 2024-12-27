@@ -58,3 +58,21 @@ export const LoadingContent = styled.div<Pick<LoadingProps, 'size' | 'color'>>`
     }
   `}
 `
+
+export const LoadingScreen = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: ${theme.colors.gray[100]};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999999;
+
+  > img {
+    max-width: 80px;
+    animation: breathing .8s ease-in-out alternate-reverse infinite;
+  }
+`

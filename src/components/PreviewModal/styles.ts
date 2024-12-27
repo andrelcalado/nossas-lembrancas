@@ -10,7 +10,7 @@ import { ButtonComponent } from "../Button/styles"
 export const PreviewModalContent = styled.div<{ active: boolean }>`
   ${({ active }) => css`
     position: fixed;
-    height: 100svh;
+    height: 100%;
     top: 0;
     left: 0;
     width: 100%;

@@ -102,7 +102,7 @@ export const HeartTrail = styled.div`
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  bottom: 5px;
+  bottom: 16px;
 `
 
 export const TimelineAnimatedTrail = styled.div`
@@ -114,7 +114,7 @@ export const TimelineAnimatedTrail = styled.div`
   background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0px;
   position: absolute;
   left: -100%;
-  bottom: 25px;
+  bottom: 40px;
   animation: dashMovement 20s linear infinite;
 `
 

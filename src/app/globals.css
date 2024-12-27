@@ -73,6 +73,17 @@ html::-webkit-scrollbar-thumb {
   }
 }
 
+@keyframes breathing {
+  0% {
+    opacity: .5;
+    transform: scale(.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes dashMovement {
   to {
     background-position: 100% 0%, 0% 100%, 0% 0%, 100% 100%;

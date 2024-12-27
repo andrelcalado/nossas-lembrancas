@@ -197,13 +197,13 @@ export const HomeHeroSlider = styled(Swiper)`
     &::before {
       content: '';
       width: 150%;
-      height: 300px;
+      height: 600px;
       position: absolute;
       pointer-events: none;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #dfced7 85%);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, #ecc9da 90%, transparent 100%);
       transform: translateX(-50%);
-      z-index: 5;
-      bottom: -1px;
+      z-index: 3;
+      bottom: -60px;
       left: 50%;
     }
   }

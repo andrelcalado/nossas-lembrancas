@@ -79,6 +79,7 @@ export interface LoginFormProps {
 }
 
 export interface LoadingProps {
+  type?: 'screen' | 'element';
   loading: boolean;
   size?: ElementSizeENUM;
   color?: 'white' | 'primary';

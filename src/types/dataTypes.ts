@@ -35,6 +35,7 @@ export interface TimelineItemDataType {
   video?: string;
   disabled?: boolean;
   fileRef?: StorageReference;
+  mediaOrientation?: 'horizontal' | 'vertical';
 }
 
 export interface TimelineDataType {

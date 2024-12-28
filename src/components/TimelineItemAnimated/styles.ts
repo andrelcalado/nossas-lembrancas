@@ -1,5 +1,5 @@
 // Library
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // Theme
 import { theme } from "@/theme/globalStyles";
@@ -24,25 +24,28 @@ export const TimelineItemAnimatedContent = styled.div`
   width: 100%;
 `
 
-export const TimelineItemPhotoContent = styled.div`
-  width: 480px;
-  height: 580px;
+export const TimelineItemPhotoContent = styled.div<{ orientation: 'horizontal' | 'vertical' }>`
+${({ orientation }) => css`
+  width: ${orientation === 'vertical' ? '480px' : 'auto'};
+  height: ${orientation === 'vertical' ? '580px' : '320px'};
   background-color: ${theme.colors.white};
   border-radius: 4px;
   padding: 24px;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2);
   transform: translate(-50%, -50%) scale(1);
   max-height: calc(100svh - 110px);
-  max-width: 85svw;
+  max-width: ${orientation === 'vertical' ? '85svw' : 'unset'};
   position: absolute;
   opacity: 0;
   left: 50%;
   top: 43%;
+  ${orientation === 'horizontal' && 'aspect-ratio: 16 / 9;'}
 
   @media (max-width: 560px) {
     padding: 12px;
-    height: 500px;
+    height: ${orientation === 'vertical' ? '500px' : '198px'};
   }
+`}
 `
 
 export const TimelineItemPhoto = styled.div`

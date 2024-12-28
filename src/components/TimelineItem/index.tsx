@@ -5,6 +5,8 @@ import React from 'react'
 
 // Styles
 import {
+  PhotoOrientationButton,
+  PhotoOrientationList,
   TimelineImageItem,
   TimelineItemActions,
   TimelineItemAdd,
@@ -25,7 +27,7 @@ import Input from '../Input';
 import { DropdownPopup } from '../DropdownPopup';
 
 // Assets
-import { BsPlus } from "react-icons/bs";
+import { BsPlus, BsFileImage, BsImage } from "react-icons/bs";
 import { MdDelete, MdAddAPhoto } from "react-icons/md";
 import { FaUndoAlt } from "react-icons/fa";
 
@@ -36,6 +38,7 @@ import useTimelineItem from './useTimelineItem';
 import { TimelineItemProps } from '@/types/layoutTypes';
 import Button from '../Button';
 import Loading from '../Loading';
+import { theme } from '@/theme/globalStyles';
 
 const TimelineItem = ({
   type,
@@ -50,12 +53,14 @@ const TimelineItem = ({
   addItem,
   deleteItem,
   memoriesAvailable,
+  mediaOrientation = 'vertical',
+  setMediaOrientation,
   loading,
 }: TimelineItemProps) => {
   const {
     openAddPopup,
     setOpenAddPopup,
-    PopupContentRef,    
+    PopupContentRef
   } = useTimelineItem();
 
   const getPhraseLabel = () => {
@@ -128,7 +133,7 @@ const TimelineItem = ({
         {type === 'photo' && (
           <>
             {photo ? (
-              <TimelineImageItem>
+              <TimelineImageItem orientation={mediaOrientation}>
                 <HeroSliderCardContent>
                   <HeroSliderCardPhoto>
                     <img
@@ -136,6 +141,26 @@ const TimelineItem = ({
                       alt="Fotografia Casal"
                     />
                   </HeroSliderCardPhoto>
+                  <PhotoOrientationList>
+                    <PhotoOrientationButton
+                      active={mediaOrientation === 'vertical'}
+                      onClick={() => setMediaOrientation && setMediaOrientation('vertical')}
+                    >
+                      <BsFileImage
+                        size={20}
+                        color={theme.colors.white}
+                      />
+                    </PhotoOrientationButton>
+                    <PhotoOrientationButton
+                      active={mediaOrientation === 'horizontal'}
+                      onClick={() => setMediaOrientation && setMediaOrientation('horizontal')}
+                    >
+                      <BsImage
+                        size={20}
+                        color={theme.colors.white}
+                      />
+                    </PhotoOrientationButton>
+                  </PhotoOrientationList>
                 </HeroSliderCardContent>
 
                 <Input

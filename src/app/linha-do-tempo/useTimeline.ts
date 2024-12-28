@@ -36,7 +36,8 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
   {
     type: 'initial-phrase',
-    desc: ''
+    desc: '',
+    mediaOrientation: 'vertical'
   }
 ];
 
@@ -61,7 +62,7 @@ const useTimeline = () => {
   } = useAppContext();
 
   const handleSetTimelineData = async (
-    field: 'desc' | 'date' | 'photo' | 'video',
+    field: 'desc' | 'date' | 'photo' | 'video' | 'mediaOrientation',
     index: number,
     value: string | File | Blob
   ) => {

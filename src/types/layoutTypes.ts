@@ -102,6 +102,8 @@ export interface TimelineItemProps {
   addItem?: (item: TimelineItemDataType) => void;
   deleteItem?: (index: number) => void;
   memoriesAvailable?: Array<TimelineItemDataType>;
+  mediaOrientation?: 'horizontal' | 'vertical';
+  setMediaOrientation?: (value: 'horizontal' | 'vertical') => void;
   loading?: boolean;
 }
 
@@ -112,6 +114,7 @@ export interface TimelineItemAnimatedProps {
   desc?: string;
   className?: string;
   date?: string;
+  mediaOrientation?: 'horizontal' | 'vertical';
 }
 
 export interface PlansModalProps {

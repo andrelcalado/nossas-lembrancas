@@ -31,6 +31,7 @@ const TimelineItemAnimated = ({
   desc,
   date,
   photo,
+  mediaOrientation =  'vertical',
   // video,
 } : TimelineItemAnimatedProps) => {
   return (
@@ -59,7 +60,7 @@ const TimelineItemAnimated = ({
       )}
 
       {(type === 'photo' && photo) && (
-        <TimelineItemPhotoContent className={className}>
+        <TimelineItemPhotoContent orientation={mediaOrientation} className={className}>
           <TimelineItemPhoto>
             <img
               src={typeof photo === 'string' ? photo :  URL.createObjectURL(photo as Blob)}

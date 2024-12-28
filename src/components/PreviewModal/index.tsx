@@ -74,7 +74,8 @@ const PreviewModal = ({
               desc={eachData.desc}
               date={eachData.date}
               video={eachData.video}
-              photo={eachData.photo}              
+              photo={eachData.photo}
+              mediaOrientation={eachData.mediaOrientation}
             />
           ))}
         </TimelineDataContent>

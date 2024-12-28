@@ -76,7 +76,7 @@ const usePreviewModal = ({
           opacity: 1, filter: 'blur(0)', duration: 3,
         }, "<+.5");
         gsapTimeline.current.to(`.timeline-item-${index}--phrase`, {
-          opacity: 1, bottom: '40px', duration: 1,
+          opacity: 1, bottom: '-20px', duration: 1,
         }, "<+1");
         gsapTimeline.current.to(`.timeline-item-${index}`, {
           transform: 'translate(-50% -50%)', scale: 1, ease: "power4.out", duration: 20,

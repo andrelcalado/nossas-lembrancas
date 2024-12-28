@@ -146,6 +146,8 @@ const Timeline = () => {
                   type={item.type}
                   desc={item.desc}
                   photo={item.photo}
+                  mediaOrientation={item.mediaOrientation}
+                  setMediaOrientation={(value) => handleSetTimelineData('mediaOrientation', index, value)}
                   setPhoto={(files) => handleSetTimelineData('photo', index, files as File)}
                   setDesc={(value) => handleSetTimelineData('desc', index, value)}
                   date={item.date}

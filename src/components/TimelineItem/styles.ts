@@ -10,7 +10,7 @@ import {
 } from "@/theme/typography"
 
 // Libraries
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 // Styles
 import { ButtonComponent } from "../Button/styles"
@@ -239,7 +239,8 @@ export const TimelineItemImageUpload = styled.label`
   }
 `
 
-export const TimelineImageItem = styled.div`
+export const TimelineImageItem = styled.div<{ orientation?: 'horizontal' | 'vertical'}>`
+${({ orientation = 'vertical' }) => css`
   max-width: 500px;
   width: 100%;
   display: flex;
@@ -253,7 +254,7 @@ export const TimelineImageItem = styled.div`
   position: relative;
 
   ${HeroSliderCardContent} {
-    height: 300px;
+    height: ${orientation === 'vertical' ? '300px' : '127px'};
     width: 220px;
     padding: 4px;
   }
@@ -271,6 +272,7 @@ export const TimelineImageItem = styled.div`
     color: ${theme.colors.primary[500]};
     margin-top: 4px;
   }
+`}
 `
 
 export const TimelineItemActions = styled.div`
@@ -302,4 +304,28 @@ export const TimelineItemActions = styled.div`
     position: unset;
     transform: unset;
   }
+`
+
+export const PhotoOrientationList = styled.div`
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  right: -37px;
+`
+
+export const PhotoOrientationButton = styled.button<{ active: boolean }>`
+  ${({ active }) => css`
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${active ? theme.colors.primary[500] : theme.colors.gray[300]};
+    border-radius: 0 8px 8px 0;
+    height: 37px;
+    width: 37px;
+
+    &:hover {
+      background-color: ${active ? theme.colors.primary[500] : theme.colors.gray[400]};
+    }
+  `}
 `

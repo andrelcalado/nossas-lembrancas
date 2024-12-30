@@ -204,6 +204,7 @@ const TimelineItem = ({
                     <input
                       type="file"
                       onChange={(event) => setPhoto && setPhoto(event.target.files?.[0])}
+                      accept='image/*'
                     />
 
                     <Button onClick={deleteItem}>

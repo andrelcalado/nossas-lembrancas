@@ -6,6 +6,7 @@ import { theme } from "@/theme/globalStyles"
 // Libraries
 import styled, { css } from "styled-components"
 import { ButtonComponent } from "../Button/styles"
+import { textX1Bold } from "@/theme/typography"
 
 export const PreviewModalContent = styled.div<{ active: boolean }>`
   ${({ active }) => css`
@@ -27,6 +28,7 @@ export const PreviewModalWrapper = styled.div`
   position: relative;
   width: 100%;
   background-color: ${theme.colors.primary[200]};
+  overflow: hidden;
   height: 100%;
   z-index: 2;
 
@@ -55,4 +57,29 @@ export const TimelineActionsContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+`
+
+export const PreviewLabel = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(45deg);
+  pointer-events: none;
+  opacity: .1;
+  z-index: 1;
+  gap: 6px;
+
+  > span {
+    ${textX1Bold}
+    color: ${theme.colors.white};
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
 `

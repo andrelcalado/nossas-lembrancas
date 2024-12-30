@@ -7,6 +7,7 @@ import React from 'react'
 import { CloseButton, ModalOverlay } from '../LoginForm/styles';
 import { TimelineAnimatedTrail } from '../TimelineItemAnimated/styles';
 import {
+  PreviewLabel,
   PreviewModalContent,
   PreviewModalWrapper,
   TimelineActionsContent,
@@ -25,6 +26,9 @@ import { CgClose } from "react-icons/cg";
 import { FaRepeat } from "react-icons/fa6";
 import { FaGift } from "react-icons/fa";
 
+// Constants
+import { previewLabelContent } from '@/constants/dataArray';
+
 // Types
 import { PreviewModalProps } from '@/types/layoutTypes';
 
@@ -41,6 +45,8 @@ const PreviewModal = ({
   timelineData,
   musicLink,
   handleToGift,
+  watermark = false,
+  hiddenGiftButton = false,
 } : PreviewModalProps) => {
   const { planSelected } = useAppContext();
   const {
@@ -62,6 +68,12 @@ const PreviewModal = ({
         <CloseButton onClick={() => setOpenModal(false)}>
           <CgClose />
         </CloseButton>
+
+        {watermark && (
+          <PreviewLabel>
+            {previewLabelContent.map(eachLabel => eachLabel)}
+          </PreviewLabel>
+        )}
 
         <TimelineDataContent>
           <TimelineAnimatedTrail className="timeline-track" />
@@ -85,10 +97,13 @@ const PreviewModal = ({
             <FaRepeat />
             Replay
           </Button>
-          <Button onClick={handleToGift}>
-            <FaGift />
-            Presentear
-          </Button>
+
+          {!hiddenGiftButton && (
+            <Button onClick={handleToGift}>
+              <FaGift />
+              Presentear
+            </Button>
+          )}
         </TimelineActionsContent>
 
         {(planSelected.music && musicLink) && (

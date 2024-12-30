@@ -123,6 +123,8 @@ export interface PlansModalProps {
 }
 
 export interface PreviewModalProps {
+  hiddenGiftButton?: boolean;
+  watermark?: boolean;
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   timelineData: Array<TimelineItemDataType>;

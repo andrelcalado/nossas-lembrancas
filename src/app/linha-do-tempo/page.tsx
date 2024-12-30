@@ -86,6 +86,7 @@ const Timeline = () => {
           <PaymentMethodsModal />
 
           <PreviewModal
+            watermark={true}
             timelineData={timelineData}
             musicLink={musicLink}
             openModal={openPreviewModal}

@@ -83,7 +83,7 @@ const Timeline = () => {
             setPlansModal={setOpenPlansModal}
           />
 
-          <PaymentMethodsModal />
+          <PaymentMethodsModal couplePath={timelineID} />
 
           <PreviewModal
             watermark={true}

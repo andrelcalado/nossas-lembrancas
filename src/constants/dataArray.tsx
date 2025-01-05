@@ -23,6 +23,7 @@ import {
   FooterSocialMediaType,
   HeroSliderDataType,
   IndicatorItemDataType,
+  PlanDataENUM,
   PlanResourceDataType,
   TimelineItemDataType,
 } from '@/types/dataTypes'
@@ -205,3 +206,9 @@ export const previewLabelContent: Array<JSX.Element> = [
   <span key={39}>{'Pré-visualização '.repeat(10)}</span>,
   <span key={40}>{'Pré-visualização '.repeat(10)}</span>,
 ]
+
+export const pricesID  : Record<PlanDataENUM, string | undefined> = {
+  "Essencial" : process.env.STRIPE_PLAN_1_PRICEID,
+  "Especial" : process.env.STRIPE_PLAN_2_PRICEID,
+  "Inesquecível" : process.env.STRIPE_PLAN_3_PRICEID
+}

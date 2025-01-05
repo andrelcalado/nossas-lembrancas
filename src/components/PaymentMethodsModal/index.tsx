@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 // Hooks
 import { useAppContext } from '../ProvidersWrapper'
+import usePaymentMethodsModal from './usePaymentMethodsModal';
 
 // Styles
 import { CloseButton, ModalOverlay } from '../LoginForm/styles';
@@ -22,11 +23,19 @@ import PIXLogo from '@/assets/icon/logo-pix.svg';
 import { IoIosCard } from "react-icons/io";
 import { CgClose } from "react-icons/cg";
 
+// Types
+import { PaymentMethodsModalProps } from '@/types/layoutTypes';
+
 // Components
 import PlanItem from '../PlanItem';
 import Button from '../Button';
 
-const PaymentMethodsModal = () => {
+const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
+  const {
+    isCreatingCheckout,
+    handleBuyByCard,
+  } = usePaymentMethodsModal();
+
   const {
     paymentMethodsModal,
     setPaymentMethodsModal,
@@ -59,12 +68,19 @@ const PaymentMethodsModal = () => {
 
           <PaymentMethods>
             <h3>Meios de Presentear</h3>
-            <Button variation="fill-blue">
+            <Button
+              variation="fill-blue"
+              loading={isCreatingCheckout}
+            >
               <Image src={PIXLogo} alt="Logo PIX" />
 
               <span>PIX</span>
             </Button>
-            <Button variation="fill-blue">
+            <Button
+              onClick={async () => await handleBuyByCard(couplePath, planSelected.plan)}
+              loading={isCreatingCheckout}
+              variation="fill-blue"
+            >
               <IoIosCard />
               <span>Cartão de Crédito</span>
             </Button>

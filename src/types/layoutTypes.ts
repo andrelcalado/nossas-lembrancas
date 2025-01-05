@@ -132,6 +132,10 @@ export interface PreviewModalProps {
   handleToGift: ((el: any) => void | React.MouseEventHandler<HTMLButtonElement> | Promise<void>) | undefined;
 }
 
+export interface PaymentMethodsModalProps {
+  couplePath?: string;
+}
+
 export interface PlanItemProps {
   eachPlan: PlanResourceDataType;
   popular?: boolean;

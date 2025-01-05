@@ -148,6 +148,8 @@ const useTimeline = () => {
     const hash = uuidv4();
     const urlSlug = `${String(coupleNames).toLowerCase().replace(/\s+/g, '-')}-${hash}`;
 
+    setTimelineID(urlSlug);
+
     const updatedTimelineData = await Promise.all(timelineData.map(async (item, index) => {
       if (item.photo || item.video) {
         const fileURL = `timelines/${uid}/${urlSlug}/media-${index}`;

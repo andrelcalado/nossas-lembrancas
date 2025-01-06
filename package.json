@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
+    "@mercadopago/sdk-js": "^0.0.3",
     "@stripe/stripe-js": "^5.4.0",
     "browser-image-compression": "^2.0.2",
     "firebase": "^10.13.2",
     "gsap": "^3.12.5",
+    "mercadopago": "^2.2.0",
     "next": "14.2.13",
     "react": "^18",
     "react-dom": "^18",

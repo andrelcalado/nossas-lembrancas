@@ -12,6 +12,12 @@ import { timelinesDB } from "@/auth/firebase";
 
 const secret: string | undefined = process.env.STRIPE_WEBHOOK_SECRET;
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export async function POST(req: Request) {
   try {
     const rawBody = await req.arrayBuffer();

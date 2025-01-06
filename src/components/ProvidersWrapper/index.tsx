@@ -11,7 +11,6 @@ import { useRouter } from 'next/navigation'
 
 // Libraries
 import { onAuthStateChanged, signOut, User } from 'firebase/auth'
-import { Payment, MercadoPagoConfig } from 'mercadopago';
 
 // Types
 import { PlanResourceDataType, ProvidersWrapperContext } from '@/types/dataTypes'
@@ -48,9 +47,6 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
   const [loading, setLoading] = useState<boolean>(false);
   const [planSelected, setPlanSelected] = useState<PlanResourceDataType>(PlansData[0]);
 
-  const client = new MercadoPagoConfig({ accessToken: process.env.NEXT_PUBLIC_PUBLIC_KEY_MERCADOPAGO as string });
-  const payment = new Payment(client);
-
   const handleUserSignOut = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     ev.preventDefault();
     setLoading(true);
@@ -72,24 +68,6 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
         router.replace('/');
       }
     });
-
-    payment.create({
-      body: { 
-          transaction_amount: 37.99,
-          description: 'Testando o description',
-          payment_method_id: "pix",
-              payer: {
-                email: 'andrelcalad@gmail.com',
-                identification: {
-                  type: "CPF",
-                  number: "61784738344",
-                }
-              }
-            },
-      requestOptions: { idempotencyKey: '<SOME_UNIQUE_VALUE>' }
-    })
-    .then((result) => console.log('ó o PIX', result))
-    .catch((error) => console.log('erro no PIX', error));
   
     return () => unsubscribe();
   }, [])

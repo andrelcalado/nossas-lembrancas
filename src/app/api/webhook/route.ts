@@ -14,7 +14,8 @@ const secret: string | undefined = process.env.STRIPE_WEBHOOK_SECRET;
 
 export async function POST(req: Request) {
   try {
-    const body: string = await req.text();
+    const rawBody = await req.arrayBuffer();
+    const body = Buffer.from(rawBody);
     const signature: string | null = headers().get("stripe-signature");
 
     if (!secret || !signature) {
@@ -95,6 +96,9 @@ export async function POST(req: Request) {
       case "customer.subscription.deleted":
         // O cliente cancelou o plano :(
         break;
+
+      default:
+        console.log(`Evento não tratado: ${event.type}`);
     }
 
     return NextResponse.json({ result: event, ok: true });

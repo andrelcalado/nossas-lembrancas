@@ -1,29 +1,31 @@
 // Core
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 // Libraries
 import stripe from "../../../../lib/stripe";
-import { buffer } from 'micro';
 import Stripe from "stripe";
 import { doc, updateDoc } from "firebase/firestore";
 
 // Auth
 import { timelinesDB } from "@/auth/firebase";
-import { IncomingMessage } from "http";
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const secret: string | undefined = process.env.STRIPE_WEBHOOK_SECRET;
 
-export async function POST(req: IncomingMessage) {
-  let event: Stripe.Event;
-  const rawBody = await buffer(req);
-  const sig = req.headers['stripe-signature']!;
-
+export async function POST(req: Request) {
   try {
-    if (!secret) {
+    const rawBody = await req.arrayBuffer();
+    const body = Buffer.from(rawBody);
+    const signature: string | null = headers().get("stripe-signature");
+
+    if (!secret || !signature) {
       throw new Error("Missing secret or signature");
     }
 
-    event = stripe.webhooks.constructEvent(rawBody.toString(), sig, secret);
+    const event: Stripe.Event = stripe.webhooks.constructEvent(body, signature, secret);
 
     switch (event.type) {
       case "checkout.session.completed":

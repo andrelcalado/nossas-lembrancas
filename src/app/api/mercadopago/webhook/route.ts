@@ -43,11 +43,11 @@ export async function POST(req: NextRequest) {
           console.log('Pagamento aprovado:', paymentId);
           console.log('Dados personalizados:', metadata);
 
-          return NextResponse.redirect(`/${metadata.couplePath}`);
+          return NextResponse.redirect(`${req.nextUrl.origin}/${metadata.couplePath}`);
         }
 
         console.log('Status do pagamento:', paymentData.status);
-        console.log('Dados do pagamento:', paymentData.status);
+        console.log('Dados do pagamento:', paymentData);
         break;
       default:
         console.log(`Evento não tratado: ${event.type}`);

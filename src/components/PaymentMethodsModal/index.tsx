@@ -72,7 +72,7 @@ const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
             <Button
               variation="fill-blue"
               loading={isCreatingCheckout}
-              onClick={async () => await handleBuyByPIX()}
+              onClick={async () => await handleBuyByPIX(couplePath, planSelected.plan)}
             >
               <Image src={PIXLogo} alt="Logo PIX" />
 

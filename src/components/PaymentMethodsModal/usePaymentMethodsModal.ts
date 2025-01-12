@@ -51,7 +51,7 @@ export default function usePaymentMethodsModal() {
     }
   }
 
-  async function handleBuyByPIX() {
+  async function handleBuyByPIX(couplePath: string | undefined, planName : PlanDataENUM) {
     setIsCreatingCheckout(true);
 
     try {
@@ -65,6 +65,8 @@ export default function usePaymentMethodsModal() {
           description: `Nossas Lembranças - Plano ${planSelected.plan}`,
           payment_method_id: "pix",
           email: "teste@gmail.com",
+          couplePath,
+          planName
         }),
       });
   

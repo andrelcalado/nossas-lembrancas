@@ -19,26 +19,28 @@ export async function POST(req: NextRequest) {
 
     const event = JSON.parse(body);
 
-    if (event.type === 'payment' && event.action === 'payment.created') {
-      // Processa o evento de pagamento
-      console.log('Evento de pagamento recebido:', event.data.id);
-      
-      // Aqui você pode buscar os detalhes do pagamento na API do Mercado Pago
-      const paymentResponse = await fetch(
-        `https://api.mercadopago.com/v1/payments/${event.data.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
+    switch (event.type) {
+      case 'payment':
+        if (event.action === 'payment.created') {
+          console.log('Evento de pagamento recebido:', event.data.id);
+          const paymentResponse = await fetch(
+            `https://api.mercadopago.com/v1/payments/${event.data.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${ACCESS_TOKEN}`,
+              },
+            }
+          );
+
+          const paymentData = await paymentResponse.json();
+
+          console.log('Dados do pagamento:', paymentData);
         }
-      );
-
-      const paymentData = await paymentResponse.json();
-
-      console.log('Dados do pagamento:', paymentData);
+        break;
+      default:
+        console.log(`Evento não tratado: ${event.type}`);
     }
 
-    // Responde com sucesso
     return NextResponse.json({ message: 'Event processed successfully' });
   } catch (error) {
     console.error('Erro no Webhook:', error);

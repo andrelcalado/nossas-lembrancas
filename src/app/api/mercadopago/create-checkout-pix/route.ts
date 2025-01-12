@@ -10,20 +10,31 @@ export async function POST(req: Request) {
     const client = new MercadoPagoConfig({ accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN as string });
     const payment = new Payment(client);
 
-    const { transaction_amount, description, payment_method_id, email } = body;
+    const {
+      transaction_amount,
+      description,
+      payment_method_id,
+      email,
+      couplePath,
+      planName,      
+    } = body;
 
     const generateIdempotencyKey = () => `${Date.now()}-${Math.random().toString(36).substring(2, 15)}`;
 
     let result;
     await payment.create({
       body: { 
-          transaction_amount: transaction_amount,
-          description: description,
-          payment_method_id: payment_method_id,
-              payer: {
-                email: email,
-              }
+        transaction_amount: transaction_amount,
+        description: description,
+        payment_method_id: payment_method_id,
+            payer: {
+              email: email,
             },
+            metadata: {
+              couplePath: couplePath,
+              planName: planName,
+            }
+          },
       requestOptions: { idempotencyKey: generateIdempotencyKey() }
     })
     .then((res) => {

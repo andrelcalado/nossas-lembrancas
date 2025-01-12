@@ -19,23 +19,35 @@ export async function POST(req: NextRequest) {
 
     const event = JSON.parse(body);
 
+    console.log('Evento recebido:', event.type);
+
     switch (event.type) {
       case 'payment':
-        if (event.action === 'payment.created') {
-          console.log('Evento de pagamento recebido:', event.data.id);
-          const paymentResponse = await fetch(
-            `https://api.mercadopago.com/v1/payments/${event.data.id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${ACCESS_TOKEN}`,
-              },
-            }
-          );
+        const paymentId = event.data.id;
 
-          const paymentData = await paymentResponse.json();
+        // Buscar detalhes do pagamento
+        const response = await fetch(
+          `https://api.mercadopago.com/v1/payments/${paymentId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${ACCESS_TOKEN}`,
+            },
+          }
+        );
 
-          console.log('Dados do pagamento:', paymentData);
+        const paymentData = await response.json();
+
+        if (paymentData.status === 'approved' && paymentData.status_detail === 'accredited') {
+          const { metadata } = paymentData;
+
+          console.log('Pagamento aprovado:', paymentId);
+          console.log('Dados personalizados:', metadata);
+
+          return NextResponse.redirect(`/${metadata.couplePath}`);
         }
+
+        console.log('Status do pagamento:', paymentData.status);
+        console.log('Dados do pagamento:', paymentData.status);
         break;
       default:
         console.log(`Evento não tratado: ${event.type}`);

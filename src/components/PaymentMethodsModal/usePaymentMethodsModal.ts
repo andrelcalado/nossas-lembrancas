@@ -55,7 +55,7 @@ export default function usePaymentMethodsModal() {
     setIsCreatingCheckout(true);
 
     try {
-      const response = await fetch("/api/create-checkout-pix", {
+      const response = await fetch("/api/mercadopago/create-checkout-pix", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

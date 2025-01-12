@@ -1,90 +1,47 @@
-// Core
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
+import crypto from 'crypto';
 
-// Libraries
-import { headers } from "next/headers";
-import { Payment, MercadoPagoConfig } from "mercadopago";
-import crypto from "crypto";
+const SECRET_SIGNATURE = process.env.MERCADOPAGO_SECRET_SIGNATURE || '';
+const ACCESS_TOKEN = process.env.MERCADOPAGO_ACCESS_TOKEN || '';
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
-    const body = await req.text(); // Captura o corpo da requisição como texto bruto.
-    const h = headers();
+    const body = await req.text();
 
-    // Obter a assinatura secreta e o cabeçalho de assinatura
-    const secret = process.env.MERCADOPAGO_WEBHOOK_SECRET;
-    const mpSignature = h.get("x-mp-signature");
-
-    if (!secret || !mpSignature) {
-      console.error("Faltando assinatura ou chave secreta");
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    // Validação da assinatura
     const hash = crypto
-      .createHmac("sha256", secret)
+      .createHmac('sha256', SECRET_SIGNATURE)
       .update(body)
-      .digest("hex");
+      .digest('hex');
 
-    if (hash !== mpSignature) {
-      console.error("Assinatura inválida");
-      return NextResponse.json({ error: "Invalid signature" }, { status: 403 });
+    if (!hash) {
+      return NextResponse.json({ message: 'Invalid signature' }, { status: 401 });
     }
 
-    // Parse do body (após validação)
-    const parsedBody = JSON.parse(body);
+    const event = JSON.parse(body);
 
-    console.log("Webhook recebido e validado:", parsedBody);
+    if (event.type === 'payment' && event.action === 'payment.created') {
+      // Processa o evento de pagamento
+      console.log('Evento de pagamento recebido:', event.data.id);
+      
+      // Aqui você pode buscar os detalhes do pagamento na API do Mercado Pago
+      const paymentResponse = await fetch(
+        `https://api.mercadopago.com/v1/payments/${event.data.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+          },
+        }
+      );
 
-    // Validar tipo de evento
-    if (!parsedBody || !parsedBody.type || !parsedBody.data || !parsedBody.data.id) {
-      console.error("Payload do webhook inválido");
-      return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+      const paymentData = await paymentResponse.json();
+
+      console.log('Dados do pagamento:', paymentData);
     }
 
-    const { type, data } = parsedBody;
-
-    if (type === "payment") {
-      const client = new MercadoPagoConfig({
-        accessToken: process.env.NEXT_PUBLIC_PUBLIC_KEY_MERCADOPAGO as string,
-      });
-      const payment = new Payment(client);
-
-      // Buscar detalhes do pagamento
-      const paymentDetails = await payment.get({ id: data.id });
-      console.log("Detalhes do pagamento:", paymentDetails);
-
-      // Processar status do pagamento
-      switch (paymentDetails.status) {
-        case "approved":
-          console.log("Pagamento aprovado:", paymentDetails);
-          // Atualize o status no banco de dados
-          break;
-
-        case "pending":
-          console.log("Pagamento pendente:", paymentDetails);
-          // Atualize o status no banco de dados
-          break;
-
-        case "rejected":
-          console.log("Pagamento rejeitado:", paymentDetails);
-          // Atualize o status no banco de dados
-          break;
-
-        default:
-          console.warn("Status de pagamento não tratado:", paymentDetails.status);
-      }
-    } else {
-      console.warn("Tipo de evento não tratado:", type);
-    }
-
-    // Retorna sucesso para o Mercado Pago
-    return NextResponse.json({ received: true }, { status: 200 });
+    // Responde com sucesso
+    return NextResponse.json({ message: 'Event processed successfully' });
   } catch (error) {
-    console.error("Erro no Webhook:", error);
-    return NextResponse.json(
-      { error: "Erro interno no servidor" },
-      { status: 500 }
-    );
+    console.error('Erro no Webhook:', error);
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }

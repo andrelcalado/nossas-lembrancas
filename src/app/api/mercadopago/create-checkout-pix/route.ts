@@ -7,7 +7,7 @@ import { Payment, MercadoPagoConfig } from 'mercadopago';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const client = new MercadoPagoConfig({ accessToken: process.env.NEXT_PUBLIC_PUBLIC_KEY_MERCADOPAGO as string });
+    const client = new MercadoPagoConfig({ accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN as string });
     const payment = new Payment(client);
 
     const { transaction_amount, description, payment_method_id, email } = body;

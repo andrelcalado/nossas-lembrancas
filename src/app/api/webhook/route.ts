@@ -27,6 +27,8 @@ export async function POST(req: Request) {
 
     const event: Stripe.Event = stripe.webhooks.constructEvent(body, signature, secret);
 
+    console.log("Evento: ", event.type);
+
     switch (event.type) {
       case "checkout.session.completed":
         if (event.data.object.payment_status === "paid") {

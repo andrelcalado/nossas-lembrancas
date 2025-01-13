@@ -49,16 +49,16 @@ export async function POST(req: NextRequest) {
           console.log('Pagamento aprovado:', paymentId);
           console.log('Dados personalizados:', metadata);
 
-          if (!metadata.couplePath || !metadata.planName) {
+          if (!metadata.couple_path || !metadata.plan_name) {
             console.error("Erro: `couplePath` ou `planName` não estão definidos.");
             return;
           }
 
-          await updateDoc(doc(timelinesDB, "timelines", metadata.couplePath), {
-            planPaid : metadata.planName,
+          await updateDoc(doc(timelinesDB, "timelines", metadata.couple_path), {
+            planPaid : metadata.plan_name,
             planPaidAt: new Date(),
           }).then(() => {
-            console.log(metadata.couplePath + ' timeline updated');
+            console.log(metadata.couple_path + ' timeline updated');
           }).catch((error) => {
             console.error('Error saving timeline: ', error);
           });

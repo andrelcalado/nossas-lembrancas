@@ -51,27 +51,6 @@ export async function POST(req: Request) {
 
           console.log("Payment success by card", couplePath);
         }
-
-        if (
-          event.data.object.payment_status === "unpaid" &&
-          event.data.object.payment_intent
-        ) {
-          // Pagamento por boleto
-          const paymentIntent = await stripe.paymentIntents.retrieve(
-            event.data.object.payment_intent.toString()
-          );
-
-          const hostedVoucherUrl =
-            paymentIntent.next_action?.boleto_display_details
-              ?.hosted_voucher_url;
-
-          if (hostedVoucherUrl) {
-            // O cliente gerou um boleto, manda um email pra ele
-            const userEmail = event.data.object.customer_details?.email;
-            console.log("gerou o boleto e o link é", hostedVoucherUrl);
-            console.log('userEmail', userEmail);
-          }
-        }
         break;
 
       case "checkout.session.expired":

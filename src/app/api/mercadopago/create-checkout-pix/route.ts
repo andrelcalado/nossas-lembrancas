@@ -60,6 +60,7 @@ export async function POST(req: Request) {
         auto_return: "approved",
         back_urls: {
           success: `${req.headers.get("origin")}/${encodeURIComponent(couplePath)}`,
+          pending: `${req.headers.get("origin")}/${encodeURIComponent(couplePath)}`,
           failure: `${req.headers.get("origin")}/linha-do-tempo`,
         },
       },

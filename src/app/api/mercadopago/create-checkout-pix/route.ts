@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const preference = new Preference(client);
 
     const {
-      // transaction_amount,
+      transaction_amount,
       description,
       email,
       couplePath,
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
             description: description,
             title: planName,
             quantity: 1,
-            unit_price: .05,
+            unit_price: transaction_amount,
             currency_id: "BRL",
           },
         ],

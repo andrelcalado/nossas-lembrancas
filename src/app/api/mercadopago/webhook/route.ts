@@ -25,7 +25,6 @@ export async function POST(req: NextRequest) {
       case 'payment':
         const paymentId = event.data.id;
 
-        // Buscar detalhes do pagamento
         const response = await fetch(
           `https://api.mercadopago.com/v1/payments/${paymentId}`,
           {
@@ -42,8 +41,6 @@ export async function POST(req: NextRequest) {
 
           console.log('Pagamento aprovado:', paymentId);
           console.log('Dados personalizados:', metadata);
-
-          return NextResponse.redirect(`${req.nextUrl.origin}/${metadata.couplePath}`);
         }
 
         console.log('Status do pagamento:', paymentData.status);

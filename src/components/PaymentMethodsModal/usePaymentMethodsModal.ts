@@ -11,9 +11,11 @@ import { useAppContext } from "../ProvidersWrapper";
 
 // Types
 import { PlanDataENUM } from "@/types/dataTypes";
+import { useRouter } from "next/navigation";
 
 export default function usePaymentMethodsModal() {
   const [isCreatingCheckout, setIsCreatingCheckout] = useState(false);
+  const router = useRouter();
 
   const { planSelected } = useAppContext();
 
@@ -53,6 +55,7 @@ export default function usePaymentMethodsModal() {
 
   async function handleBuyByPIX(couplePath: string | undefined, planName : PlanDataENUM) {
     setIsCreatingCheckout(true);
+    
 
     try {
       const response = await fetch("/api/mercadopago/create-checkout-pix", {
@@ -63,7 +66,6 @@ export default function usePaymentMethodsModal() {
         body: JSON.stringify({
           transaction_amount: planSelected.price,
           description: `Nossas Lembranças - Plano ${planSelected.plan}`,
-          payment_method_id: "pix",
           email: "teste@gmail.com",
           couplePath,
           planName
@@ -71,8 +73,10 @@ export default function usePaymentMethodsModal() {
       });
   
       const data = await response.json();
+
       if (response.ok) {
         console.log("Pagamento criado:", data);
+        router.push(data.initPoint);
         setIsCreatingCheckout(false);
       } else {
         console.error("Erro ao criar pagamento:", data.error);

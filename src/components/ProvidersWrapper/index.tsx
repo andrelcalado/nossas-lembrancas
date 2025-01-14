@@ -63,8 +63,11 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
       if (user) {
         setUser(user);
         console.log('user', user);
-        router.replace('/linha-do-tempo');
-      } else {
+
+        if (window.location.pathname === '/' || window.location.pathname === '/linha-do-tempo') {
+          router.replace('/linha-do-tempo');
+        }
+      } else if (window.location.pathname === '/' || window.location.pathname === '/linha-do-tempo') {
         router.replace('/');
       }
     });

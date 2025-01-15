@@ -14,6 +14,7 @@ import { onAuthStateChanged, signOut, User } from 'firebase/auth'
 
 // Types
 import { PlanResourceDataType, ProvidersWrapperContext } from '@/types/dataTypes'
+import { Timestamp } from 'firebase/firestore'
 
 // Constants
 import { PlansData } from '@/constants/dataArray'
@@ -33,6 +34,10 @@ const INITIAL_CONTEXT: ProvidersWrapperContext = {
   loading: false,
   planSelected: PlansData[0],
   setPlanSelected: () => null,
+  planPaid: null,
+  setPlanPaid: () => null,
+  planPaidAt: null,
+  setPlanPaidAt: () => null,
 }
 
 const AppContext = createContext<ProvidersWrapperContext>(INITIAL_CONTEXT)
@@ -46,6 +51,8 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
   const [loginMode, setLoginMode] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [planSelected, setPlanSelected] = useState<PlanResourceDataType>(PlansData[0]);
+  const [planPaid, setPlanPaid] = useState<string | null>(null);
+  const [planPaidAt, setPlanPaidAt] = useState<Timestamp | null>(null);
 
   const handleUserSignOut = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     ev.preventDefault();
@@ -93,6 +100,10 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
         setPlanSelected,
         paymentMethodsModal,
         setPaymentMethodsModal,
+        planPaid,
+        setPlanPaid,
+        planPaidAt,
+        setPlanPaidAt,
       }}
     >
       {children}

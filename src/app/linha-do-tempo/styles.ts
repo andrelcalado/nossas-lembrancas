@@ -181,6 +181,18 @@ export const IndicatorsContent = styled.div`
     margin-top: -4px;
     letter-spacing: -.1px;
     color: ${theme.colors.primary[500]};
+
+    strong {
+      font-weight: 400;
+      display: block;
+      text-align: center;
+      padding: 1px 5px;
+      width: 100%;
+      border-radius: 4px;
+      background: ${theme.colors.blue[500]};
+      color: ${theme.colors.white};
+      margin-bottom: 1px;
+    }
   }
   
   &.actions {

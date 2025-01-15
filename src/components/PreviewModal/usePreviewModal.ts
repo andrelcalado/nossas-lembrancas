@@ -7,6 +7,9 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
+// Hooks
+import { useAppContext } from '../ProvidersWrapper';
+
 // Types
 import { PreviewModalProps } from '@/types/layoutTypes'
 import { YouTubePlayer } from 'react-youtube'
@@ -19,6 +22,7 @@ const usePreviewModal = ({
 }: Pick<PreviewModalProps, 'openModal' | 'timelineData'>) => {
   const gsapTimeline = useRef(gsap.timeline({ paused: true }));
   const [youtubeController, setYoutubeController] = useState<YouTubePlayer | null>();
+  const { planSelected } = useAppContext();
 
   const initAnimation = () => {
     gsapTimeline.current.clear(true);
@@ -110,7 +114,7 @@ const usePreviewModal = ({
       initAnimation();
       gsapTimeline.current.play();
     } else {
-      if (youtubeController) {
+      if (youtubeController && planSelected.music && planSelected.plan !== 'Essencial') {
         youtubeController.stopVideo();
       }
       gsapTimeline.current.pause().seek(0);

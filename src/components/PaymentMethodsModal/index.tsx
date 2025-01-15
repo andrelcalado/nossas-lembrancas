@@ -30,6 +30,9 @@ import { PaymentMethodsModalProps } from '@/types/layoutTypes';
 import PlanItem from '../PlanItem';
 import Button from '../Button';
 
+// Utils
+import { timestampToDateBR } from '@/utils/dataFormats';
+
 const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
   const {
     isCreatingCheckout,
@@ -41,6 +44,8 @@ const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
     paymentMethodsModal,
     setPaymentMethodsModal,
     planSelected,
+    planPaid,
+    planPaidAt,
   } = useAppContext();
 
   return (
@@ -65,6 +70,7 @@ const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
             eachPlan={planSelected}
             selected
             popular={planSelected.plan === "Especial"}
+            planPaid={planPaidAt && planPaid === planSelected.plan ? timestampToDateBR(planPaidAt, true) : undefined}
           />
 
           <PaymentMethods>

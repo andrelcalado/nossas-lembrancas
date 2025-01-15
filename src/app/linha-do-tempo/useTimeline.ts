@@ -11,6 +11,7 @@ import { useAppContext } from '@/components/ProvidersWrapper';
 
 // Libraries
 import imageCompression from 'browser-image-compression';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import {
   collection,
   doc,
@@ -31,7 +32,6 @@ import {
 
 // Constants
 import { MemoryTypes, PlansData } from '@/constants/dataArray';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
   {
@@ -58,7 +58,9 @@ const useTimeline = () => {
     user,
     planSelected,
     setPlanSelected,
-    setPaymentMethodsModal,    
+    setPaymentMethodsModal,
+    setPlanPaid,
+    setPlanPaidAt,
   } = useAppContext();
 
   const handleSetTimelineData = async (
@@ -287,6 +289,8 @@ const useTimeline = () => {
         setMusicLink(eachItem.musicLink);
         setTimelineData(eachItem.timelineData);
         setTimelineID(eachItem.id);
+        setPlanPaid(doc.data().planPaid);
+        setPlanPaidAt(doc.data().planPaidAt);
 
         const planAux = PlansData.find((eachPlan) => eachPlan.plan === eachItem.plan) || PlansData[0];
         setPlanSelected(planAux);

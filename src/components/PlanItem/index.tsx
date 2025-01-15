@@ -13,6 +13,7 @@ import { FaArrowRight } from "react-icons/fa6";
 
 // Style
 import {
+  PlanItemBadges,
   PlanItemBody,
   PlanItemContent,
   PlanItemHeader,
@@ -32,13 +33,21 @@ const PlanItem = ({
   eachPlan,
   popular,
   selected,
-  handleSelect,  
+  handleSelect,
+  planPaid,
 }: PlanItemProps) => {
   return (
     <PlanItemContent className={popular ? 'popular' : ''}>
-      {selected && (
-        <PlanItemSelected>Selecionado</PlanItemSelected>
-      )}
+      <PlanItemBadges>
+        {selected && (
+          <PlanItemSelected>Selecionado</PlanItemSelected>
+        )}
+        {planPaid && (
+          <PlanItemSelected>
+            expira: {planPaid}
+          </PlanItemSelected>
+        )}
+      </PlanItemBadges>
       <PlanItemHeader>
         <PlanItemIllustration>
           <Image

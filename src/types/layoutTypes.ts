@@ -140,5 +140,6 @@ export interface PlanItemProps {
   eachPlan: PlanResourceDataType;
   popular?: boolean;
   selected?: boolean;
+  planPaid?: string;
   handleSelect?: () => void;
 }

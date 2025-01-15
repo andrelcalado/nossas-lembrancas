@@ -1,29 +1,27 @@
-'use client'; // Declarar como um componente cliente
+'use client';
 
 // Core
 import React from 'react';
 
+// Components
+import PreviewModal from '@/components/PreviewModal';
+
 // Hooks
 import usePath from './usePath';
-import PreviewModal from '@/components/PreviewModal';
+import Loading from '@/components/Loading';
 
 export default function UserPage({ params }: { params: { path: string } }) {
   const decodedPath = decodeURIComponent(params.path);
   const { coupleTimeline } = usePath(decodedPath);
 
-  return (
-    <div>
-      <h1>Bem-vindo!</h1>
-      {coupleTimeline ? (
-        <PreviewModal
-          openModal
-          timelineData={coupleTimeline}
-          setOpenModal={() => {}}
-          handleToGift={() => {}}
-          />
-      ) : (
-        <p>Carregando...</p>
-      )}
-    </div>
+  return coupleTimeline ? (
+    <PreviewModal
+      openModal
+      timelineData={coupleTimeline}
+      setOpenModal={() => {}}
+      handleToGift={() => {}}
+    />
+  ) : (
+    <Loading loading={!coupleTimeline} type="screen" />
   );
 }

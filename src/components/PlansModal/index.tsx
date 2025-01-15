@@ -25,8 +25,16 @@ import { PlansData } from '@/constants/dataArray';
 // Hooks
 import { useAppContext } from '../ProvidersWrapper';
 
+// Utils
+import { timestampToDateBR } from '@/utils/dataFormats';
+
 const PlansModal = ({ openPlansModal, setPlansModal }: PlansModalProps) => {
-  const { planSelected, setPlanSelected } = useAppContext();
+  const {
+    planSelected,
+    setPlanSelected,
+    planPaid,
+    planPaidAt,    
+  } = useAppContext();
 
   return (
     <PlansModalContent openPlansModal={openPlansModal}>
@@ -55,6 +63,7 @@ const PlansModal = ({ openPlansModal, setPlansModal }: PlansModalProps) => {
               popular={index === 1}
               eachPlan={eachPlan}
               selected={planSelected === eachPlan}
+              planPaid={planPaidAt && planPaid === eachPlan.plan ? timestampToDateBR(planPaidAt, true) : undefined}
               handleSelect={() => {
                 setPlanSelected(eachPlan);
                 setPlansModal(false);

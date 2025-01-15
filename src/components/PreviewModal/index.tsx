@@ -106,7 +106,7 @@ const PreviewModal = ({
           )}
         </TimelineActionsContent>
 
-        {(planSelected.music && musicLink) && (
+        {(planSelected.music && musicLink && planSelected.plan !== 'Essencial') && (
           <YouTube
             opts={{ playerVars: { autoplay: 1 } }}
             onReady={(event: YouTubeEvent) => {

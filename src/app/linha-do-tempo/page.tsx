@@ -32,6 +32,7 @@ import { useAppContext } from '@/components/ProvidersWrapper'
 
 // Types
 import { PlanResourceDataType } from '@/types/dataTypes'
+import { Timestamp } from 'firebase/firestore'
 
 // Assets
 import { FaEye, FaGift } from "react-icons/fa";
@@ -40,7 +41,7 @@ import { FaEye, FaGift } from "react-icons/fa";
 import { IndicatorsArray } from '@/constants/dataArray'
 
 // Utils
-import { numberToCurrency } from '@/utils/dataFormats'
+import { numberToCurrency, timestampToDateBR } from '@/utils/dataFormats'
 
 const Timeline = () => {
   const {
@@ -67,7 +68,21 @@ const Timeline = () => {
     handleUpdateForm,
   } = useTimeline();
 
-  const { planSelected } = useAppContext();
+  const {
+    planSelected,
+    planPaid,
+    planPaidAt,
+  } = useAppContext();
+
+  const getWatermark = () => {
+    if (planPaidAt) {
+      const aux = planPaidAt.toDate();
+
+      aux.setFullYear(aux.getFullYear() + 1);
+      return aux < new Date();
+    }
+    return true;
+  }
 
   return (
     <PageContent>
@@ -86,7 +101,7 @@ const Timeline = () => {
           <PaymentMethodsModal couplePath={timelineID} />
 
           <PreviewModal
-            watermark={true}
+            watermark={getWatermark()}
             timelineData={timelineData}
             musicLink={musicLink}
             openModal={openPreviewModal}
@@ -175,7 +190,18 @@ const Timeline = () => {
                 <PlanSelected onClick={() => setOpenPlansModal(true)}>
                   <Image src={planSelected.icon} alt="Ilustração do plano" />
                 </PlanSelected>
-                <p>{numberToCurrency(planSelected.price)}</p>
+                {planPaid === planSelected.plan ? (
+                  <p>
+                    {planPaid !==  'Inesquecível' && (
+                      <>
+                        <strong>Expira</strong>
+                        {timestampToDateBR(planPaidAt as Timestamp, true)}
+                      </>
+                    )}
+                  </p>
+                ) : (
+                  <p>{numberToCurrency(planSelected.price)}</p>
+                )}
               </IndicatorsContent>
 
               <h4>Disponível</h4>

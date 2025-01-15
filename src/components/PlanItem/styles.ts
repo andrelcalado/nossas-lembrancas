@@ -167,21 +167,29 @@ export const PlanItemBody = styled.ul`
   }
 `
 
-export const PlanItemSelected = styled.span`
-  ${textX1sMedium}
+export const PlanItemBadges = styled.div`
   position: absolute;
   left: 50%;
   bottom: -13px;
   transform: translateX(-50%);
-  border-radius: 12px;
-  background-color: ${theme.colors.blue[400]};
-  color: ${theme.colors.white};
-  padding: 4px 12px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 3px;
 
   @media (max-width: 740px) {
     top: 80px;
     bottom: unset;
   }
+`
+
+export const PlanItemSelected = styled.span`
+  ${textX1sMedium}
+  border-radius: 12px;
+  background-color: ${theme.colors.blue[400]};
+  color: ${theme.colors.white};
+  padding: 4px 12px;  
+  flex-shrink: 0;
 `
 
 export const PlanItemContent = styled.li`

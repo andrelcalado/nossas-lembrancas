@@ -6,6 +6,7 @@ import { HeroSliderCardProps, TimelineItemTypeENUM } from "./layoutTypes";
 import { User } from "firebase/auth";
 import { StaticImageData } from "next/image";
 import { StorageReference } from "firebase/storage";
+import { Timestamp } from "firebase/firestore";
 
 export type HeroSliderDataType = Array<HeroSliderCardProps>
 
@@ -23,6 +24,10 @@ export interface ProvidersWrapperContext {
   user: User | null;
   planSelected: PlanResourceDataType;
   setPlanSelected: React.Dispatch<React.SetStateAction<PlanResourceDataType>>;
+  planPaid: string | null;
+  setPlanPaid: React.Dispatch<React.SetStateAction<string | null>>;
+  planPaidAt: Timestamp | null;
+  setPlanPaidAt: React.Dispatch<React.SetStateAction<Timestamp | null>>;
 }
 
 export interface TimelineItemDataType {

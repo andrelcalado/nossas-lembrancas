@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 
 export default function usePaymentMethodsModal() {
   const [isCreatingCheckout, setIsCreatingCheckout] = useState(false);
+  const [copyLinkTooltip, setCopyLinkTooltip] = useState(false);
   const router = useRouter();
 
   const { planSelected } = useAppContext();
@@ -47,15 +48,13 @@ export default function usePaymentMethodsModal() {
         await stripeClient.redirectToCheckout({ sessionId });
       } catch (error) {
         console.error(error);
-      } finally {
         setIsCreatingCheckout(false);
       }
     }
   }
 
   async function handleBuyByPIX(couplePath: string | undefined, planName : PlanDataENUM) {
-    setIsCreatingCheckout(true);
-    
+    setIsCreatingCheckout(true);    
 
     try {
       const response = await fetch("/api/mercadopago/create-checkout-pix", {
@@ -77,7 +76,6 @@ export default function usePaymentMethodsModal() {
       if (response.ok) {
         console.log("Pagamento criado:", data);
         router.push(data.initPoint);
-        setIsCreatingCheckout(false);
       } else {
         console.error("Erro ao criar pagamento:", data.error);
         setIsCreatingCheckout(false);
@@ -88,9 +86,24 @@ export default function usePaymentMethodsModal() {
     }
   }
 
+  function handleCopyLink(couplePath : string) {
+    const link = `${window.location.origin}/${couplePath}`;
+
+    navigator.clipboard.writeText(link)
+      .then(() => {
+        setCopyLinkTooltip(true);
+      })
+      .catch((err) => {
+        console.error('Erro ao copiar o link:', err);
+      });
+  };
+
   return {
+    copyLinkTooltip,
+    setCopyLinkTooltip,
     isCreatingCheckout,
     handleBuyByCard,
     handleBuyByPIX,
+    handleCopyLink,
   };
 }

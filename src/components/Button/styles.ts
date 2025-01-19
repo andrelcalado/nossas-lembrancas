@@ -90,6 +90,7 @@ export const ButtonComponent = styled.button<Pick<ButtonProps, 'size' | 'variati
     ${getVariationStyle(disabled, variation)}
     cursor: pointer;
     ${disabled && 'pointer-events: none;'}
+    position: relative;
 
     @media (max-width: 910px) {
       padding: 9px 17px;

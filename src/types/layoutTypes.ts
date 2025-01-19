@@ -143,3 +143,9 @@ export interface PlanItemProps {
   planPaid?: string;
   handleSelect?: () => void;
 }
+
+export interface TooltipProps {
+  active: boolean;
+  setActive: Dispatch<SetStateAction<boolean>>;
+  message: string;
+}

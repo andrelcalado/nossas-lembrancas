@@ -22,6 +22,10 @@ import {
 import PIXLogo from '@/assets/icon/logo-pix.svg';
 import { IoIosCard } from "react-icons/io";
 import { CgClose } from "react-icons/cg";
+import { VscShare } from "react-icons/vsc";
+import { MdOutlineQrCodeScanner } from "react-icons/md";
+import { RiFileVideoLine } from "react-icons/ri";
+import { LuGlobe } from "react-icons/lu";
 
 // Types
 import { PaymentMethodsModalProps } from '@/types/layoutTypes';
@@ -32,12 +36,16 @@ import Button from '../Button';
 
 // Utils
 import { timestampToDateBR } from '@/utils/dataFormats';
+import Tooltip from '../Tooltip';
 
 const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
   const {
     isCreatingCheckout,
     handleBuyByCard,
     handleBuyByPIX,
+    copyLinkTooltip,
+    setCopyLinkTooltip,
+    handleCopyLink,
   } = usePaymentMethodsModal();
 
   const {
@@ -47,6 +55,16 @@ const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
     planPaid,
     planPaidAt,
   } = useAppContext();
+
+  const isPlanExpired = () => {
+    if (planPaidAt) {
+      const aux = planPaidAt.toDate();
+
+      aux.setFullYear(aux.getFullYear() + 1);
+      return aux < new Date();
+    }
+    return true;
+  }
 
   return (
     <PaymentMethodsModalContent active={paymentMethodsModal}>
@@ -58,14 +76,22 @@ const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
         </CloseButton>
 
         <h3>Faça o dia de alguém <strong>especial</strong></h3>
-        <p>Finalize o seu presente com o plano escolhido e leve suas memórias para quem você ama. Selecione o método de pagamento e crie algo inesquecível.</p>
+        <p>
+          {isPlanExpired() || planPaid !== planSelected.plan ? `
+            Finalize o seu presente com o plano escolhido e leve suas memórias para quem você ama. Selecione o método de pagamento e crie algo inesquecível.
+          ` : `
+            Escolha a melhor forma de levar essas memórias para quem você ama de forma inesquecível!
+          `}
+        </p>
 
-        <PlansPromotion>
-          <img className="desktop" src="/assets/img/promotion-banner-0.jpg" alt="Promoção Outubro Rosa" />
-          <img className="mobile" src="/assets/img/promotion-banner-0-mobile.jpg" alt="Promoção Outubro Rosa" />
-        </PlansPromotion>
+        {isPlanExpired() || planPaid !== planSelected.plan && (
+          <PlansPromotion>
+            <img className="desktop" src="/assets/img/promotion-banner-0.jpg" alt="Promoção Outubro Rosa" />
+            <img className="mobile" src="/assets/img/promotion-banner-0-mobile.jpg" alt="Promoção Outubro Rosa" />
+          </PlansPromotion>
+        )}
 
-        <PaymentMethodsWithPlan>
+        <PaymentMethodsWithPlan planPaid={!isPlanExpired() && planPaid === planSelected.plan}>
           <PlanItem
             eachPlan={planSelected}
             selected
@@ -75,23 +101,63 @@ const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
 
           <PaymentMethods>
             <h3>Meios de Presentear</h3>
-            <Button
-              variation="fill-blue"
-              loading={isCreatingCheckout}
-              onClick={async () => await handleBuyByPIX(couplePath, planSelected.plan)}
-            >
-              <Image src={PIXLogo} alt="Logo PIX" />
+            {!isPlanExpired() && couplePath && planPaid === planSelected.plan ? (
+              <>
+                <Button
+                  variation="fill"
+                  onClick={() => handleCopyLink(couplePath)}
+                >
+                  <Tooltip
+                    message="Link copiado"
+                    active={copyLinkTooltip}
+                    setActive={setCopyLinkTooltip}
+                  />
+                  <VscShare />                  
+                  <span>Compartilhar link</span>
+                </Button>
+                <Button
+                  variation="fill"
+                  loading={isCreatingCheckout}
+                >
+                  <LuGlobe />
+                  <span>Visualizar Site</span>
+                </Button>
+                <Button
+                  variation="fill"
+                  loading={isCreatingCheckout}
+                >
+                  <MdOutlineQrCodeScanner />
+                  <span>Gerar QR Code</span>
+                </Button>
+                <Button
+                  variation="fill"
+                  loading={isCreatingCheckout}
+                >
+                  <RiFileVideoLine />
+                  <span>Gerar Vídeo</span>
+                </Button>
+              </>              
+            ) : (
+              <>
+                <Button
+                  variation="fill-blue"
+                  loading={isCreatingCheckout}
+                  onClick={async () => await handleBuyByPIX(couplePath, planSelected.plan)}
+                >
+                  <Image src={PIXLogo} alt="Logo PIX" />
 
-              <span>PIX</span>
-            </Button>
-            <Button
-              onClick={async () => await handleBuyByCard(couplePath, planSelected.plan)}
-              loading={isCreatingCheckout}
-              variation="fill-blue"
-            >
-              <IoIosCard />
-              <span>Cartão de Crédito</span>
-            </Button>
+                  <span>PIX</span>
+                </Button>
+                <Button
+                  onClick={async () => await handleBuyByCard(couplePath, planSelected.plan)}
+                  loading={isCreatingCheckout}
+                  variation="fill-blue"
+                >
+                  <IoIosCard />
+                  <span>Cartão de Crédito</span>
+                </Button>
+              </>
+            )}
           </PaymentMethods>      
         </PaymentMethodsWithPlan>
       </PaymentMethodsModalWrapper>

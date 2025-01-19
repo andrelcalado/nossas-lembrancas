@@ -87,7 +87,8 @@ export const PaymentMethodsModalWrapper = styled.div`
   }
 `
 
-export const PaymentMethodsWithPlan = styled.div`
+export const PaymentMethodsWithPlan = styled.div<{ planPaid: boolean }>`
+${({ planPaid }) => css`
   display: flex;
   justify-content: center;
   position: relative;
@@ -112,16 +113,18 @@ export const PaymentMethodsWithPlan = styled.div`
     top: 50%;
     transform: translate(-50%, -50%);
     background-color: ${theme.colors.primary[100]};
-    left: 51%;
+    left: 52%;
 
     @media (max-width: 740px) {
       width: 60%;
       height: 1px;
-      top: 45%;
+      top: unset;
+      bottom: ${planPaid ? '44%' : '53%'};
+      left: 50%;
     }
 
     @media (max-width: 537px) {
-      top: 40%;
+      bottom: ${planPaid ? '47%' : '57%'};
     }
   }
 
@@ -148,7 +151,7 @@ export const PaymentMethodsWithPlan = styled.div`
       padding: 12px;
     }
   }
-`
+`}`
 
 export const PaymentMethods = styled.div`
   width: 100%;
@@ -172,7 +175,7 @@ export const PaymentMethods = styled.div`
   ${ButtonComponent} {
     width: 100%;
 
-    &:last-child {
+    &:not(:first-child) {
       margin-top: 8px;
     }
 

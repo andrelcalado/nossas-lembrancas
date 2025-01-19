@@ -1,7 +1,7 @@
 'use client'
 
 // Core
-import React from 'react'
+import React, { useRef } from 'react'
 import Image from 'next/image'
 
 // Styles
@@ -45,6 +45,8 @@ import { IndicatorsArray } from '@/constants/dataArray'
 import { numberToCurrency, timestampToDateBR } from '@/utils/dataFormats'
 
 const Timeline = () => {
+  const coupleNamesRef = useRef<HTMLInputElement>(null);
+
   const {
     loading,
     handleSetTimelineData,
@@ -122,8 +124,9 @@ const Timeline = () => {
             <h1>Recrie os <strong>melhores momentos</strong></h1>
             <p>Informe os nomes de vocês, adicione todos os momentos que deseja compartilhar e surpreenda quem ama com uma experiência inesquecível</p>
 
-            <h3>Nome do Casal</h3>
+            <h3>Nome do Casal<strong>*</strong></h3>
             <Input
+              inputRef={coupleNamesRef}
               type="text"
               value={coupleNames}
               onChange={({ target }) => setCoupleNames(target.value)}
@@ -249,9 +252,11 @@ const Timeline = () => {
 
                 <h5>Presentear</h5>
                 <Button
-                  disabled={timelineData.length < 2 || !coupleNames}
+                  disabled={timelineData.length < 2}
                   onClick={async () => {
-                    if (timelineID) {
+                    if (!coupleNames || coupleNames.length <= 1) {
+                      coupleNamesRef.current?.focus();
+                    } else if (timelineID) {
                       await handleUpdateForm();
                     } else {
                       await handleSubmitForm();

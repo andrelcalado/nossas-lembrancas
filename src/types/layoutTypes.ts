@@ -5,6 +5,7 @@ import { StaticImageData } from "next/image";
 import React, { 
   Dispatch,
   HTMLAttributeAnchorTarget,
+  LegacyRef,
   SetStateAction
 } from "react";
 import { PlanResourceDataType, TimelineItemDataType } from "./dataTypes";
@@ -50,6 +51,7 @@ export interface SocialButtonProps {
 
 export type InputTypeENUM = "text" | "email" | "password" | "textarea" | "date";
 export interface InputProps {
+  inputRef?: LegacyRef<HTMLTextAreaElement> | React.RefObject<HTMLInputElement> | React.RefObject<HTMLTextAreaElement>;
   placeholder?: string;
   value?: string;
   error?: boolean;

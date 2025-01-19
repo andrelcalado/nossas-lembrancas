@@ -61,6 +61,11 @@ export const TimelineWrapper = styled.div`
     ${textMdMedium}
     margin-bottom: 4px;
     color: ${theme.colors.primary[700]};
+
+    strong {
+      font-weight: 500;
+      color: ${theme.colors.primary[400]};
+    }
   }
 
   > p {

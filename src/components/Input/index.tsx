@@ -1,7 +1,7 @@
 'use client'
 
 // Core
-import React, { useState } from 'react'
+import React, { LegacyRef, RefObject, useState } from 'react'
 
 // Types
 import { InputProps } from '@/types/layoutTypes'
@@ -26,6 +26,7 @@ const Input = ({
   placeholder,
   onBlur,
   maxLength,
+  inputRef,
 } : InputProps) => {
   const [showPassword, setShowPassword] = useState(false)
 
@@ -57,6 +58,7 @@ const Input = ({
           placeholder={placeholder}
           onBlur={onBlur}
           maxLength={maxLength}
+          ref={inputRef as LegacyRef<HTMLTextAreaElement>}
         />
       ) : (
         <input
@@ -66,6 +68,7 @@ const Input = ({
           placeholder={placeholder}
           onBlur={onBlur}
           maxLength={maxLength}
+          ref={inputRef as RefObject<HTMLInputElement>}
         />
       )}
 

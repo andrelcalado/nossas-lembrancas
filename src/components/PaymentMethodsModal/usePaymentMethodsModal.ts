@@ -98,6 +98,11 @@ export default function usePaymentMethodsModal() {
       });
   };
 
+  function handleGoToSite(couplePath : string) {
+    setIsCreatingCheckout(true);
+    router.push(`/${couplePath}`);
+  }
+
   return {
     copyLinkTooltip,
     setCopyLinkTooltip,
@@ -105,5 +110,6 @@ export default function usePaymentMethodsModal() {
     handleBuyByCard,
     handleBuyByPIX,
     handleCopyLink,
+    handleGoToSite,
   };
 }

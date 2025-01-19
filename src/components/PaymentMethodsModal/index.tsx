@@ -46,6 +46,7 @@ const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
     copyLinkTooltip,
     setCopyLinkTooltip,
     handleCopyLink,
+    handleGoToSite,
   } = usePaymentMethodsModal();
 
   const {
@@ -118,6 +119,7 @@ const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
                 <Button
                   variation="fill"
                   loading={isCreatingCheckout}
+                  onClick={() => handleGoToSite(couplePath)}
                 >
                   <LuGlobe />
                   <span>Visualizar Site</span>

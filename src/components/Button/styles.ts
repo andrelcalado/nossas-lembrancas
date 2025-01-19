@@ -43,7 +43,7 @@ const getVariationStyle = (disabled: boolean, variation?: ButtonVariationENUM) =
       `;
     case 'fill-blue':
       return css`
-        background-color: ${disabled ? theme.colors.blue[300] : theme.colors.blue[500]};
+        background-color: ${disabled ? theme.colors.gray[300] : theme.colors.blue[500]};
         border: 1px solid transparent;
         color: ${theme.colors.white};
 

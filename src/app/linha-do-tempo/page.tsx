@@ -36,6 +36,7 @@ import { Timestamp } from 'firebase/firestore'
 
 // Assets
 import { FaEye, FaGift } from "react-icons/fa";
+import { TbCardsFilled } from "react-icons/tb";
 
 // Constants
 import { IndicatorsArray } from '@/constants/dataArray'
@@ -227,6 +228,15 @@ const Timeline = () => {
 
               <h4>Ações</h4>
               <IndicatorsContent className='actions'>
+                <h5>Modelos</h5>
+                <Button
+                  className="to-view-animation"
+                  variation='fill-blue'
+                  disabled
+                >
+                  <TbCardsFilled />
+                </Button>
+
                 <h5>Conferir</h5>
                 <Button
                   onClick={() => setOpenPreviewModal(true)}

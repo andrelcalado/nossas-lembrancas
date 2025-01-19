@@ -15,7 +15,8 @@ import {
   PaymentMethods,
   PaymentMethodsModalContent,
   PaymentMethodsModalWrapper,
-  PaymentMethodsWithPlan,  
+  PaymentMethodsWithPlan,
+  QRCodeContent,  
 } from './styles';
 
 // Assets
@@ -37,8 +38,9 @@ import Button from '../Button';
 // Utils
 import { timestampToDateBR } from '@/utils/dataFormats';
 import Tooltip from '../Tooltip';
+import QRCode from 'react-qr-code';
 
-const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
+const PaymentMethodsModal = ({ couplePath, coupleNames } : PaymentMethodsModalProps) => {
   const {
     isCreatingCheckout,
     handleBuyByCard,
@@ -47,7 +49,10 @@ const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
     setCopyLinkTooltip,
     handleCopyLink,
     handleGoToSite,
-  } = usePaymentMethodsModal();
+    handleGenerateQRCode,
+    QRCodeUrl,
+    qrCodeRef,
+  } = usePaymentMethodsModal(coupleNames, couplePath );
 
   const {
     paymentMethodsModal,
@@ -69,6 +74,16 @@ const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
 
   return (
     <PaymentMethodsModalContent active={paymentMethodsModal}>
+      {QRCodeUrl && (
+        <QRCodeContent ref={qrCodeRef}>
+          <QRCode
+            size={256}
+            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+            value={QRCodeUrl}
+            viewBox={`0 0 256 256`}
+          />
+        </QRCodeContent>
+      )}
       <ModalOverlay role="button" onClick={() => setPaymentMethodsModal(false)} />
 
       <PaymentMethodsModalWrapper>
@@ -126,6 +141,7 @@ const PaymentMethodsModal = ({ couplePath } : PaymentMethodsModalProps) => {
                 </Button>
                 <Button
                   variation="fill"
+                  onClick={async () => await handleGenerateQRCode()}
                   loading={isCreatingCheckout}
                 >
                   <MdOutlineQrCodeScanner />

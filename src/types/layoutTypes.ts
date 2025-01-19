@@ -136,6 +136,7 @@ export interface PreviewModalProps {
 
 export interface PaymentMethodsModalProps {
   couplePath?: string;
+  coupleNames?: string;
 }
 
 export interface PlanItemProps {

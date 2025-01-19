@@ -2,6 +2,7 @@
 
 // Libraries
 import styled, { css } from "styled-components";
+import { MutableRefObject } from "react";
 
 // Theme
 import { theme } from "@/theme/globalStyles";
@@ -12,6 +13,8 @@ import {
   textSmRegular,
   textXsRegular,  
 } from "@/theme/typography";
+
+// Styles
 import { PlanItemBody, PlanItemContent } from "../PlanItem/styles";
 import { ButtonComponent } from "../Button/styles";
 
@@ -184,4 +187,11 @@ export const PaymentMethods = styled.div`
       height: 20px;
     }
   }
+`
+
+export const QRCodeContent = styled.div<{ ref : MutableRefObject<HTMLDivElement | undefined> }>`
+  position: fixed;
+  top: -100%;
+  left: -100%;
+  pointer-events: none;
 `

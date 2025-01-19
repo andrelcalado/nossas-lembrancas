@@ -20,7 +20,6 @@ const usePath = (path : string) => {
     
         if (docSnap.exists()) {
           const timelineData = docSnap.data().timelineData;
-          console.log('timeline casal', timelineData);
           setCoupleTimeline(timelineData);
         } else {
           console.error(`Nenhum documento encontrado para o couplePath: ${path}`);

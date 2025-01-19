@@ -1,10 +1,12 @@
 "use client";
 
 // Core
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 // Libraries
 import { loadStripe } from "@stripe/stripe-js";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 // Hooks
 import { useAppContext } from "../ProvidersWrapper";
@@ -13,12 +15,21 @@ import { useAppContext } from "../ProvidersWrapper";
 import { PlanDataENUM } from "@/types/dataTypes";
 import { useRouter } from "next/navigation";
 
-export default function usePaymentMethodsModal() {
+export default function usePaymentMethodsModal(coupleNames? : string, couplePath? : string) {
   const [isCreatingCheckout, setIsCreatingCheckout] = useState(false);
   const [copyLinkTooltip, setCopyLinkTooltip] = useState(false);
+  const [QRCodeUrl, setQRCodeUrl] = useState<string>();
+  const qrCodeRef = useRef<HTMLDivElement | undefined>();
   const router = useRouter();
 
   const { planSelected } = useAppContext();
+
+  useEffect(() => {
+    if (couplePath) {
+      setQRCodeUrl(`${window.location.origin}/${couplePath}`);
+    }
+  }, [couplePath])
+  
 
   async function handleBuyByCard(couplePath: string | undefined, planName : PlanDataENUM) {
     if (couplePath) {
@@ -103,6 +114,33 @@ export default function usePaymentMethodsModal() {
     router.push(`/${couplePath}`);
   }
 
+  async function handleGenerateQRCode() {
+    setIsCreatingCheckout(true);
+
+    const qrCodeElement = qrCodeRef.current;
+    if (!qrCodeElement) {
+      setIsCreatingCheckout(false);
+      return;
+    };
+
+    const canvas = await html2canvas(qrCodeElement);
+    const imgData = canvas.toDataURL('image/png');
+
+    const pdf = new jsPDF();
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const imgWidth = pageWidth * 0.4;
+    const imgHeight = (canvas.height / canvas.width) * imgWidth;
+
+    const x = (pageWidth - imgWidth) / 2;
+    const y = (pageHeight - imgHeight) / 2;
+
+    pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+    pdf.save(`${coupleNames}.pdf`);
+
+    setIsCreatingCheckout(false);
+  }
+
   return {
     copyLinkTooltip,
     setCopyLinkTooltip,
@@ -111,5 +149,8 @@ export default function usePaymentMethodsModal() {
     handleBuyByPIX,
     handleCopyLink,
     handleGoToSite,
+    handleGenerateQRCode,
+    QRCodeUrl,
+    qrCodeRef,
   };
 }

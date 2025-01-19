@@ -101,7 +101,10 @@ const Timeline = () => {
             setPlansModal={setOpenPlansModal}
           />
 
-          <PaymentMethodsModal couplePath={timelineID} />
+          <PaymentMethodsModal
+            coupleNames={coupleNames}
+            couplePath={timelineID}
+            />
 
           <PreviewModal
             watermark={getWatermark()}

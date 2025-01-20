@@ -8,6 +8,9 @@ import styled, { css } from "styled-components"
 import { ButtonComponent } from "../Button/styles"
 import { textX1Bold } from "@/theme/typography"
 
+// Components
+import Button from "../Button"
+
 export const PreviewModalContent = styled.div<{ active: boolean }>`
   ${({ active }) => css`
     position: fixed;
@@ -82,4 +85,11 @@ export const PreviewLabel = styled.div`
     white-space: nowrap;
     flex-shrink: 0;
   }
+`
+
+export const SkipAnimation = styled(Button)`
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 8px;
 `

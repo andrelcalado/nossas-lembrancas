@@ -111,7 +111,6 @@ const usePhoneForm = () => {
     if (window.confirmationResult) {
       window.confirmationResult.confirm(phoneForm.code as string).then(() => {
         router.replace('/linha-do-tempo');
-        setLoading(false);
       }).catch((err) => {
         setLoading(false);
         setErrorLabel('Código inválido, tente novamente');
@@ -147,7 +146,6 @@ const usePhoneForm = () => {
       userPasswordForm.pwd,
     ).then(() => {
       router.replace('/linha-do-tempo');
-      setLoading(false);
     }).catch((err) => {
       setErrorLabel(getErrorMessage(err.code));
       setLoading(false);
@@ -164,7 +162,6 @@ const usePhoneForm = () => {
       userPasswordForm.pwd,
     ).then(() => {
       router.replace('/linha-do-tempo');
-      setLoading(false);
     }).catch((err) => {
       setLoading(false);
       setErrorLabel("Email ou senha incorreta, tente novamente");
@@ -178,7 +175,6 @@ const usePhoneForm = () => {
     signInWithRedirect(firebaseAuth, provider)
       .then(() => {
         router.replace('/linha-do-tempo');
-        setLoading(false);
       })
       .catch(() => {
         setLoading(false);

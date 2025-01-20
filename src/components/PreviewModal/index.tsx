@@ -10,6 +10,7 @@ import {
   PreviewLabel,
   PreviewModalContent,
   PreviewModalWrapper,
+  SkipAnimation,
   TimelineActionsContent,
   TimelineDataContent,
 } from './styles';
@@ -24,6 +25,9 @@ import usePreviewModal from './usePreviewModal';
 // Assets
 import { CgClose } from "react-icons/cg";
 import { FaRepeat } from "react-icons/fa6";
+import { RiFileVideoLine } from "react-icons/ri";
+import { IoMdExit, IoMdPhotos } from "react-icons/io";
+import { MdModeEdit } from "react-icons/md";
 import { FaGift } from "react-icons/fa";
 
 // Constants
@@ -46,12 +50,16 @@ const PreviewModal = ({
   musicLink,
   handleToGift,
   watermark = false,
-  hiddenGiftButton = false,
+  isGift = false,
+  previewLoading = false,
 } : PreviewModalProps) => {
   const { planSelected } = useAppContext();
+
   const {
     setYoutubeController,
-    handleRepeatTimeline
+    handleRepeatTimeline,
+    handleEditTimeline,
+    handleSkipAnimation,
   } = usePreviewModal({
     openModal,
     timelineData
@@ -65,9 +73,15 @@ const PreviewModal = ({
       />
 
       <PreviewModalWrapper>
-        <CloseButton onClick={() => setOpenModal(false)}>
-          <CgClose />
-        </CloseButton>
+        {isGift ? (
+          <SkipAnimation onClick={handleSkipAnimation} variation="fill-blue">
+            <IoMdExit />
+          </SkipAnimation>
+        ) : (
+          <CloseButton onClick={() => setOpenModal(false)}>
+            <CgClose />
+          </CloseButton>
+        )}
 
         {watermark && (
           <PreviewLabel>
@@ -98,8 +112,37 @@ const PreviewModal = ({
             Replay
           </Button>
 
-          {!hiddenGiftButton && (
-            <Button onClick={handleToGift}>
+          {isGift ? (
+            <>
+              <Button
+                variation="fill-blue"
+                disabled={!planSelected.albumMode}
+                // onClick={handleAlbumMode}
+              >
+                <IoMdPhotos />
+                <span>Modo Album Digital</span>
+              </Button>
+              <Button
+                variation="fill-blue"
+                disabled
+              >
+                <RiFileVideoLine />
+                <span>Gerar Vídeo (em breve)</span>
+              </Button>
+              
+              <Button
+                variation="fill"
+                onClick={handleEditTimeline}
+              >
+                <MdModeEdit />
+                <span>Editar</span>
+              </Button>
+            </>
+          ) : (
+            <Button
+              onClick={handleToGift}
+              loading={previewLoading}
+            >
               <FaGift />
               Presentear
             </Button>

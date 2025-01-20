@@ -13,6 +13,7 @@ import { useAppContext } from '../ProvidersWrapper';
 // Types
 import { PreviewModalProps } from '@/types/layoutTypes'
 import { YouTubePlayer } from 'react-youtube'
+import { useRouter } from 'next/navigation';
 
 gsap.registerPlugin(useGSAP);
 
@@ -22,6 +23,7 @@ const usePreviewModal = ({
 }: Pick<PreviewModalProps, 'openModal' | 'timelineData'>) => {
   const gsapTimeline = useRef(gsap.timeline({ paused: true }));
   const [youtubeController, setYoutubeController] = useState<YouTubePlayer | null>();
+  const router = useRouter();
   const { planSelected } = useAppContext();
 
   const initAnimation = () => {
@@ -128,10 +130,20 @@ const usePreviewModal = ({
     });
     gsapTimeline.current.restart();
   }
+
+  const handleEditTimeline = () => {
+    router.push('/linha-do-tempo');
+  }
+
+  const handleSkipAnimation = () => {
+    gsapTimeline.current.progress(1);
+  }
   
   return {
     setYoutubeController,
-    handleRepeatTimeline
+    handleRepeatTimeline,
+    handleEditTimeline,
+    handleSkipAnimation,
   }
 }
 

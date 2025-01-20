@@ -125,13 +125,14 @@ export interface PlansModalProps {
 }
 
 export interface PreviewModalProps {
-  hiddenGiftButton?: boolean;
+  isGift?: boolean;
   watermark?: boolean;
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   timelineData: Array<TimelineItemDataType>;
   musicLink?: string;
   handleToGift: ((el: any) => void | React.MouseEventHandler<HTMLButtonElement> | Promise<void>) | undefined;
+  previewLoading?: boolean;
 }
 
 export interface PaymentMethodsModalProps {

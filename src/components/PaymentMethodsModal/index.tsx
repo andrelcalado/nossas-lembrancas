@@ -149,10 +149,10 @@ const PaymentMethodsModal = ({ couplePath, coupleNames } : PaymentMethodsModalPr
                 </Button>
                 <Button
                   variation="fill"
-                  loading={isCreatingCheckout}
+                  disabled
                 >
                   <RiFileVideoLine />
-                  <span>Gerar Vídeo</span>
+                  <span>Vídeo (em breve)</span>
                 </Button>
               </>              
             ) : (

@@ -104,7 +104,7 @@ const Timeline = () => {
           <PaymentMethodsModal
             coupleNames={coupleNames}
             couplePath={timelineID}
-            />
+          />
 
           <PreviewModal
             watermark={getWatermark()}
@@ -121,6 +121,7 @@ const Timeline = () => {
                 setOpenPreviewModal(false);
               }
             }}
+            previewLoading={submitLoading}
           />
 
           <TimelineWrapper className='container'>

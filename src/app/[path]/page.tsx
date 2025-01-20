@@ -17,6 +17,7 @@ export default function UserPage({ params }: { params: { path: string } }) {
   return coupleTimeline ? (
     <PreviewModal
       openModal
+      isGift
       timelineData={coupleTimeline}
       setOpenModal={() => {}}
       handleToGift={() => {}}

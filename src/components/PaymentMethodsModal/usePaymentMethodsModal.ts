@@ -100,13 +100,22 @@ export default function usePaymentMethodsModal(coupleNames? : string, couplePath
   function handleCopyLink(couplePath : string) {
     const link = `${window.location.origin}/${couplePath}`;
 
-    navigator.clipboard.writeText(link)
-      .then(() => {
-        setCopyLinkTooltip(true);
+    if (window.innerWidth <= 1024) {
+      window.navigator.share({
+        title: 'Presente',
+        text: 'Tenho uma surpresa pra você!',
+        url: link,
       })
-      .catch((err) => {
-        console.error('Erro ao copiar o link:', err);
-      });
+      .catch((error) => console.log('Error sharing', error));
+    } else {
+      navigator.clipboard.writeText(link)
+        .then(() => {
+          setCopyLinkTooltip(true);
+        })
+        .catch((err) => {
+          console.error('Erro ao copiar o link:', err);
+        });
+    }
   };
 
   function handleGoToSite(couplePath : string) {

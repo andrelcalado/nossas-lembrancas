@@ -1,19 +1,12 @@
-'use client';
-
 // Core
 import React from 'react';
 import Head from 'next/head';
 
-// Components
-import PreviewModal from '@/components/PreviewModal';
-
-// Hooks
-import usePath from './usePath';
-import Loading from '@/components/Loading';
+// Layout
+import PageContent from './pageContent';
 
 export default function UserPage({ params }: { params: { path: string } }) {
   const decodedPath = decodeURIComponent(params.path);
-  const { coupleTimeline } = usePath(decodedPath);
 
   return (
     <>
@@ -32,16 +25,6 @@ export default function UserPage({ params }: { params: { path: string } }) {
         <meta property="og:type" content="website" />
       </Head>
 
-      {coupleTimeline ? (
-        <PreviewModal
-          openModal
-          isGift
-          timelineData={coupleTimeline}
-          setOpenModal={() => {}}
-          handleToGift={() => {}}
-        />
-      ) : (
-        <Loading loading={!coupleTimeline} type="screen" />
-      )}
+      <PageContent path={decodedPath} />      
   </>)
 }

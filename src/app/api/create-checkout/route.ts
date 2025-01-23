@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       ],
       mode: "subscription",
       payment_method_types: ["card"],
-      success_url: `${req.headers.get("origin")}/${encodeURIComponent(couplePath)}?msg=success`,
+      success_url: `${req.headers.get("origin")}/linha-do-tempo?verify=payment`,
       cancel_url: `${req.headers.get("origin")}/linha-do-tempo`,
       metadata: {
         couplePath,

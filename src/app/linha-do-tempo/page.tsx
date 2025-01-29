@@ -200,11 +200,13 @@ const Timeline = () => {
                 </PlanSelected>
                 {planPaid === planSelected.plan ? (
                   <p>
-                    {planPaid !==  'Inesquecível' && (
+                    {planPaid !== 'Inesquecível' ? (
                       <>
                         <strong>Expira</strong>
                         {timestampToDateBR(planPaidAt as Timestamp, true)}
                       </>
+                    ) : (
+                      <strong>Eterno</strong>
                     )}
                   </p>
                 ) : (

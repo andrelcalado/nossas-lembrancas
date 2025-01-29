@@ -44,7 +44,7 @@ const PlanItem = ({
         )}
         {planPaid && (
           <PlanItemSelected>
-            expira: {planPaid}
+            {eachPlan.plan !== 'Inesquecível' ? `expira: ${planPaid}` : 'Pago'}
           </PlanItemSelected>
         )}
       </PlanItemBadges>

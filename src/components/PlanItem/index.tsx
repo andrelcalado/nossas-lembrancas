@@ -92,7 +92,7 @@ const PlanItem = ({
         </li>
         <li className={eachPlan.music ? '' : 'disabled'}>
           {eachPlan.music ? <BsCheckLg /> : <CgClose />}
-          <span>Música</span>
+          <span>Música (em breve)</span>
         </li>
         <li className={eachPlan.albumMode ? '' : 'disabled'}>
           {eachPlan.albumMode ? <BsCheckLg /> : <CgClose />}

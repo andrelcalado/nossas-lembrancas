@@ -138,7 +138,8 @@ const Timeline = () => {
               maxLength={200}
             />
 
-            {planSelected.music && (
+            {/* {planSelected.music && ( */}
+            {false && (
               <YoutubeForm>
                 <h2>Escolha a Trilha Sonora <strong>Perfeita</strong></h2>
                 <p>Insira o link de uma música no YouTube que será a trilha sonora de suas lembranças. A música começará logo após a experiência ser iniciada.</p>

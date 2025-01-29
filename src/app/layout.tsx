@@ -1,5 +1,6 @@
 // Core
 import type * as next from "next"
+import { Suspense } from "react";
 import localFont from "next/font/local";
 
 // Libraries
@@ -70,11 +71,13 @@ export default function RootLayout({
       <body className={Poppins.className}>
         <main>
           <StyledComponentsRegistry>
-            <ProvidersWrapper>
-              <Header />
-              {children}
-              <Footer />
-            </ProvidersWrapper>
+            <Suspense>
+              <ProvidersWrapper>
+                <Header />
+                {children}
+                <Footer />
+              </ProvidersWrapper>
+            </Suspense>
           </StyledComponentsRegistry>
         </main>
       </body>

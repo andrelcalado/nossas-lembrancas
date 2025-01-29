@@ -32,6 +32,7 @@ import {
 
 // Constants
 import { MemoryTypes, PlansData } from '@/constants/dataArray';
+import { useSearchParams } from 'next/navigation';
 
 const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
   {
@@ -42,6 +43,8 @@ const INITIAL_TIMELINE_DATA: Array<TimelineItemDataType> = [
 ];
 
 const useTimeline = () => {
+  const searchParams = useSearchParams();
+  const verifyQuery = searchParams.get('verify');
   const [loading, setLoading] = useState(true);
   const [timelineItemLoading, setTimelineItemLoading] = useState(false);
   const [coupleNames, setCoupleNames] = useState<string>();
@@ -60,6 +63,7 @@ const useTimeline = () => {
     setPlanSelected,
     setPaymentMethodsModal,
     setPlanPaid,
+    planPaidAt,
     setPlanPaidAt,
   } = useAppContext();
 
@@ -268,29 +272,35 @@ const useTimeline = () => {
 
   // When user has timeline data
   useEffect(() => {
+    if (!user) {
+      return;
+    }    
+    setLoading(true);
+
     const getUserTimeline = async () => {
       const timelineQuery = query(collection(timelinesDB, 'timelines'), where('userId', '==', user?.uid));
   
       const querySnapshot = await getDocs(timelineQuery);
     
-      querySnapshot.forEach((doc) => {
-        console.log('doc', doc.data());
+      const timelines = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        console.log('doc', data);
 
         const eachItem: TimelineDataType = {
           id: doc.id,
-          coupleNames: doc.data().coupleNames,
-          timelineData: doc.data().timelineData,
-          musicLink: doc.data().musicLink,
-          createdAt: doc.data().createdAt,
-          userId: doc.data().userId,
-          plan: doc.data().plan,
+          coupleNames: data.coupleNames,
+          timelineData: data.timelineData,
+          musicLink: data.musicLink,
+          createdAt: data.createdAt,
+          userId: data.userId,
+          plan: data.plan,
         };
         setCoupleNames(eachItem.coupleNames);
         setMusicLink(eachItem.musicLink);
         setTimelineData(eachItem.timelineData);
         setTimelineID(eachItem.id);
-        setPlanPaid(doc.data().planPaid);
-        setPlanPaidAt(doc.data().planPaidAt);
+        setPlanPaid(data.planPaid);
+        setPlanPaidAt(data.planPaidAt);
 
         const planAux = PlansData.find((eachPlan) => eachPlan.plan === eachItem.plan) || PlansData[0];
         setPlanSelected(planAux);
@@ -309,20 +319,40 @@ const useTimeline = () => {
             return { ...eachMemory, disabled: true };
           }
           return eachMemory;
-        }));        
+        }));
+
+        return data.planPaidAt;
       });
+
+      return timelines.length > 0 ? timelines[0] : null;
     }
-    if(user) {
-      getUserTimeline()
-        .then(() => {
+
+    let interval: NodeJS.Timeout | null = null;
+    
+    const fetchData = async () => {
+      await getUserTimeline().then((planData) => {
+        if (verifyQuery === "payment" && planData || !verifyQuery) {
           setLoading(false);
-        })
-        .catch(() => {
-          setLoading(false);
-        });
-    } else {
-      setLoading(true);
+          if (interval) clearInterval(interval);
+
+          if (verifyQuery === "payment") {
+            setPaymentMethodsModal(true);
+          }
+        }
+      });
+    };
+
+    fetchData();
+
+    if (verifyQuery === "payment" && !planPaidAt) {
+      interval = setInterval(async () => {
+        await fetchData();
+      }, 3000);
     }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, [user]);
 
   useEffect(() => {

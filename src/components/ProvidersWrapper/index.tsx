@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 // Libraries
 import { onAuthStateChanged, signOut, User } from 'firebase/auth'
@@ -45,6 +45,8 @@ const useAppContext: () => ProvidersWrapperContext = () => useContext(AppContext
 
 export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const verifyQuery = searchParams.get('verify');
   const [user, setUser] = useState<User | null>(null);
   const [paymentMethodsModal, setPaymentMethodsModal] = useState<boolean>(false);
   const [loginModal, setLoginModal] = useState<boolean>(false);
@@ -71,7 +73,7 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
         setUser(user);
         console.log('user', user);
 
-        if (window.location.pathname === '/' || window.location.pathname === '/linha-do-tempo') {
+        if (window.location.pathname === '/' || window.location.pathname === '/linha-do-tempo' && !verifyQuery) {
           router.replace('/linha-do-tempo');
         }
       } else if (window.location.pathname === '/' || window.location.pathname === '/linha-do-tempo') {

@@ -26,7 +26,7 @@ const usePreviewModal = ({
   const albumModeTimeline = useRef(gsap.timeline({
     paused: true,
     repeat: -1,
-    delay: -.5,
+    delay: -1,
     // yoyo: false,
     // defaults: { invalidateOnRefresh: true },
   }));
@@ -144,7 +144,7 @@ const usePreviewModal = ({
   }
 
   const handleAlbumMode = () => {
-    gsapTimeline.current.kill();
+    albumModeTimeline.current.clear();
 
     const timelineAux = timelineData.filter((eachItem) => {
       return eachItem.type === 'photo' || eachItem.type === 'video';
@@ -172,10 +172,15 @@ const usePreviewModal = ({
     });
 
     albumModeTimeline.current.play();
+    albumModeTimeline.current.repeat(-1);
   }
 
   const handleSkipAnimation = () => {
+    albumModeTimeline.current.repeat(0);
+
     gsapTimeline.current.progress(1);
+    albumModeTimeline.current.progress(1);
+
     gsap.to('.timeline-actions', {
       left: '50%', opacity: 1, duration: 1.3, ease: "power4.out",
     });

@@ -14,6 +14,7 @@ import { useAppContext } from '../ProvidersWrapper';
 import { PreviewModalProps } from '@/types/layoutTypes'
 import { YouTubePlayer } from 'react-youtube'
 import { useRouter } from 'next/navigation';
+import { TimelineItemDataType } from '@/types/dataTypes';
 
 gsap.registerPlugin(useGSAP);
 
@@ -22,11 +23,18 @@ const usePreviewModal = ({
   timelineData,
 }: Pick<PreviewModalProps, 'openModal' | 'timelineData'>) => {
   const gsapTimeline = useRef(gsap.timeline({ paused: true }));
+  const albumModeTimeline = useRef(gsap.timeline({
+    paused: true,
+    repeat: -1,
+    delay: -.5,
+    // yoyo: false,
+    // defaults: { invalidateOnRefresh: true },
+  }));
   const [youtubeController, setYoutubeController] = useState<YouTubePlayer | null>();
   const router = useRouter();
   const { planSelected } = useAppContext();
 
-  const initAnimation = () => {
+  const initAnimation = (timeline : TimelineItemDataType[]) => {
     gsapTimeline.current.clear(true);
 
     // gsapTimeline.current.to(`.timeline-item-1--heart`, {
@@ -70,7 +78,7 @@ const usePreviewModal = ({
       translateX: '50%', duration: 1.3,
     }, ">-.6");
 
-    timelineData.forEach((_, index) => {
+    timeline.forEach((_, index) => {
       if (index !== 0) {
         gsapTimeline.current.to(`.timeline-item-${index}--heart`, {
           width: 50, height: 50, ease: "power4.out", duration: 1,
@@ -113,7 +121,7 @@ const usePreviewModal = ({
   useEffect(() => {
     if (openModal) {
       document.body.style.overflow = 'hidden';
-      initAnimation();
+      initAnimation(timelineData);
       gsapTimeline.current.play();
     } else {
       if (youtubeController && planSelected.music && planSelected.plan !== 'Essencial') {
@@ -135,8 +143,42 @@ const usePreviewModal = ({
     router.push('/linha-do-tempo');
   }
 
+  const handleAlbumMode = () => {
+    gsapTimeline.current.kill();
+
+    const timelineAux = timelineData.filter((eachItem) => {
+      return eachItem.type === 'photo' || eachItem.type === 'video';
+    });
+
+    gsap.to('.timeline-actions', {
+      left: '150%', opacity: 0, duration: 1.5, ease: "power4.out",
+    });
+    gsap.to('.timeline-track', {
+      translateY: '-50%', duration: 1.5, ease: "power4.out",
+    });
+
+    timelineAux.forEach((_, index) => {
+      albumModeTimeline.current.to(`.timeline-album-item-${index}`, {
+        opacity: 1, filter: 'blur(0)', translateX: '-50%', ease: "power4.out", duration: 1,
+      }, "<-.7");
+
+      albumModeTimeline.current.to(`.timeline-album-item-${index}`, {
+        translateX: '-150%', opacity: 0, ease: "power4.out", duration: 1.3
+      }, ">+5");
+
+      albumModeTimeline.current.set(`.timeline-album-item-${index}`, {
+        opacity: 0, filter: 'blur(10px)', translateX: '150%'
+      });
+    });
+
+    albumModeTimeline.current.play();
+  }
+
   const handleSkipAnimation = () => {
     gsapTimeline.current.progress(1);
+    gsap.to('.timeline-actions', {
+      left: '50%', opacity: 1, duration: 1.3, ease: "power4.out",
+    });
   }
   
   return {
@@ -144,6 +186,7 @@ const usePreviewModal = ({
     handleRepeatTimeline,
     handleEditTimeline,
     handleSkipAnimation,
+    handleAlbumMode,
   }
 }
 

@@ -32,22 +32,24 @@ const TimelineItemAnimated = ({
   date,
   photo,
   mediaOrientation =  'vertical',
+  albumMode = false,
   // video,
 } : TimelineItemAnimatedProps) => {
   return (
     <TimelineItemAnimatedContent className={`${className}--content`}>
-      {/* Aparece em todos os items, na parte inferior da tela, mas somente no initial-phrase aparece o coração */}
-      <HeartTrail>
-        {date && (
-          <HeartTrailDate className={`${className}--date`}>
-            <LuCalendarHeart />
-            <span>{stringDateToFormatedDate(date)}</span>
-          </HeartTrailDate>
-        )}
-        <HeartTrailBall className={`${className}--heart`}>
-          <CiHeart size={30} />
-        </HeartTrailBall>
-      </HeartTrail>
+      {!albumMode && (
+        <HeartTrail>
+          {date && (
+            <HeartTrailDate className={`${className}--date`}>
+              <LuCalendarHeart />
+              <span>{stringDateToFormatedDate(date)}</span>
+            </HeartTrailDate>
+          )}
+          <HeartTrailBall className={`${className}--heart`}>
+            <CiHeart size={30} />
+          </HeartTrailBall>
+        </HeartTrail>
+      )}
       {type === 'initial-phrase' && (
         <TimelineItemInitialPhrase className={className}>
           {desc}
@@ -60,7 +62,11 @@ const TimelineItemAnimated = ({
       )}
 
       {(type === 'photo' && photo) && (
-        <TimelineItemPhotoContent orientation={mediaOrientation} className={className}>
+        <TimelineItemPhotoContent
+          albumMode={albumMode}
+          orientation={mediaOrientation}
+          className={className}
+        >
           <TimelineItemPhoto>
             <img
               src={typeof photo === 'string' ? photo :  URL.createObjectURL(photo as Blob)}
@@ -68,7 +74,7 @@ const TimelineItemAnimated = ({
             />
           </TimelineItemPhoto>
 
-          {desc && (
+          {(desc && !albumMode) && (
             <TimelineItemPhotoPhrase className={`${className}--phrase`}>
               {desc}
             </TimelineItemPhotoPhrase>          

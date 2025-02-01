@@ -24,26 +24,33 @@ export const TimelineItemAnimatedContent = styled.div`
   width: 100%;
 `
 
-export const TimelineItemPhotoContent = styled.div<{ orientation: 'horizontal' | 'vertical' }>`
-${({ orientation }) => css`
-  width: ${orientation === 'vertical' ? '480px' : 'auto'};
-  height: ${orientation === 'vertical' ? '580px' : '320px'};
+const getPhotoHeight = (orientation : 'horizontal' | 'vertical', albumMode : boolean) => {
+  if (albumMode) {
+    return '100%';
+  }
+  return orientation === 'vertical' ? '79svh' : 'unset';  
+}
+
+export const TimelineItemPhotoContent = styled.div<{ orientation: 'horizontal' | 'vertical', albumMode: boolean }>`
+${({ orientation, albumMode }) => css`
+  width: auto;
+  height: ${getPhotoHeight(orientation, albumMode)};
   background-color: ${theme.colors.white};
   border-radius: 4px;
   padding: 24px;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2);
-  transform: translate(-50%, -50%) scale(1);
-  max-height: calc(100svh - 110px);
+  transform: translate(${albumMode ? '150%' : '-50%'}, -50%) scale(1);
+  max-height: ${albumMode ? 'calc(100svh - 20px)' : 'calc(100svh - 110px)'};
   max-width: ${orientation === 'vertical' ? '85svw' : 'unset'};
+  aspect-ratio: ${orientation === 'horizontal' ? '16 / 9' : '4 / 5'};
   position: absolute;
   opacity: 0;
   left: 50%;
-  top: 43%;
-  ${orientation === 'horizontal' && 'aspect-ratio: 16 / 9;'}
+  top: ${albumMode ? '50%' : '43%'};
 
   @media (max-width: 560px) {
     padding: 12px;
-    height: ${orientation === 'vertical' ? '500px' : '198px'};
+    height: ${orientation === 'vertical' ? '454px' : '198px'};
   }
 `}
 `

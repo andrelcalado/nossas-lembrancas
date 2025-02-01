@@ -115,6 +115,7 @@ export interface TimelineItemAnimatedProps {
   video?: string;
   desc?: string;
   className?: string;
+  albumMode?: boolean;
   date?: string;
   mediaOrientation?: 'horizontal' | 'vertical';
 }

@@ -60,6 +60,7 @@ const PreviewModal = ({
     handleRepeatTimeline,
     handleEditTimeline,
     handleSkipAnimation,
+    handleAlbumMode,
   } = usePreviewModal({
     openModal,
     timelineData
@@ -92,6 +93,18 @@ const PreviewModal = ({
         <TimelineDataContent>
           <TimelineAnimatedTrail className="timeline-track" />
 
+          {(isGift && planSelected.albumMode) && timelineData.filter((eachItem) => (
+            eachItem.type === 'photo' || eachItem.type === 'video'
+          )).map((eachData, index) => (
+            <TimelineItemAnimated
+              key={index}
+              className={`timeline-album-item-${index}`}
+              albumMode
+              type={eachData.type}
+              photo={eachData.photo}
+              mediaOrientation={eachData.mediaOrientation}
+            />
+          ))}
           {timelineData.map((eachData, index) => (
             <TimelineItemAnimated
               key={index}
@@ -117,7 +130,7 @@ const PreviewModal = ({
               <Button
                 variation="fill-blue"
                 disabled={!planSelected.albumMode}
-                // onClick={handleAlbumMode}
+                onClick={handleAlbumMode}
               >
                 <IoMdPhotos />
                 <span>Modo Album Digital</span>

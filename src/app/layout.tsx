@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 // Libraries
 import StyledComponentsRegistry from './registry';
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/react"
 
 // Styles
 import "./globals.css";
@@ -82,6 +83,7 @@ export default function RootLayout({
           </StyledComponentsRegistry>
         </main>
 
+        <Analytics />
         <GoogleAnalytics gaId="G-BMRFMPDHKW" />
       </body>
     </html>

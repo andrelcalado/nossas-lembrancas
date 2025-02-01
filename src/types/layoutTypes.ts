@@ -134,6 +134,7 @@ export interface PreviewModalProps {
   musicLink?: string;
   handleToGift: ((el: any) => void | React.MouseEventHandler<HTMLButtonElement> | Promise<void>) | undefined;
   previewLoading?: boolean;
+  planPaid?: string;
 }
 
 export interface PaymentMethodsModalProps {

@@ -11,7 +11,8 @@ import PreviewModal from '@/components/PreviewModal';
 import Loading from '@/components/Loading';
 
 const PageContent = ({ path }: { path: string }) => {
-const { coupleTimeline } = usePath(path);
+  const { coupleTimeline, planPaid } = usePath(path);
+
   return coupleTimeline ? (
     <PreviewModal
       openModal
@@ -19,6 +20,7 @@ const { coupleTimeline } = usePath(path);
       timelineData={coupleTimeline}
       setOpenModal={() => {}}
       handleToGift={() => {}}
+      planPaid={planPaid}
     />
   ) : (
     <Loading loading={!coupleTimeline} type="screen" />

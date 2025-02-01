@@ -31,7 +31,10 @@ import { MdModeEdit } from "react-icons/md";
 import { FaGift } from "react-icons/fa";
 
 // Constants
-import { previewLabelContent } from '@/constants/dataArray';
+import {
+  previewLabelContent,
+  PlansData,
+} from '@/constants/dataArray';
 
 // Types
 import { PreviewModalProps } from '@/types/layoutTypes';
@@ -52,8 +55,12 @@ const PreviewModal = ({
   watermark = false,
   isGift = false,
   previewLoading = false,
+  planPaid
 } : PreviewModalProps) => {
   const { planSelected } = useAppContext();
+  const planToValidate = planPaid
+  ? PlansData.find((eachPlan) => eachPlan.plan === planPaid)
+  : planSelected;
 
   const {
     setYoutubeController,
@@ -93,7 +100,7 @@ const PreviewModal = ({
         <TimelineDataContent>
           <TimelineAnimatedTrail className="timeline-track" />
 
-          {(isGift && planSelected.albumMode) && timelineData.filter((eachItem) => (
+          {(isGift && planToValidate?.albumMode) && timelineData.filter((eachItem) => (
             eachItem.type === 'photo' || eachItem.type === 'video'
           )).map((eachData, index) => (
             <TimelineItemAnimated
@@ -129,7 +136,7 @@ const PreviewModal = ({
             <>
               <Button
                 variation="fill-blue"
-                disabled={!planSelected.albumMode}
+                disabled={!planToValidate?.albumMode}
                 onClick={handleAlbumMode}
               >
                 <IoMdPhotos />
@@ -162,7 +169,7 @@ const PreviewModal = ({
           )}
         </TimelineActionsContent>
 
-        {(planSelected.music && musicLink && planSelected.plan !== 'Essencial') && (
+        {(planToValidate?.music && musicLink && planToValidate?.plan !== 'Essencial') && (
           <YouTube
             opts={{ playerVars: { autoplay: 1 } }}
             onReady={(event: YouTubeEvent) => {

@@ -11,6 +11,7 @@ import { timelinesDB } from '@/auth/firebase';
 
 const usePath = (path : string) => {
   const [coupleTimeline, setCoupleTimeline] = useState(null);
+  const [planPaid, setPlanPaid] = useState(null);
 
   useEffect(() => {
     const getTimelineDataByCouplePath = async () => {
@@ -20,7 +21,9 @@ const usePath = (path : string) => {
     
         if (docSnap.exists()) {
           const timelineData = docSnap.data().timelineData;
+          console.log('data', timelineData);
           setCoupleTimeline(timelineData);
+          setPlanPaid(docSnap.data().planPaid);
         } else {
           console.error(`Nenhum documento encontrado para o couplePath: ${path}`);
           return null;
@@ -36,6 +39,7 @@ const usePath = (path : string) => {
   
   return {
     coupleTimeline,
+    planPaid,
   }
 };
 

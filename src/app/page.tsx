@@ -43,7 +43,7 @@ export default function Home() {
       <HomeWrapper className="container">
         <HomeTexts>
           <h1>Um <strong>Presente</strong> Cheio de Memórias <strong>Únicas</strong></h1>
-          <p>Surpreenda quem você ama com uma página e um app exclusivo que reúne os melhores momentos de vocês. ❤️</p>
+          <p>Surpreenda quem você ama com um presente e uma página exclusiva que reúne os melhores momentos de vocês. ❤️</p>
 
           <HomeCTAs>
             <li>

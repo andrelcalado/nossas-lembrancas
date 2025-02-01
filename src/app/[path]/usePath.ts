@@ -11,7 +11,7 @@ import { timelinesDB } from '@/auth/firebase';
 
 const usePath = (path : string) => {
   const [coupleTimeline, setCoupleTimeline] = useState(null);
-  const [planPaid, setPlanPaid] = useState(null);
+  const [planPaid, setPlanPaid] = useState(undefined);
 
   useEffect(() => {
     const getTimelineDataByCouplePath = async () => {

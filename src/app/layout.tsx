@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 
 // Libraries
 import StyledComponentsRegistry from './registry';
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 // Styles
 import "./globals.css";
@@ -80,6 +81,8 @@ export default function RootLayout({
             </Suspense>
           </StyledComponentsRegistry>
         </main>
+
+        <GoogleAnalytics gaId="G-BMRFMPDHKW" />
       </body>
     </html>
   );

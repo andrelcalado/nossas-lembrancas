@@ -11,6 +11,7 @@
   "dependencies": {
     "@gsap/react": "^2.1.1",
     "@mercadopago/sdk-js": "^0.0.3",
+    "@next/third-parties": "^15.1.6",
     "@stripe/stripe-js": "^5.4.0",
     "browser-image-compression": "^2.0.2",
     "firebase": "^10.13.2",

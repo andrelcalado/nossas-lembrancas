@@ -102,8 +102,8 @@ const PaymentMethodsModal = ({ couplePath, coupleNames } : PaymentMethodsModalPr
 
         {isPlanExpired() || planPaid !== planSelected.plan && (
           <PlansPromotion>
-            <img className="desktop" src="/assets/img/promotion-banner-0.jpg" alt="Promoção Outubro Rosa" />
-            <img className="mobile" src="/assets/img/promotion-banner-0-mobile.jpg" alt="Promoção Outubro Rosa" />
+            <img className="desktop" src="/assets/img/promotion-banner-1.jpg" alt="Promoção Outubro Rosa" />
+            <img className="mobile" src="/assets/img/promotion-banner-1-mobile.jpg" alt="Promoção Outubro Rosa" />
           </PlansPromotion>
         )}
 

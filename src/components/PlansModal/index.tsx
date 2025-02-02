@@ -52,8 +52,8 @@ const PlansModal = ({ openPlansModal, setPlansModal }: PlansModalProps) => {
         <p>Escolha o plano ideal para guardar suas memórias e surpreender quem você ama.</p>
 
         <PlansPromotion>
-          <img className="desktop" src="/assets/img/promotion-banner-0.jpg" alt="Promoção Outubro Rosa" />
-          <img className="mobile" src="/assets/img/promotion-banner-0-mobile.jpg" alt="Promoção Outubro Rosa" />
+          <img className="desktop" src="/assets/img/promotion-banner-1.jpg" alt="Promoção Outubro Rosa" />
+          <img className="mobile" src="/assets/img/promotion-banner-1-mobile.jpg" alt="Promoção Outubro Rosa" />
         </PlansPromotion>
 
         <PlansList>

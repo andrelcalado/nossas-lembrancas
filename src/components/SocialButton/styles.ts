@@ -20,8 +20,9 @@ export const SocialButtonContent = styled(Link)`
   width: 45px;
   transition: .3s ease-in-out;
   
-  svg {
+  svg, img {
     max-width: 45px;
+    max-height: 16px;
     width: 100%;
     color: ${theme.colors.white};
   }

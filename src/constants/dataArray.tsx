@@ -3,15 +3,14 @@ import heroPhoto0 from '@/assets/img/slider-photo-0.jpg'
 import heroPhoto1 from '@/assets/img/slider-photo-1.jpg'
 import heroPhoto3 from '@/assets/img/slider-photo-3.jpg'
 import {
-  BiLogoFacebook,
   BiLogoInstagramAlt,
-  BiLogoLinkedin,
   BiLogoTiktok,
   BiLogoGmail,
   BiSolidVideos
 } from "react-icons/bi"
 import { IoIosText } from "react-icons/io";
 import { TbPhotoFilled } from "react-icons/tb";
+import KwaiLogo from '@/assets/icon/logo-kwai.svg';
 import Plan0 from '@/assets/icon/plan-0.jpg';
 import Plan1 from '@/assets/icon/plan-1.jpg';
 import Plan2 from '@/assets/icon/plan-2.jpg';
@@ -25,6 +24,7 @@ import {
   PlanResourceDataType,
   TimelineItemDataType,
 } from '@/types/dataTypes'
+import Image from 'next/image';
 
 export const heroSliderData: HeroSliderDataType = [
   {
@@ -67,24 +67,20 @@ export const heroSliderData: HeroSliderDataType = [
 
 export const footerSocialMediaData: Array<FooterSocialMediaType> = [
   {
-    icon: <BiLogoFacebook />,
-    url: 'https://www.facebook.com',
-  },
-  {
     icon: <BiLogoInstagramAlt />,
-    url: 'https://www.instagram.com',
+    url: 'https://www.instagram.com/nossas_lembrancas_app/',
   },
   {
-    icon: <BiLogoLinkedin />,
-    url: 'https://www.linkedin.com',
+    icon: <Image src={KwaiLogo} alt="Ícone kwai" />,
+    url: ' https://kwai-video.com/u/@Nossas.lembrancas/hC5CWrOK',
   },
   {
     icon: <BiLogoTiktok />,
-    url: 'https://www.tiktok.com',
+    url: 'https://www.tiktok.com/@nossas.lembrancas',
   },
   {
     icon: <BiLogoGmail />,
-    url: 'mailto:2bWkA@example.com',
+    url: 'mailto:nossaslembrancasapp@gmail.com',
   },
 ];
 

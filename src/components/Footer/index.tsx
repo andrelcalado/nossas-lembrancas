@@ -39,7 +39,7 @@ const Footer = () => {
         </FooterTopContent>
 
         <FooterBottomContent>
-          Copyright © 2024 - Nossas Memórias - todos os direitos reservados.
+          Copyright © 2025 - Nossas Lembranças - todos os direitos reservados.
         </FooterBottomContent>
       </FooterContainer>
     </FooterContent>

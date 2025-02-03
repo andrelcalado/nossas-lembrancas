@@ -64,10 +64,6 @@ const PlanItem = ({
       <PlanItemBody>
         <li>
           <BsCheckLg />
-          <span>App Exclusivo</span>
-        </li>
-        <li>
-          <BsCheckLg />
           <span>Site Exclusivo</span>
         </li>
         <li>

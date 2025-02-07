@@ -20,15 +20,17 @@ import 'swiper/css/effect-cards';
 import 'swiper/css/autoplay';
 
 // Hooks
+import useLogin from './useLogin';
 import { useAppContext } from '@/components/ProvidersWrapper';
 
 // Components
 import Button from "@/components/Button";
 import LoginForm from "@/components/LoginForm";
 import HeroSliderCard from '@/components/HeroSliderCard';
+import PreviewModal from '@/components/PreviewModal';
 
 // Constants
-import { heroSliderData } from '@/constants/dataArray';
+import { heroSliderData, previewData } from '@/constants/dataArray';
 
 export default function Home() {
   const {
@@ -36,9 +38,25 @@ export default function Home() {
     setLoginModal,
   } = useAppContext();
 
+  const {
+    openPreviewModal,
+    setOpenPreviewModal
+  } = useLogin();
+
   return (
     <PageContent>
       <LoginForm />
+
+      <PreviewModal
+        timelineData={previewData}
+        openModal={openPreviewModal}
+        watermark={false}
+        setOpenModal={setOpenPreviewModal}
+        handleToGift={() => {
+          setOpenPreviewModal(false);
+          setLoginModal(true);
+        }}
+      />
 
       <HomeWrapper className="container">
         <HomeTexts>
@@ -53,7 +71,15 @@ export default function Home() {
               }}>Criar o nosso</Button>
             </li>
             <li>
-              <Button variation="border">Ver exemplo</Button>
+              <Button
+                variation="border"
+                onClick={() => setOpenPreviewModal(true)}
+              >
+                Ver exemplo
+              </Button>
+            </li>
+            <li>
+              <Button variation="border">Como funciona</Button>
             </li>
           </HomeCTAs>
         </HomeTexts>

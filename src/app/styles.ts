@@ -34,7 +34,7 @@ export const PageContent = styled.section`
   margin-top: 76px;
   padding: 56px 0 86px;
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     padding: 36px 0 48px;
   }
 
@@ -77,7 +77,7 @@ export const HomeWrapper = styled.div`
     gap: 80px;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     flex-direction: column-reverse;
     gap: 0;
   }
@@ -111,13 +111,27 @@ export const HomeCTAs = styled.ul`
   margin-top: 24px;
   display: flex;
   gap: 12px;
+  width: 100%;
+  max-width: 477px;
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   li {
     list-style: none;
+    width: 100%;
+
+    @media (max-width: 900px) {
+      max-width: 140px;      
+    }
+
+    ${ButtonComponent} {
+      padding: 10px 0;
+      width: 100%;
+      white-space: nowrap;
+    }
 
     &:first-child {
       ${ButtonComponent} {
@@ -134,7 +148,7 @@ export const HomeCTAs = styled.ul`
 export const HomeTexts = styled.div`
   max-width: 650px;
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     max-width: 450px;
     z-index: 10;
     margin-top: -70px;
@@ -150,7 +164,7 @@ export const HomeTexts = styled.div`
       ${displayLgRegular}
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       font-size: 33px;
       line-height: 105%;
       text-align: center;
@@ -170,7 +184,7 @@ export const HomeTexts = styled.div`
       max-width: 450px;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       ${textSmRegular}
       text-align: center;
     }
@@ -188,7 +202,7 @@ export const HomeHeroSlider = styled(Swiper)`
     height: 420px;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     width: 250px;
     height: 370px;
     position: relative;
@@ -229,7 +243,7 @@ export const HomeHeroSlider = styled(Swiper)`
       background-color: rgba(255, 255, 255, .6);
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       ${HeroSliderDescription} {
         display: none;
       }      

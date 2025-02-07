@@ -36,10 +36,10 @@ export interface TimelineItemDataType {
   typeIcon?: JSX.Element;
   desc?: string;
   date?: string;
-  photo?: File | Blob;
+  photo?: File | Blob | string;
   video?: string;
   disabled?: boolean;
-  fileRef?: StorageReference;
+  fileRef?: StorageReference | string;
   mediaOrientation?: 'horizontal' | 'vertical';
 }
 

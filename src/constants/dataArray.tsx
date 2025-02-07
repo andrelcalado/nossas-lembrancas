@@ -206,3 +206,62 @@ export const pricesID  : Record<PlanDataENUM, string | undefined> = {
   "Especial" : process.env.STRIPE_PLAN_2_PRICEID,
   "Inesquecível" : process.env.STRIPE_PLAN_3_PRICEID
 }
+
+export const previewData: Array<TimelineItemDataType> = [
+  {
+    "desc": "Gostaria de compartilhar com você, meu amor, alguns momentos importantes do nosso relacionamento",
+    "mediaOrientation": "vertical",
+    "type": "initial-phrase"
+  },
+  {
+    "desc": "Desde o princípio éramos muito intensos, ao ponto de começamos a namorar em menos de 1 mês. Esse dia foi incrível",
+    "type": "photo",
+    "date": "2021-07-24",
+    "fileRef": "timelines/N38xPZtLUqZuwzuqba1T4w38FJn2/bianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc/media-1",
+    "mediaOrientation": "vertical",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/nossas-lembrancas.appspot.com/o/timelines%2FN38xPZtLUqZuwzuqba1T4w38FJn2%2Fbianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc%2Fmedia-1?alt=media&token=06f7f3ee-1b92-45a5-8217-55b620cc6ddc"
+  },
+  {
+    "fileRef": "timelines/N38xPZtLUqZuwzuqba1T4w38FJn2/bianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc/media-2",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/nossas-lembrancas.appspot.com/o/timelines%2FN38xPZtLUqZuwzuqba1T4w38FJn2%2Fbianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc%2Fmedia-2?alt=media&token=6b310d85-dd02-4cca-ab06-afb9387aa1ed",
+    "disabled": false,
+    "desc": "Desde o início o nosso relacionamento era lotado de novas aventuras e experiências únicas. Esse dia foi muito louco kkk",
+    "type": "photo",
+    "date": "2022-07-09"
+  },
+  {
+    "type": "photo",
+    "date": "2022-03-31",
+    "disabled": false,
+    "fileRef": "timelines/N38xPZtLUqZuwzuqba1T4w38FJn2/bianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc/media-3",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/nossas-lembrancas.appspot.com/o/timelines%2FN38xPZtLUqZuwzuqba1T4w38FJn2%2Fbianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc%2Fmedia-3?alt=media&token=1f2ec023-c33d-454c-95ea-4016cb24a76a",
+    "desc": "Também passamos por várias \"desventuras\", mas sempre juntos, sempre nos amando. Período que andamos de metrô "
+  },
+  {
+    "fileRef": "timelines/N38xPZtLUqZuwzuqba1T4w38FJn2/bianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc/media-4",
+    "date": "2023-04-25",
+    "desc": "Algumas desventuras por minha culpa, mas que trouxe muitos aprendizados para nós como pessoa e como casal",
+    "type": "photo",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/nossas-lembrancas.appspot.com/o/timelines%2FN38xPZtLUqZuwzuqba1T4w38FJn2%2Fbianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc%2Fmedia-4?alt=media&token=19c57829-c205-49ac-9647-0599bc0a80df"
+  },
+  {
+    "date": "2024-08-18",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/nossas-lembrancas.appspot.com/o/timelines%2FN38xPZtLUqZuwzuqba1T4w38FJn2%2Fbianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc%2Fmedia-5?alt=media&token=4b9eb8fa-4209-4b21-8673-085a6c0e3e13",
+    "desc": "Independente de tudo, sempre estivemos juntos, tentando ser melhor um para o outro, com muita conversa e sempre com novas aventuras…",
+    "disabled": false,
+    "fileRef": "timelines/N38xPZtLUqZuwzuqba1T4w38FJn2/bianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc/media-5",
+    "type": "photo"
+  },
+  {
+    "desc": "Essa foi a nossa última aventura e que 2025 seja repleto de mais momentos como esse ❤️",
+    "fileRef": "timelines/N38xPZtLUqZuwzuqba1T4w38FJn2/bianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc/media-6",
+    "disabled": false,
+    "date": "2025-01-26",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/nossas-lembrancas.appspot.com/o/timelines%2FN38xPZtLUqZuwzuqba1T4w38FJn2%2Fbianca-e-andre-bdeab092-449d-40c5-9b23-9fff9bd907fc%2Fmedia-6?alt=media&token=6b27ddc8-7712-426e-b5ba-70ac97bd6a96",
+    "type": "photo"
+  },
+  {
+    "type": "phrase",
+    "desc": "Te Amo mil milhões ❤️"
+  }
+]

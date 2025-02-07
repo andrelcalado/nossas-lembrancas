@@ -93,7 +93,7 @@ export type TimelineItemTypeENUM = "add" | "initial-phrase" | "phrase" | "photo"
 
 export interface TimelineItemProps {
   type: TimelineItemTypeENUM;
-  photo?: File | Blob;
+  photo?: File | Blob | string;
   setPhoto?: (el: File | null | undefined ) => void;
   video?: string;
   setVideo?: () => void;
@@ -111,7 +111,7 @@ export interface TimelineItemProps {
 
 export interface TimelineItemAnimatedProps {
   type: TimelineItemTypeENUM;
-  photo?: File | Blob;
+  photo?: File | Blob | string;
   video?: string;
   desc?: string;
   className?: string;

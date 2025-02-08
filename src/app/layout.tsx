@@ -58,8 +58,8 @@ export const Poppins = localFont({
 );
 
 export const metadata: next.Metadata = {
-  title: "Nossas Lembranças",
-  description: "Cada segundo da nossa história.",
+  title: "Nossas Lembranças | Crie a Linha do Tempo do seu Amor",
+  description: "Surpreenda quem você ama revivendo os seus melhores momentos através de uma página exclusiva gerada pela Nossas Lembranças. Adicione fotos, vídeos e descrições para criar uma animação única que conta a história do seu amor. Perfeito para presentear e celebrar.",
 };
 
 export default function RootLayout({

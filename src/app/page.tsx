@@ -28,9 +28,17 @@ import Button from "@/components/Button";
 import LoginForm from "@/components/LoginForm";
 import HeroSliderCard from '@/components/HeroSliderCard';
 import PreviewModal from '@/components/PreviewModal';
+import {
+  PaymentMethodsModalContent,
+  PaymentMethodsModalWrapper,
+} from '@/components/PaymentMethodsModal/styles';
+
+// Assets
+import { CgClose } from 'react-icons/cg';
 
 // Constants
 import { heroSliderData, previewData } from '@/constants/dataArray';
+import { CloseButton, ModalOverlay } from '@/components/LoginForm/styles';
 
 export default function Home() {
   const {
@@ -40,7 +48,9 @@ export default function Home() {
 
   const {
     openPreviewModal,
-    setOpenPreviewModal
+    setOpenPreviewModal,
+    howItWorksModal,
+    setHowItWorksModal,
   } = useLogin();
 
   return (
@@ -57,6 +67,26 @@ export default function Home() {
           setLoginModal(true);
         }}
       />
+
+      <PaymentMethodsModalContent active={howItWorksModal}>
+        <ModalOverlay
+          role="button"
+          onClick={() => setHowItWorksModal(false)}
+        />
+
+        <PaymentMethodsModalWrapper>
+          <CloseButton onClick={() => setHowItWorksModal(false)}>
+            <CgClose />
+          </CloseButton>
+  
+          <h3>Como <strong>funciona</strong></h3>
+          <p>
+            Assista o vídeo abaixo e aprenda a criar uma página exclusiva para guardar suas memórias e surpreender quem você ama.
+          </p>
+
+          <video controls src="/assets/video/video-explicativo.mp4" />
+        </PaymentMethodsModalWrapper>
+      </PaymentMethodsModalContent>
 
       <HomeWrapper className="container">
         <HomeTexts>
@@ -79,7 +109,12 @@ export default function Home() {
               </Button>
             </li>
             <li>
-              <Button variation="border">Como funciona</Button>
+              <Button
+                onClick={() => setHowItWorksModal(true)}
+                variation="border"
+              >
+                Como funciona
+              </Button>
             </li>
           </HomeCTAs>
         </HomeTexts>

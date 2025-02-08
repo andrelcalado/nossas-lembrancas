@@ -85,8 +85,11 @@ export const ProvidersWrapper = ({ children }: { children: React.ReactNode }) =>
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = loginModal || paymentMethodsModal ? 'hidden' : 'auto';
-  }, [loginModal, paymentMethodsModal])
+    document.body.style.overflow = loginModal ? 'hidden' : 'auto';
+  }, [loginModal]);
+  useEffect(() => {
+    document.body.style.overflow = paymentMethodsModal ? 'hidden' : 'auto';
+  }, [paymentMethodsModal]);
 
   return (
     <AppContext.Provider

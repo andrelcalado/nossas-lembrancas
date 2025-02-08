@@ -88,6 +88,11 @@ export const PaymentMethodsModalWrapper = styled.div`
       max-width: 400px;
     }
   }
+
+  > video {
+    max-height: calc(100svh - 170px);
+    width: 100%;
+  }
 `
 
 export const PaymentMethodsWithPlan = styled.div<{ planPaid: boolean }>`

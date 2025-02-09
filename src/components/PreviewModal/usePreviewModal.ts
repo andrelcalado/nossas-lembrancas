@@ -27,8 +27,6 @@ const usePreviewModal = ({
     paused: true,
     repeat: -1,
     delay: -1,
-    // yoyo: false,
-    // defaults: { invalidateOnRefresh: true },
   }));
   const [youtubeController, setYoutubeController] = useState<YouTubePlayer | null>();
   const router = useRouter();
@@ -146,6 +144,16 @@ const usePreviewModal = ({
   const handleAlbumMode = () => {
     albumModeTimeline.current.clear();
 
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen();
+    }
+
     const timelineAux = timelineData.filter((eachItem) => {
       return eachItem.type === 'photo' || eachItem.type === 'video';
     });
@@ -184,6 +192,16 @@ const usePreviewModal = ({
     gsap.to('.timeline-actions', {
       left: '50%', opacity: 1, duration: 1.3, ease: "power4.out",
     });
+
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
   }
   
   return {

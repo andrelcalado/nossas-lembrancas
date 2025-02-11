@@ -42,7 +42,7 @@ import { TbCardsFilled } from "react-icons/tb";
 import { IndicatorsArray } from '@/constants/dataArray'
 
 // Utils
-import { numberToCurrency, timestampToDateBR } from '@/utils/dataFormats'
+import { timestampToDateBR } from '@/utils/dataFormats'
 
 const Timeline = () => {
   const coupleNamesRef = useRef<HTMLInputElement>(null);
@@ -199,7 +199,7 @@ const Timeline = () => {
                 <PlanSelected onClick={() => setOpenPlansModal(true)}>
                   <Image src={planSelected.icon} alt="Ilustração do plano" />
                 </PlanSelected>
-                {planPaid === planSelected.plan ? (
+                {planPaid === planSelected.plan && (
                   <p>
                     {planPaid !== 'Inesquecível' ? (
                       <>
@@ -210,8 +210,6 @@ const Timeline = () => {
                       <strong>Eterno</strong>
                     )}
                   </p>
-                ) : (
-                  <p>{numberToCurrency(planSelected.price)}</p>
                 )}
               </IndicatorsContent>
 

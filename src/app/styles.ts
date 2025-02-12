@@ -16,16 +16,19 @@ import {
 import { theme } from "@/theme/globalStyles";
 import {
   displayLgRegular,
+  displayMdSemibold,
+  displaySmSemibold,
   displayX1Regular,
   textMdRegular,
-  textSmRegular
+  textSmRegular,
+  textXsRegular
 } from "@/theme/typography";
 
 // Components
 import { ButtonComponent } from "@/components/Button/styles";
 
 export const PageContent = styled.section`
-  background-color: ${theme.colors.white};
+  background-color: ${theme.colors.gray[100]};
   position: relative;
   min-height: calc(100vh - 76px);
   display: flex;
@@ -47,7 +50,7 @@ export const PageContent = styled.section`
     height: 100%;
     pointer-events: none;
     background-color: ${theme.colors.gray[200]};
-    border-radius: 24px 24px 0 0;
+    border-radius: 24px;
   }
 
   &::after {
@@ -62,7 +65,7 @@ export const PageContent = styled.section`
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 24px 24px 0 0;
+    border-radius: 24px;
     pointer-events: none;
   }
 `;
@@ -250,3 +253,114 @@ export const HomeHeroSlider = styled(Swiper)`
     }
   }
 `
+
+export const BenefitsSection = styled.section`
+  background-color: ${theme.colors.gray[100]};
+  padding: 90px 0;
+
+  @media (max-width: 660px) {
+    padding: 48px 0;
+  }
+`;
+
+export const Container = styled.div`
+  max-width: calc(1400px - 80px);
+  padding: 0 40px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: 800px) {
+    padding: 0 24px;
+  }
+
+  ${ButtonComponent} {
+    width: 100%;
+    max-width: 200px;
+    margin: 46px auto 0;
+  }
+`;
+
+export const Title = styled.h2`
+  ${displayMdSemibold}
+  color: ${theme.colors.primary[500]};
+  text-align: center;
+  margin-bottom: 8px;
+
+  @media (max-width: 660px) {
+    ${displaySmSemibold}
+    margin: 0 auto 4px;
+  }
+`;
+
+export const SectionDescription = styled.p`
+  ${textSmRegular}
+  color: ${theme.colors.gray[600]};
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 60px auto;
+  line-height: 1.6;
+
+  @media (max-width: 660px) {
+    ${textXsRegular}
+    margin-bottom: 48px;
+    max-width: 400px;
+  }
+`;
+
+export const BenefitsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 660px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+`;
+
+export const BenefitCard = styled.div`
+  background-color: ${theme.colors.white};
+  padding: 40px 32px ;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(167, 30, 164, 0.27);
+  border: 1px solid transparent;
+
+  &:hover {
+    transform: translateY(-10px);
+    border: 1px solid ${theme.colors.primary[100]};
+  }
+
+  @media (max-width: 660px) {
+    padding: 32px 20px;
+  }
+`;
+
+export const IconWrapper = styled.div`
+  color: ${theme.colors.primary[300]};
+  margin-bottom: 20px;
+
+  @media (max-width: 660px) {
+    margin-bottom: 12px;
+  }
+`;
+
+export const BenefitTitle = styled.h3`
+  ${textMdRegular}
+  color: ${theme.colors.black};
+  margin-bottom: 8px;
+
+  @media (max-width: 660px) {
+    ${textSmRegular}
+    margin-bottom: 4px  ;
+  }
+`;
+
+export const BenefitDescription = styled.p`
+  ${textXsRegular}
+  color: ${theme.colors.gray[600]};
+`;

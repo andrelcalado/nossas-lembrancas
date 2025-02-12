@@ -13,7 +13,16 @@ import {
   HomeCTAs,
   HomeTexts,
   HomeHeroSlider,
-  PageContent,  
+  PageContent,
+  Container,
+  Title,
+  BenefitsGrid,
+  BenefitCard,
+  IconWrapper,
+  BenefitTitle,
+  BenefitDescription,
+  BenefitsSection,
+  SectionDescription,  
 } from "./styles";
 import 'swiper/css';
 import 'swiper/css/effect-cards';
@@ -32,13 +41,13 @@ import {
   PaymentMethodsModalContent,
   PaymentMethodsModalWrapper,
 } from '@/components/PaymentMethodsModal/styles';
+import { CloseButton, ModalOverlay } from '@/components/LoginForm/styles';
 
 // Assets
 import { CgClose } from 'react-icons/cg';
 
 // Constants
-import { heroSliderData, previewData } from '@/constants/dataArray';
-import { CloseButton, ModalOverlay } from '@/components/LoginForm/styles';
+import { benefits, heroSliderData, previewData } from '@/constants/dataArray';
 
 export default function Home() {
   const {
@@ -54,100 +63,128 @@ export default function Home() {
   } = useLogin();
 
   return (
-    <PageContent>
-      <LoginForm />
+    <>
+      <PageContent>
+        <LoginForm />
 
-      <PreviewModal
-        timelineData={previewData}
-        openModal={openPreviewModal}
-        watermark={false}
-        setOpenModal={setOpenPreviewModal}
-        handleToGift={() => {
-          setOpenPreviewModal(false);
-          setLoginModal(true);
-        }}
-      />
-
-      <PaymentMethodsModalContent active={howItWorksModal}>
-        <ModalOverlay
-          role="button"
-          onClick={() => setHowItWorksModal(false)}
+        <PreviewModal
+          timelineData={previewData}
+          openModal={openPreviewModal}
+          watermark={false}
+          setOpenModal={setOpenPreviewModal}
+          handleToGift={() => {
+            setOpenPreviewModal(false);
+            setLoginModal(true);
+          }}
         />
 
-        <PaymentMethodsModalWrapper>
-          <CloseButton onClick={() => setHowItWorksModal(false)}>
-            <CgClose />
-          </CloseButton>
-  
-          <h3>Como <strong>funciona</strong></h3>
-          <p>
-            Assista o vídeo abaixo e aprenda a criar uma página exclusiva para guardar suas memórias e surpreender quem você ama.
-          </p>
+        <PaymentMethodsModalContent active={howItWorksModal}>
+          <ModalOverlay
+            role="button"
+            onClick={() => setHowItWorksModal(false)}
+          />
 
-          <video controls src="/assets/video/video-explicativo.mp4" />
-        </PaymentMethodsModalWrapper>
-      </PaymentMethodsModalContent>
+          <PaymentMethodsModalWrapper>
+            <CloseButton onClick={() => setHowItWorksModal(false)}>
+              <CgClose />
+            </CloseButton>
+    
+            <h3>Como <strong>funciona</strong></h3>
+            <p>
+              Assista o vídeo abaixo e aprenda a criar uma página exclusiva para guardar suas memórias e surpreender quem você ama.
+            </p>
 
-      <HomeWrapper className="container">
-        <HomeTexts>
-          <h1>Um <strong>Presente</strong> Cheio de Memórias <strong>Únicas</strong></h1>
-          <p>Surpreenda quem você ama com um presente e uma página exclusiva que reúne os melhores momentos de vocês. ❤️</p>
+            <video controls src="/assets/video/video-explicativo.mp4" />
+          </PaymentMethodsModalWrapper>
+        </PaymentMethodsModalContent>
 
-          <HomeCTAs>
-            <li>
-              <Button onClick={() => {
-                setLoginMode(false);
-                setLoginModal(true);
-              }}>Criar o nosso</Button>
-            </li>
-            <li>
-              <Button
-                variation="border"
-                onClick={() => setOpenPreviewModal(true)}
-              >
-                Ver exemplo
-              </Button>
-            </li>
-            <li>
-              <Button
-                onClick={() => setHowItWorksModal(true)}
-                variation="border"
-              >
-                Como funciona
-              </Button>
-            </li>
-          </HomeCTAs>
-        </HomeTexts>
+        <HomeWrapper className="container">
+          <HomeTexts>
+            <h1>Um <strong>Presente</strong> Cheio de Memórias <strong>Únicas</strong></h1>
+            <p>Surpreenda quem você ama com um presente e uma página exclusiva que reúne os melhores momentos de vocês. ❤️</p>
 
-        <HomeHeroSlider
-          effect={'cards'}
-          grabCursor={true}
-          modules={[EffectCards, Autoplay]}
-          cardsEffect={{
-            perSlideOffset: 8,
-            perSlideRotate: 3,
-          }}
-          speed={500}
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: false,
-            stopOnLastSlide: false,
-            waitForTransition: true,
-          }}
-        >
-          {heroSliderData?.map(({ media, mediaType, desc, date }, index) => (
-            <SwiperSlide key={index}>
-              <HeroSliderCard
-                media={media}
-                mediaType={mediaType}
-                desc={desc}
-                date={date}
-              />
-            </SwiperSlide>
-          ))}
-        </HomeHeroSlider>
-      </HomeWrapper>
-    </PageContent>
+            <HomeCTAs>
+              <li>
+                <Button onClick={() => {
+                  setLoginMode(false);
+                  setLoginModal(true);
+                }}>Criar o nosso</Button>
+              </li>
+              <li>
+                <Button
+                  variation="border"
+                  onClick={() => setOpenPreviewModal(true)}
+                >
+                  Ver exemplo
+                </Button>
+              </li>
+              <li>
+                <Button
+                  onClick={() => setHowItWorksModal(true)}
+                  variation="border"
+                >
+                  Como funciona
+                </Button>
+              </li>
+            </HomeCTAs>
+          </HomeTexts>
+
+          <HomeHeroSlider
+            effect={'cards'}
+            grabCursor={true}
+            modules={[EffectCards, Autoplay]}
+            cardsEffect={{
+              perSlideOffset: 8,
+              perSlideRotate: 3,
+            }}
+            speed={500}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: false,
+              stopOnLastSlide: false,
+              waitForTransition: true,
+            }}
+          >
+            {heroSliderData?.map(({ media, mediaType, desc, date }, index) => (
+              <SwiperSlide key={index}>
+                <HeroSliderCard
+                  media={media}
+                  mediaType={mediaType}
+                  desc={desc}
+                  date={date}
+                />
+              </SwiperSlide>
+            ))}
+          </HomeHeroSlider>
+        </HomeWrapper>
+      </PageContent>
+
+      <BenefitsSection>
+        <Container>
+          <Title>O Amor em cada detalhe</Title>
+          <SectionDescription>
+            Descubra como transformar cada momento em uma lembrança eterna e surpreender quem você ama com um presente único, cheio de significado e emoção. ❤️✨
+          </SectionDescription>
+          <BenefitsGrid>
+            {benefits.map((benefit, index) => (
+              <BenefitCard key={index}>
+                <IconWrapper>{benefit.icon}</IconWrapper>
+                <BenefitTitle>{benefit.title}</BenefitTitle>
+                <BenefitDescription>{benefit.description}</BenefitDescription>
+              </BenefitCard>
+            ))}
+          </BenefitsGrid>
+          <Button variation="border" onClick={() => {
+            setLoginMode(false);
+            setLoginModal(true);
+          }}>
+            Criar o nosso
+          </Button>
+        </Container>
+      </BenefitsSection>
+
+      {/* Depoimentos */}
+    </>
   );
 }

@@ -14,14 +14,15 @@ import {
   HomeTexts,
   HomeHeroSlider,
   PageContent,
-  SectionWrapper,
   Container,
   Title,
   BenefitsGrid,
   BenefitCard,
   IconWrapper,
   BenefitTitle,
-  BenefitDescription,  
+  BenefitDescription,
+  BenefitsSection,
+  SectionDescription,  
 } from "./styles";
 import 'swiper/css';
 import 'swiper/css/effect-cards';
@@ -40,15 +41,13 @@ import {
   PaymentMethodsModalContent,
   PaymentMethodsModalWrapper,
 } from '@/components/PaymentMethodsModal/styles';
+import { CloseButton, ModalOverlay } from '@/components/LoginForm/styles';
 
 // Assets
 import { CgClose } from 'react-icons/cg';
 
 // Constants
-import { heroSliderData, previewData } from '@/constants/dataArray';
-import { CloseButton, ModalOverlay } from '@/components/LoginForm/styles';
-import { FaHeart } from 'react-icons/fa6';
-import { FaPhotoVideo, FaShareAlt } from 'react-icons/fa';
+import { benefits, heroSliderData, previewData } from '@/constants/dataArray';
 
 export default function Home() {
   const {
@@ -62,27 +61,6 @@ export default function Home() {
     howItWorksModal,
     setHowItWorksModal,
   } = useLogin();
-
-  const benefits = [
-    {
-      icon: <FaHeart size={40} />,
-      title: "Memórias que Unem",
-      description:
-        "Crie uma linha do tempo única com fotos, vídeos e datas especiais que celebram o seu amor.",
-    },
-    {
-      icon: <FaPhotoVideo size={40} />,
-      title: "Animação Personalizada",
-      description:
-        "Transforme seus momentos em uma animação emocionante que conta a história do seu relacionamento.",
-    },
-    {
-      icon: <FaShareAlt size={40} />,
-      title: "Compartilhamento Fácil",
-      description:
-        "Compartilhe sua linha do tempo com quem você ama através de um link ou QR Code.",
-    },
-  ];
 
   return (
     <>
@@ -182,9 +160,12 @@ export default function Home() {
         </HomeWrapper>
       </PageContent>
 
-      <SectionWrapper>
+      <BenefitsSection>
         <Container>
-          <Title>Por que escolher nosso produto?</Title>
+          <Title>O Amor em cada detalhe</Title>
+          <SectionDescription>
+            Descubra como transformar cada momento em uma lembrança eterna e surpreender quem você ama com um presente único, cheio de significado e emoção. ❤️✨
+          </SectionDescription>
           <BenefitsGrid>
             {benefits.map((benefit, index) => (
               <BenefitCard key={index}>
@@ -194,8 +175,16 @@ export default function Home() {
               </BenefitCard>
             ))}
           </BenefitsGrid>
+          <Button variation="border" onClick={() => {
+            setLoginMode(false);
+            setLoginModal(true);
+          }}>
+            Criar o nosso
+          </Button>
         </Container>
-    </SectionWrapper>
-  </>
+      </BenefitsSection>
+
+      {/* Depoimentos */}
+    </>
   );
 }

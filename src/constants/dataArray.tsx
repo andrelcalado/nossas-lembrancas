@@ -1,3 +1,6 @@
+// Core
+import Image from 'next/image';
+
 // Assets
 import heroPhoto0 from '@/assets/img/slider-photo-0.jpg'
 import heroPhoto1 from '@/assets/img/slider-photo-1.jpg'
@@ -8,12 +11,14 @@ import {
   BiLogoGmail,
   BiSolidVideos
 } from "react-icons/bi"
-import { IoIosText } from "react-icons/io";
+import { IoIosText, IoMdPhotos } from "react-icons/io";
 import { TbPhotoFilled } from "react-icons/tb";
 import KwaiLogo from '@/assets/icon/logo-kwai.svg';
 import Plan0 from '@/assets/icon/plan-0.jpg';
 import Plan1 from '@/assets/icon/plan-1.jpg';
 import Plan2 from '@/assets/icon/plan-2.jpg';
+import { FaFilm } from 'react-icons/fa6';
+import { FaEdit, FaShareAlt } from 'react-icons/fa';
 
 // Types
 import {
@@ -24,7 +29,6 @@ import {
   PlanResourceDataType,
   TimelineItemDataType,
 } from '@/types/dataTypes'
-import Image from 'next/image';
 
 export const heroSliderData: HeroSliderDataType = [
   {
@@ -265,3 +269,30 @@ export const previewData: Array<TimelineItemDataType> = [
     "desc": "Te Amo mil milhões ❤️"
   }
 ]
+
+export const benefits = [
+  {
+    icon: <FaFilm size={40} />,
+    title: "Experiência inesquecível",
+    description:
+      "Transforme seus sentimentos, fotos e vídeos em uma experiência única e emocionante. 🎬❤️",
+  },
+  {
+    icon: <FaEdit size={40} />,
+    title: "Edição sem limites",
+    description:
+      "Adicione, remova ou atualize sua experiência a qualquer hora. ✨📅",
+  },
+  {
+    icon: <FaShareAlt size={40} />,
+    title: "Compartilhe o Amor",
+    description:
+      "Compartilhe sua linha do tempo com quem você ama, em qualquer dispositivo. 💌📱",
+  },
+  {
+    icon: <IoMdPhotos size={40} />,
+    title: "Album digital",
+    description:
+      "Transforme qualquer dispositivo móvel em um álbum digital. 🖼️❤️",
+  },
+];

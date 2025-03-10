@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="left">
+   <img src="./.github/docs/images/logo.png" />
+</p>
 
-## Getting Started
+# Nossas Lembranças
 
-First, run the development server:
+[![Author](https://img.shields.io/badge/author-AndreLuis-0052a6?style=flat-square)](https://github.com/andrelcalado)
+[![Languages](https://img.shields.io/github/languages/count/andrelcalado/nossas-lembrancas?color=%230052a6&style=flat-square)](#)
+[![Stars](https://img.shields.io/github/stars/andrelcalado/nossas-lembrancas?color=0052a6&style=flat-square)](https://github.com/andrelcalado/nossas-lembrancas/stargazers)
 
+---
+<p align="center">
+   <img src="./.github/docs/images/app-mobile.png" width="188"/>
+   <img src="./.github/docs/images/app-desktop.png" width="680"/>
+</p>
+
+<p align="center">
+   <a href="https://nossaslembrancas.app">Go check it out 🎉</a>
+</p>
+
+---
+
+# :pushpin: Table of Contents
+
+* [Requirements](#requirements)
+* [Running Locally](#running-locally)
+* [Issues](#bug-issues)
+* [Contributing](#tada-contributing)
+
+## :wrench: Requirements
+
+1. Node v18^. [[Install here]](https://nodejs.org/en/download)
+
+2. Firebase APIKEY, AUTHDOMAIN, PROJECTID, STORAGEBUCKET, MSENDERID, APPID and MEASUREMENTID from Firebase. [[You can get here]](https://console.firebase.google.com/)
+
+3. PRICEID of each product from Stripe. [[You can get here]](https://dashboard.stripe.com/products?active=true)
+
+4. PUB_KEY, SECRET_KEY and WEBHOOK_SECRET from Stripe. [[You can get here]](https://dashboard.stripe.com/apikeys)
+
+5. WEBHOOK_SECRET, ACCESS_TOKEN and PUBLIC_KEY from Mercado Pago. [[You can get here]](https://www.mercadopago.com.br/developers/panel/)
+
+#### Define environment variables
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Install dependencies
+```bash
+yarn
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## :rocket: Running Locally
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+After done all [requirements](#requirements), only run this command:
 
-## Learn More
+```bash
+yarn run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+# :bug: Issues
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Feel free to **file a new issue** with a respective title and description. If you already found a solution to your problem, **I would love to review your pull request**!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# :tada: Contributing
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out the [contributing](https://github.com/andrelcalado/nossas-lembrancas/blob/master/CONTRIBUTING.md) page to see the best places to file issues, start discussions and begin contributing

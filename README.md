@@ -22,8 +22,8 @@
 
 # :pushpin: Table of Contents
 
-* [Requirements](#requirements)
-* [Running Locally](#running-locally)
+* [Requirements](#wrench-requirements)
+* [Running Locally](#rocket-running-locally)
 * [Issues](#bug-issues)
 * [Contributing](#tada-contributing)
 
